@@ -1,46 +1,47 @@
 /* ============================================================
    OMI — content data  (single source of truth)
    ------------------------------------------------------------
-   The homepage product range (tabs + cards + pickers) is
-   rendered from this file at runtime by app.js. Nothing about
-   the range is hardcoded in index.html.
+   The homepage product range (tabs + cards + pickers) renders
+   from this file at runtime by app.js. Nothing about the range
+   is hardcoded in index.html.
+
+   The whole site is standardised on 4 merged categories:
+     1. Sols, Surfaces & Vitres
+     2. Entretien du Linge      (Lessive + Eau de Javel)
+     3. Vaisselle & Cuisine
+     4. Hygiène & Soin Personnel (Savon mains + Papiers/Maxiplus)
 
    MODEL
    -----
    categories[]                      -> one tab each
-     └ products[]                    -> one card each
-         ├ name        {fr,ar}       -> card title (consistent)
-         ├ axes        {scent?,size?,type?}   (optional)
+     ├ name        {fr,ar}
+     ├ products[]  OR  groups[]      -> a category is EITHER a flat
+     │                                  product list, OR sub-groups
+     │                                  each with its own heading.
+     │   groups[] : { name:{fr,ar}, products:[...] }
+     └ (product)
+         ├ name    {fr,ar}           -> card title
+         ├ tag?    {fr,ar}           -> small badge on the card (e.g. Maxiplus)
+         ├ axes?   {scent?,size?,type?}
          │     each axis: { label:{fr,ar}, style:"swatch"|"pill",
          │                  values:[ {key,label:{fr,ar},swatch?} ] }
          └ variants[]                -> every real product that exists
                { <axisKey>:<valueKey> ..., image, alt, sub? }
 
-   HOW THE CARD BEHAVES
-   --------------------
-   • A picker row is shown for an axis only if it has >= 2 values.
-   • The subtitle under the title is auto-built from the selected
-     values' labels, e.g. "Roses · 1,5 L" — unless a variant sets
-     its own `sub` (used for single-variant products).
-   • Selecting a value swaps the card image to the matching variant;
-     if the current size isn't available for the new scent, the size
-     auto-switches to the first available one. Combinations that
-     don't exist are dimmed.
-
-   All copy is bilingual {fr, ar}. Arabic triggers RTL.
-   Images live in ./assets/ (filename only below).
-
-   TO EDIT THE RANGE: change this file only.
+   Picker rules: a picker row shows only for an axis with >= 2 values;
+   the subtitle auto-builds from selected labels unless a variant sets
+   its own `sub`. Bilingual {fr,ar}; Arabic triggers RTL. Images live
+   in ./assets/ (filename only).  TO EDIT THE RANGE: change this file.
    ============================================================ */
 
 window.OMI_DATA = {
 
   categories: [
 
-    /* ========== 1 · NETTOYANTS MAISON ========================= */
+    /* ========== 1 · SOLS, SURFACES & VITRES =================== */
     {
-      slug: "nettoyants-maison",
-      name: { fr: "Nettoyants Maison", ar: "منظفات المنزل" },
+      slug: "sols-surfaces-vitres",
+      name: { fr: "Sols, Surfaces & Vitres", ar: "الأرضيات والأسطح والزجاج" },
       products: [
         {
           slug: "nettoyant-surfaces",
@@ -88,68 +89,70 @@ window.OMI_DATA = {
       ]
     },
 
-    /* ========== 2 · EAU DE JAVEL ============================== */
+    /* ========== 2 · ENTRETIEN DU LINGE (Lessive + Javel) ====== */
     {
-      slug: "eau-de-javel",
-      name: { fr: "Eau de Javel", ar: "ماء جافيل" },
-      products: [
+      slug: "entretien-du-linge",
+      name: { fr: "Entretien du Linge", ar: "العناية بالملابس" },
+      groups: [
         {
-          slug: "eau-de-javel",
-          name: { fr: "Eau de Javel", ar: "ماء جافيل" },
-          axes: {
-            scent: {
-              label: { fr: "Parfum", ar: "العطر" },
-              style: "swatch",
-              values: [
-                { key: "original", label: { fr: "Original", ar: "أصلي" },   swatch: "#eaf0f6" },
-                { key: "lavande",  label: { fr: "Lavande",  ar: "الخزامة" }, swatch: "#8a6fd6" },
-                { key: "citron",   label: { fr: "Citron",   ar: "الليمون" }, swatch: "#f2d024" }
+          name: { fr: "Lessive", ar: "مسحوق الغسيل" },
+          products: [
+            {
+              slug: "lessive-gel-matic",
+              name: { fr: "Lessive Gel Matic", ar: "جل غسيل ماتيك" },
+              variants: [
+                { image: "lessive-gel-matic.png", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
+                  sub: { fr: "Power Gel · 2 en 1 · 3 Kg", ar: "جل قوي · 2 في 1 · 3 كغ" } }
               ]
             },
-            size: {
-              label: { fr: "Format", ar: "الحجم" },
-              style: "pill",
-              values: [
-                { key: "1l", label: { fr: "1 L", ar: "1 لتر" } },
-                { key: "4l", label: { fr: "4 L", ar: "4 لتر" } }
+            {
+              slug: "detergent-poudre",
+              name: { fr: "Détergent en Poudre", ar: "مسحوق الغسيل" },
+              variants: [
+                { image: "detergent-poudre.png", alt: "Maxi Clean Détergent en Poudre 90 g",
+                  sub: { fr: "Maxi Clean · lavage main", ar: "ماكسي كلين · غسيل يدوي" } }
               ]
             }
-          },
-          variants: [
-            { scent: "original", size: "4l", image: "javel-original-4l.png", alt: "OMI Eau de Javel Original 4 L" },
-            { scent: "original", size: "1l", image: "javel-original-1l.png", alt: "OMI Eau de Javel Original 1 L" },
-            { scent: "lavande",  size: "4l", image: "javel-lavande-4l.png",  alt: "OMI Eau de Javel Lavande 4 L" },
-            { scent: "citron",   size: "4l", image: "javel-citron-4l.png",   alt: "OMI Eau de Javel Citron 4 L" }
-          ]
-        }
-      ]
-    },
-
-    /* ========== 3 · SOIN DU LINGE ============================= */
-    {
-      slug: "soin-du-linge",
-      name: { fr: "Soin du Linge", ar: "العناية بالملابس" },
-      products: [
-        {
-          slug: "lessive-gel-matic",
-          name: { fr: "Lessive Gel Matic", ar: "جل غسيل ماتيك" },
-          variants: [
-            { image: "lessive-gel-matic.png", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
-              sub: { fr: "Power Gel · 2 en 1 · 3 Kg", ar: "جل قوي · 2 في 1 · 3 كغ" } }
           ]
         },
         {
-          slug: "detergent-poudre",
-          name: { fr: "Détergent en Poudre", ar: "مسحوق الغسيل" },
-          variants: [
-            { image: "detergent-poudre.png", alt: "Maxi Clean Détergent en Poudre 90 g",
-              sub: { fr: "Maxi Clean · lavage main", ar: "ماكسي كلين · غسيل يدوي" } }
+          name: { fr: "Eau de Javel", ar: "ماء جافيل" },
+          products: [
+            {
+              slug: "eau-de-javel",
+              name: { fr: "Eau de Javel", ar: "ماء جافيل" },
+              axes: {
+                scent: {
+                  label: { fr: "Parfum", ar: "العطر" },
+                  style: "swatch",
+                  values: [
+                    { key: "original", label: { fr: "Original", ar: "أصلي" },   swatch: "#eaf0f6" },
+                    { key: "lavande",  label: { fr: "Lavande",  ar: "الخزامة" }, swatch: "#8a6fd6" },
+                    { key: "citron",   label: { fr: "Citron",   ar: "الليمون" }, swatch: "#f2d024" }
+                  ]
+                },
+                size: {
+                  label: { fr: "Format", ar: "الحجم" },
+                  style: "pill",
+                  values: [
+                    { key: "1l", label: { fr: "1 L", ar: "1 لتر" } },
+                    { key: "4l", label: { fr: "4 L", ar: "4 لتر" } }
+                  ]
+                }
+              },
+              variants: [
+                { scent: "original", size: "4l", image: "javel-original-4l.png", alt: "OMI Eau de Javel Original 4 L" },
+                { scent: "original", size: "1l", image: "javel-original-1l.png", alt: "OMI Eau de Javel Original 1 L" },
+                { scent: "lavande",  size: "4l", image: "javel-lavande-4l.png",  alt: "OMI Eau de Javel Lavande 4 L" },
+                { scent: "citron",   size: "4l", image: "javel-citron-4l.png",   alt: "OMI Eau de Javel Citron 4 L" }
+              ]
+            }
           ]
         }
       ]
     },
 
-    /* ========== 4 · VAISSELLE & CUISINE ======================= */
+    /* ========== 3 · VAISSELLE & CUISINE ======================= */
     {
       slug: "vaisselle-cuisine",
       name: { fr: "Vaisselle & Cuisine", ar: "الأواني والمطبخ" },
@@ -173,10 +176,10 @@ window.OMI_DATA = {
       ]
     },
 
-    /* ========== 5 · SAVON POUR LES MAINS ====================== */
+    /* ========== 4 · HYGIÈNE & SOIN PERSONNEL ================== */
     {
-      slug: "savon-mains",
-      name: { fr: "Savon pour les Mains", ar: "صابون اليدين" },
+      slug: "hygiene-soin-personnel",
+      name: { fr: "Hygiène & Soin Personnel", ar: "النظافة والعناية الشخصية" },
       products: [
         {
           slug: "savon-liquide-mains",
@@ -200,18 +203,11 @@ window.OMI_DATA = {
             { scent: "camomille", image: "savon-camomille.png", alt: "OMI Savon Liquide Mains Camomille",
               sub: { fr: "Camomille · 300 & 500 ml", ar: "بابونج · 300 و 500 مل" } }
           ]
-        }
-      ]
-    },
-
-    /* ========== 6 · PAPIERS & MOUCHOIRS ======================= */
-    {
-      slug: "papiers-mouchoirs",
-      name: { fr: "Papiers & Mouchoirs", ar: "ورق ومناديل" },
-      products: [
+        },
         {
           slug: "essuie-tout",
           name: { fr: "Essuie-Tout", ar: "فوط مطبخ" },
+          tag: { fr: "Maxiplus", ar: "ماكسي بلس" },
           axes: {
             type: {
               label: { fr: "Format", ar: "النوع" },
@@ -232,6 +228,7 @@ window.OMI_DATA = {
         {
           slug: "mouchoirs",
           name: { fr: "Mouchoirs", ar: "مناديل" },
+          tag: { fr: "Maxiplus", ar: "ماكسي بلس" },
           axes: {
             type: {
               label: { fr: "Format", ar: "النوع" },

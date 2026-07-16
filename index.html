@@ -16,7 +16,7 @@
 <header class="site-header"><div class="wrap">
   <nav class="nav">
     <a href="#" class="nav-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.png" alt="OMI" style="height:40px;display:block"></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
       <a href="#cats"><span class="fr">Produits</span><span class="ar">المنتجات</span></a>
       <a href="#"><span class="fr">La marque</span><span class="ar">العلامة</span></a>
@@ -34,6 +34,7 @@
           <button class="lang-opt" id="opt-ar" onclick="setLang('ar')" role="menuitem">العربية</button>
         </div>
       </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleMenu(event)"><span></span><span></span><span></span></button>
     </div>
   </nav>
 </div></header>
@@ -61,6 +62,16 @@
   </div>
 </section>
 
+<!-- ================= QUICK-NAV (4 categories) ================= -->
+<nav class="quicknav" aria-label="Catégories"><div class="wrap">
+  <div class="qn-row">
+    <button class="qn-pill" onclick="gotoCat(0)"><span class="qn-dot" style="--d:#1E5BE6"></span><span class="fr">Sols, Surfaces &amp; Vitres</span><span class="ar">الأرضيات والأسطح والزجاج</span></button>
+    <button class="qn-pill" onclick="gotoCat(1)"><span class="qn-dot" style="--d:#D99A00"></span><span class="fr">Entretien du Linge</span><span class="ar">العناية بالملابس</span></button>
+    <button class="qn-pill" onclick="gotoCat(2)"><span class="qn-dot" style="--d:#12A24E"></span><span class="fr">Vaisselle &amp; Cuisine</span><span class="ar">الأواني والمطبخ</span></button>
+    <button class="qn-pill" onclick="gotoCat(3)"><span class="qn-dot" style="--d:#7A57C7"></span><span class="fr">Hygiène &amp; Soin Personnel</span><span class="ar">النظافة والعناية الشخصية</span></button>
+  </div>
+</div></nav>
+
 <!-- ================= SERVICES / CATEGORIES ================= -->
 <section class="services"><div class="wrap">
   <h2><span class="fr">L’Excellence au cœur de votre foyer</span><span class="ar">التميّز في قلب منزلك</span></h2>
@@ -74,7 +85,7 @@
         <p><span class="fr">Des sols, plans de travail et vitres impeccables, sans traces.</span><span class="ar">أرضيات وأسطح وزجاج نظيفة تمامًا، بدون آثار.</span></p>
         <a href="#cats" class="svc-more"><span class="fr">Découvrir</span><span class="ar">اكتشف</span></a>
       </div>
-      <div class="svc-card c-cyan">
+      <div class="svc-card c-gold">
         <span class="svc-icon ic-linge" role="img" aria-label="Entretien du linge"></span>
         <h3><span class="fr">Entretien du Linge</span><span class="ar">العناية بالملابس</span></h3>
         <p><span class="fr">Un linge éclatant et une fraîcheur qui dure, lavage après lavage.</span><span class="ar">غسيل ناصع ونضارة تدوم، غسلة بعد غسلة.</span></p>
@@ -108,12 +119,6 @@
   <h2><span class="fr">Découvrez notre gamme de produits.</span><span class="ar">اكتشف تشكيلة منتجاتنا.</span></h2>
   <div class="tabs" id="tabs" role="tablist"></div>
   <div id="panels"></div>
-  <div class="range-foot">
-    <button class="btn-ghost" id="viewAll">
-      <span class="lbl-more"><span class="fr">Afficher tous les produits</span><span class="ar">عرض كل المنتجات</span></span>
-      <span class="lbl-less"><span class="fr">Afficher moins</span><span class="ar">عرض أقل</span></span>
-    </button>
-  </div>
 </div></section>
 
 <!-- ================= SHOWCASE — La marque OMI ================= -->
@@ -158,10 +163,10 @@
       <div class="foot-col">
         <h4><span class="fr">Produits</span><span class="ar">المنتجات</span></h4>
         <ul>
-          <li><a href="#cats"><span class="fr">Nettoyants Maison</span><span class="ar">منظفات المنزل</span></a></li>
-          <li><a href="#cats"><span class="fr">Eau de Javel</span><span class="ar">ماء جافيل</span></a></li>
-          <li><a href="#cats"><span class="fr">Soin du Linge</span><span class="ar">العناية بالملابس</span></a></li>
-          <li><a href="#cats"><span class="fr">Papiers &amp; Mouchoirs</span><span class="ar">ورق ومناديل</span></a></li>
+          <li><a href="#cats" onclick="gotoCat(0)"><span class="fr">Sols, Surfaces &amp; Vitres</span><span class="ar">الأرضيات والأسطح والزجاج</span></a></li>
+          <li><a href="#cats" onclick="gotoCat(1)"><span class="fr">Entretien du Linge</span><span class="ar">العناية بالملابس</span></a></li>
+          <li><a href="#cats" onclick="gotoCat(2)"><span class="fr">Vaisselle &amp; Cuisine</span><span class="ar">الأواني والمطبخ</span></a></li>
+          <li><a href="#cats" onclick="gotoCat(3)"><span class="fr">Hygiène &amp; Soin Personnel</span><span class="ar">النظافة والعناية الشخصية</span></a></li>
         </ul>
       </div>
 

@@ -20,8 +20,6 @@ function axisValue(product, key, valKey) {
 }
 
 /* ---------- render the product range from data ---------- */
-const FEATURED = 8; // products shown in the "Tous" tab before "view all"
-
 function renderRange() {
   const data = window.OMI_DATA;
   if (!data) return;
@@ -29,31 +27,23 @@ function renderRange() {
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
 
-  // flatten every product with its owning category (for the "Tous" tab)
-  const all = [];
-  cats.forEach(c => c.products.forEach(p => all.push({ cat: c, p })));
+  // one tab per category (standardised on the 4 merged categories)
+  tabsEl.innerHTML = cats.map((c, i) =>
+    `<button class="tab${i === 0 ? " on" : ""}" role="tab" data-tab="${i}">${bi(c.name)}</button>`
+  ).join("");
 
-  // tabs: "Tous" first (index 0), then one per category
-  tabsEl.innerHTML =
-    `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
-    cats.map((c, i) =>
-      `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}</button>`
-    ).join("");
-
-  // panels: "Tous" aggregate panel first, then the category panels
-  const allPanel = `
-    <div class="panel on" id="panel-0" data-category="all">
-      <div class="grid" id="allGrid">
-        ${all.map((e, idx) => cardHTML(e.cat, e.p, idx >= FEATURED ? "extra" : "")).join("")}
-      </div>
-    </div>`;
-  const catPanels = cats.map((c, i) => `
-    <div class="panel" id="panel-${i + 1}" data-category="${c.slug}">
-      <div class="grid">
-        ${c.products.map(p => cardHTML(c, p)).join("")}
-      </div>
-    </div>`).join("");
-  panelsEl.innerHTML = allPanel + catPanels;
+  // one panel per category; a category is either a flat product list
+  // or sub-groups (each with a heading) rendered as separate grids
+  panelsEl.innerHTML = cats.map((c, i) => {
+    const body = c.groups
+      ? c.groups.map(g => `
+          <div class="prod-group">
+            <h4 class="group-title">${bi(g.name)}</h4>
+            <div class="grid">${g.products.map(p => cardHTML(c, p)).join("")}</div>
+          </div>`).join("")
+      : `<div class="grid">${c.products.map(p => cardHTML(c, p)).join("")}</div>`;
+    return `<div class="panel${i === 0 ? " on" : ""}" id="panel-${i}" data-category="${c.slug}">${body}</div>`;
+  }).join("");
 
   tabsEl.querySelectorAll(".tab").forEach(t =>
     t.addEventListener("click", () => showTab(+t.dataset.tab))
@@ -61,20 +51,21 @@ function renderRange() {
 
   // wire up every card (picker state + interactions)
   document.querySelectorAll(".pcard").forEach(initCard);
-
-  // "Afficher tous les produits" — reveal / hide the extra cards in the Tous tab
-  const vb = document.getElementById("viewAll");
-  if (vb) vb.addEventListener("click", () => {
-    const g = document.getElementById("allGrid");
-    if (g) vb.classList.toggle("on", g.classList.toggle("show-all"));
-  });
-
   showTab(0);
 }
 
-/* build one product card (default variant = first).
-   `extra` = optional class ("extra") to hide it behind "view all". */
-function cardHTML(cat, p, extra) {
+/* jump to a category tab from the quick-nav strip, then scroll to the grid */
+function gotoCat(i) {
+  showTab(i);
+  const el = document.getElementById("cats");
+  if (el) {
+    const y = el.getBoundingClientRect().top + window.scrollY - 68;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+}
+
+/* build one product card (default variant = first) */
+function cardHTML(cat, p) {
   const first = p.variants[0];
   const keys = axisKeys(p);
 
@@ -96,9 +87,11 @@ function cardHTML(cat, p, extra) {
     return `<div class="picker-row ${ax.style === "swatch" ? "swatches" : "pills"}" data-axis="${k}">${buttons}</div>`;
   }).join("");
 
+  const tag = p.tag ? `<span class="pcard-tag">${bi(p.tag)}</span>` : "";
+
   return `
-    <div class="pcard${extra ? " " + extra : ""}" data-product="${p.slug}" data-category="${cat.slug}">
-      <div class="ph"><img src="assets/${first.image}" alt="${first.alt}"></div>
+    <div class="pcard" data-product="${p.slug}" data-category="${cat.slug}">
+      <div class="ph">${tag}<img src="assets/${first.image}" alt="${first.alt}"></div>
       <h3>${bi(p.name)}</h3>
       <p class="sub"></p>
       ${pickers ? `<div class="pickers">${pickers}</div>` : ""}
@@ -133,7 +126,13 @@ function initCard(card) {
 
 function findProduct(catSlug, prodSlug) {
   const cat = window.OMI_DATA.categories.find(c => c.slug === catSlug);
-  return cat && cat.products.find(p => p.slug === prodSlug);
+  if (!cat) return null;
+  const lists = cat.groups ? cat.groups.map(g => g.products) : [cat.products];
+  for (const list of lists) {
+    const p = list.find(p => p.slug === prodSlug);
+    if (p) return p;
+  }
+  return null;
 }
 
 /* handle a picker click: the clicked axis is authoritative,
@@ -199,9 +198,6 @@ function applyVariant(card, variant) {
 function showTab(i) {
   document.querySelectorAll(".tab").forEach((t, n) => t.classList.toggle("on", n === i));
   document.querySelectorAll(".panel").forEach((p, n) => p.classList.toggle("on", n === i));
-  // the "view all" button only belongs to the Tous tab (index 0)
-  const foot = document.querySelector(".range-foot");
-  if (foot) foot.style.display = (i === 0) ? "flex" : "none";
 }
 
 /* ---------- language ---------- */
@@ -229,18 +225,39 @@ function toggleLang(e) {
   l.querySelector(".lang-trigger").setAttribute("aria-expanded", open);
 }
 
+/* ---------- mobile menu ---------- */
+function setMenu(open) {
+  const h = document.querySelector(".site-header");
+  if (!h) return;
+  h.classList.toggle("menu-open", open);
+  const btn = document.getElementById("navToggle");
+  if (btn) btn.setAttribute("aria-expanded", open);
+}
+function toggleMenu(e) {
+  if (e) e.stopPropagation();
+  const h = document.querySelector(".site-header");
+  setMenu(!h.classList.contains("menu-open"));
+}
+
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderRange();
 
-  // close language menu on outside click / Escape
+  // close language + mobile menu on outside click / Escape
   document.addEventListener("click", (e) => {
     const l = document.getElementById("lang");
     if (l && !l.contains(e.target)) l.classList.remove("open");
+    const h = document.querySelector(".site-header");
+    if (h && h.classList.contains("menu-open") &&
+        !e.target.closest(".nav-links") && !e.target.closest(".nav-toggle")) setMenu(false);
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") document.getElementById("lang").classList.remove("open");
+    if (e.key === "Escape") { document.getElementById("lang").classList.remove("open"); setMenu(false); }
   });
+
+  // close the mobile menu after tapping a link
+  document.querySelectorAll(".nav-links a").forEach((a) =>
+    a.addEventListener("click", () => setMenu(false)));
 
   // hide-on-scroll header
   const header = document.querySelector(".site-header");
@@ -249,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const y = window.scrollY;
     header.classList.toggle("scrolled", y > 4);
     if (y < 80 || y < lastY) header.classList.remove("hide");
-    else if (y > lastY) { header.classList.add("hide"); document.getElementById("lang").classList.remove("open"); }
+    else if (y > lastY) { header.classList.add("hide"); document.getElementById("lang").classList.remove("open"); setMenu(false); }
     lastY = y; ticking = false;
   }
   window.addEventListener("scroll", () => {
