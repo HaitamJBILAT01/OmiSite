@@ -11,7 +11,7 @@
   --dur-fast:140ms; --dur-base:240ms; --ease-out:cubic-bezier(.22,.61,.36,1);
   --nav-h:62px;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{margin:0;padding-top:var(--nav-h);font-family:var(--font);color:var(--ink-700);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:1520px;margin:0 auto;padding:0 clamp(24px,11.38vw,173px)}
@@ -249,7 +249,7 @@ a:hover{color:var(--omi-cyan-deep)}
   cursor:pointer;transition:border-color var(--dur-fast),color var(--dur-fast),background var(--dur-fast)}
 [dir="rtl"] .pills .pill{font-family:var(--font)}
 .pills .pill:hover{border-color:var(--ink-400);color:var(--ink-900)}
-.pills .pill.on{border-color:var(--ink-900);background:var(--ink-900);color:#fff}
+.pills .pill.on{border-color:var(--ink-900);background:#fff;color:var(--ink-900);font-weight:600;box-shadow:inset 0 0 0 1px var(--ink-900)}
 .pills .pill.na{opacity:.4}
 /* "Tous" tab: hide extra products until "Afficher tous les produits" */
 .grid .pcard.extra{display:none}
@@ -264,11 +264,18 @@ a:hover{color:var(--omi-cyan-deep)}
 .btn-ghost:hover{border-color:var(--ink-900);background:var(--ink-50);transform:translateY(-2px)}
 @media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr);gap:32px}}
 @media(max-width:767px){
-  /* tabs scroll horizontally instead of wrapping; product cards stay 2-up */
+  /* tabs scroll horizontally instead of wrapping */
   .tabs{gap:22px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:none;white-space:nowrap}
-  .grid{grid-template-columns:repeat(2,1fr);gap:22px 16px}
+  /* one product per row: full-width neutral cards, image dominant, minimal text */
+  .grid{grid-template-columns:1fr;gap:16px}
+  .pcard{background:#fff;border:1px solid var(--ink-100);border-radius:16px;padding:16px 16px 18px}
+  .pcard .ph{aspect-ratio:1/1;border-radius:12px}
+  .pcard .ph img{padding:6px}
+  .pcard h3{margin-top:14px;font-size:16px}
+  .pcard .sub{font-size:12.5px}
+  .pickers{margin-top:12px}
 }
 
 /* ================= SHOWCASE — "La marque OMI" ================= */
@@ -299,12 +306,18 @@ a:hover{color:var(--omi-cyan-deep)}
   box-shadow:0 24px 60px rgba(11,27,51,.12);background:#EAF0FA}
 .showcase-photo img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:900px){
-  /* stack: text first, then image (order follows DOM: copy then photo) */
-  .showcase-grid{grid-template-columns:1fr;gap:36px}
-  .showcase-photo{order:0;max-width:480px;margin:0 auto;width:100%;aspect-ratio:16/10}
+  /* stack like the hero: glove photo on top, then copy + stats below */
+  .showcase-grid{grid-template-columns:1fr;gap:30px}
+  .showcase-photo{order:-1;max-width:440px;margin:0 auto;width:100%;aspect-ratio:1/1;background:#EAF0FA}
+  .showcase-photo img{object-fit:contain}
   .showcase h2,.showcase .body{max-width:none}
 }
-@media(max-width:560px){.brand-stats{gap:24px 32px}}
+@media(max-width:767px){
+  /* all 3 stats in a single row, 3 equal columns */
+  .brand-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;justify-items:start}
+  .brand-stats .stat-num{font-size:clamp(21px,6vw,30px)}
+  .brand-stats .stat-label{font-size:11.5px;max-width:none}
+}
 
 /* ================= FOOTER — compact ================= */
 .footer{color:rgba(255,255,255,.58);
@@ -362,22 +375,30 @@ a:hover{color:var(--omi-cyan-deep)}
    No overlay, no seam. ======================================= */
 @media(max-width:1023px){
   .hero{display:flex;flex-direction:column;min-height:0}
-  .hero-visual{order:-1;width:100%;min-height:0;height:auto;aspect-ratio:16/10;background:#EAF2FF}
+  /* compact top image band (tight crop, products centred) */
+  .hero-visual{order:-1;width:100%;min-height:0;height:clamp(150px,40vw,220px);background:#EAF2FF}
   .hero-photo{width:100%;height:100%;object-fit:cover;object-position:center}
+  /* short, tight blue block below */
   .hero-copy{width:100%;text-align:center;align-items:center;
-    padding:clamp(38px,7vw,60px) clamp(24px,6vw,48px) clamp(46px,8vw,66px)}
+    padding:clamp(26px,5vw,40px) clamp(24px,6vw,44px) clamp(30px,6vw,46px)}
   .hero-copy .inner{max-width:540px;margin:0 auto;transform:none}
-  .hero-copy .lead{margin-inline:auto}
-  .hero-copy .hero-actions{margin-top:clamp(28px,5vw,40px);justify-content:center;display:flex}
+  .hero-copy h1{line-height:1.08}
+  .hero-copy .lead{margin:clamp(10px,2.5vw,15px) auto 0;font-size:clamp(13.5px,3.5vw,15px);line-height:1.55}
+  .hero-copy .hero-actions{margin-top:clamp(16px,3.5vw,22px);justify-content:center;display:flex}
+  .hero-copy .btn{padding:13px 32px;font-size:15px}
 }
 @media(max-width:560px){
-  .hero-visual{aspect-ratio:4/3}
-  .hero-copy h1{font-size:clamp(34px,9vw,44px)}
+  .hero-visual{height:clamp(140px,42vw,180px)}
+  .hero-copy h1{font-size:clamp(27px,7vw,36px)}
 }
 
 /* ================= NAVBAR RESPONSIVE ================= */
 @media(max-width:1024px){
+  /* nav-links is absolute here, so use flex to pin logo left + controls right */
+  .nav{display:flex;justify-content:space-between}
   .nav-toggle{display:inline-flex}
+  /* icon flush to the inline-end edge, mirroring the logo on the left */
+  .nav-toggle span{left:auto;right:0;width:22px}
   .nav-links{position:absolute;top:100%;left:0;right:0;
     flex-direction:column;align-items:stretch;gap:0;
     background:#fff;border-top:1px solid var(--ink-100);box-shadow:var(--shadow-md);
