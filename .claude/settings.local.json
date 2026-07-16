@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"/c/Users/Haitam JBILAT/Desktop\" && ls -la \"Brand design system setup.zip\")",
+      "Bash(mkdir -p \"brand-extract\")",
+      "Bash(unzip -o -q \"Brand design system setup.zip\" -d \"brand-extract\")",
+      "Bash(find \"/c/Users/Haitam JBILAT/Downloads\" \"/c/Users/Haitam JBILAT/Desktop\" -maxdepth 2 -type f \\\\\\( -iname \"*.png\" -o -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.webp\" \\\\\\) -newermt \"2026-07-15\" 2>/dev/null | head -40; echo \"---temp uploads---\"; find \"/c/Users/HAITAM~1/AppData/Local/Temp/claude\" -type f \\\\\\( -iname \"*.png\" -o -iname \"*.jpg\" -o -iname \"*.jpeg\" \\\\\\) 2>/dev/null | head -40)",
+      "Bash(exit 1)",
+      "Bash(cp 1j.png   ../javel-original-4l.png)",
+      "Bash(cp 2j.png   ../javel-original-1l.png)",
+      "Bash(cp 4.png    ../javel-lavande-4l.png)",
+      "Bash(cp 3j.png   ../javel-citron-4l.png)",
+      "Bash(rm -rf incoming)",
+      "Bash(rm -f p-vitres.png p-javel-original.png p-javel-citron.png p-surface-original.png p-surface-green.png p-surface-lavande-1l.png p-surface-lavande-5l.png)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8777/index.html)",
+      "Bash(rm -f assets/incoming/*.png)",
+      "Bash(rmdir assets/incoming)",
+      "Bash(ls assets/incoming)",
+      "Bash(python -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget"
+    ]
+  }
+}

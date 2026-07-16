@@ -1,0 +1,261 @@
+/* ============================================================
+   OMI — homepage behaviour
+   - renders the product range (tabs + cards + scent/size pickers)
+     from window.OMI_DATA
+   - language switch (FR / AR) with RTL + localStorage persistence
+   - hide-on-scroll sticky header
+   ============================================================ */
+
+/* ---------- helpers ---------- */
+function bi(pair) {
+  // bilingual <span> markup used across the page
+  return `<span class="fr">${pair.fr}</span><span class="ar">${pair.ar}</span>`;
+}
+function axisKeys(product) {
+  return Object.keys(product.axes || {});
+}
+function axisValue(product, key, valKey) {
+  const ax = product.axes[key];
+  return ax.values.find(v => v.key === valKey);
+}
+
+/* ---------- render the product range from data ---------- */
+const FEATURED = 8; // products shown in the "Tous" tab before "view all"
+
+function renderRange() {
+  const data = window.OMI_DATA;
+  if (!data) return;
+  const cats = data.categories;
+  const tabsEl = document.getElementById("tabs");
+  const panelsEl = document.getElementById("panels");
+
+  // flatten every product with its owning category (for the "Tous" tab)
+  const all = [];
+  cats.forEach(c => c.products.forEach(p => all.push({ cat: c, p })));
+
+  // tabs: "Tous" first (index 0), then one per category
+  tabsEl.innerHTML =
+    `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
+    cats.map((c, i) =>
+      `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}</button>`
+    ).join("");
+
+  // panels: "Tous" aggregate panel first, then the category panels
+  const allPanel = `
+    <div class="panel on" id="panel-0" data-category="all">
+      <div class="grid" id="allGrid">
+        ${all.map((e, idx) => cardHTML(e.cat, e.p, idx >= FEATURED ? "extra" : "")).join("")}
+      </div>
+    </div>`;
+  const catPanels = cats.map((c, i) => `
+    <div class="panel" id="panel-${i + 1}" data-category="${c.slug}">
+      <div class="grid">
+        ${c.products.map(p => cardHTML(c, p)).join("")}
+      </div>
+    </div>`).join("");
+  panelsEl.innerHTML = allPanel + catPanels;
+
+  tabsEl.querySelectorAll(".tab").forEach(t =>
+    t.addEventListener("click", () => showTab(+t.dataset.tab))
+  );
+
+  // wire up every card (picker state + interactions)
+  document.querySelectorAll(".pcard").forEach(initCard);
+
+  // "Afficher tous les produits" — reveal / hide the extra cards in the Tous tab
+  const vb = document.getElementById("viewAll");
+  if (vb) vb.addEventListener("click", () => {
+    const g = document.getElementById("allGrid");
+    if (g) vb.classList.toggle("on", g.classList.toggle("show-all"));
+  });
+
+  showTab(0);
+}
+
+/* build one product card (default variant = first).
+   `extra` = optional class ("extra") to hide it behind "view all". */
+function cardHTML(cat, p, extra) {
+  const first = p.variants[0];
+  const keys = axisKeys(p);
+
+  // picker rows — only for axes with >= 2 values
+  const pickers = keys.map(k => {
+    const ax = p.axes[k];
+    if (ax.values.length < 2) return "";
+    const buttons = ax.values.map(v => {
+      if (ax.style === "swatch") {
+        const light = isLight(v.swatch) ? " light" : "";
+        return `<button class="swatch${light}" data-axis="${k}" data-val="${v.key}"
+                  style="--sw:${v.swatch}"
+                  aria-label="${ax.label.fr} ${v.label.fr}"
+                  title="${v.label.fr}"><span class="dot"></span></button>`;
+      }
+      return `<button class="pill" data-axis="${k}" data-val="${v.key}"
+                aria-label="${ax.label.fr} ${v.label.fr}">${bi(v.label)}</button>`;
+    }).join("");
+    return `<div class="picker-row ${ax.style === "swatch" ? "swatches" : "pills"}" data-axis="${k}">${buttons}</div>`;
+  }).join("");
+
+  return `
+    <div class="pcard${extra ? " " + extra : ""}" data-product="${p.slug}" data-category="${cat.slug}">
+      <div class="ph"><img src="assets/${first.image}" alt="${first.alt}"></div>
+      <h3>${bi(p.name)}</h3>
+      <p class="sub"></p>
+      ${pickers ? `<div class="pickers">${pickers}</div>` : ""}
+    </div>`;
+}
+
+/* is a swatch colour light enough to need a visible border? */
+function isLight(hex) {
+  if (!hex) return true;
+  const c = hex.replace("#", "");
+  const r = parseInt(c.slice(0, 2), 16), g = parseInt(c.slice(2, 4), 16), b = parseInt(c.slice(4, 6), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) > 200;
+}
+
+/* set up a card's picker state + listeners */
+function initCard(card) {
+  const cat = card.dataset.category;
+  const p = findProduct(cat, card.dataset.product);
+  if (!p) return;
+
+  // initial selection = first variant's axis values
+  const sel = {};
+  axisKeys(p).forEach(k => { if (p.variants[0][k] != null) sel[k] = p.variants[0][k]; });
+  card._omi = { product: p, sel };
+
+  card.querySelectorAll(".swatch, .pill").forEach(btn => {
+    btn.addEventListener("click", () => selectValue(card, btn.dataset.axis, btn.dataset.val));
+  });
+
+  applyVariant(card, p.variants[0]);
+}
+
+function findProduct(catSlug, prodSlug) {
+  const cat = window.OMI_DATA.categories.find(c => c.slug === catSlug);
+  return cat && cat.products.find(p => p.slug === prodSlug);
+}
+
+/* handle a picker click: the clicked axis is authoritative,
+   other axes are kept if possible, otherwise repaired */
+function selectValue(card, axisKey, valKey) {
+  const { product: p, sel } = card._omi;
+  sel[axisKey] = valKey;
+
+  const cands = p.variants.filter(v => v[axisKey] === valKey);
+  let best = cands[0], bestScore = -1;
+  const others = axisKeys(p).filter(k => k !== axisKey);
+  cands.forEach(v => {
+    let score = 0;
+    others.forEach(k => { if (v[k] === sel[k]) score++; });
+    if (score > bestScore) { best = v; bestScore = score; }
+  });
+
+  // sync selection to the chosen variant across all axes
+  axisKeys(p).forEach(k => { if (best[k] != null) sel[k] = best[k]; });
+  applyVariant(card, best);
+}
+
+/* reflect a variant in the DOM: image, subtitle, active + available states */
+function applyVariant(card, variant) {
+  const { product: p, sel } = card._omi;
+  const img = card.querySelector(".ph img");
+
+  // swap image (with a soft fade)
+  if (img.getAttribute("src") !== "assets/" + variant.image) {
+    img.classList.add("swapping");
+    const swap = () => {
+      img.src = "assets/" + variant.image;
+      img.alt = variant.alt || "";
+      img.classList.remove("swapping");
+    };
+    // fade out, then swap; fallback timer in case transitionend doesn't fire
+    setTimeout(swap, 150);
+  }
+
+  // subtitle: variant override, else auto from selected axis labels
+  const sub = card.querySelector(".sub");
+  if (variant.sub) {
+    sub.innerHTML = bi(variant.sub);
+  } else {
+    const parts = axisKeys(p)
+      .filter(k => sel[k] != null)
+      .map(k => bi(axisValue(p, k, sel[k]).label));
+    sub.innerHTML = parts.join(`<span class="sep"> · </span>`);
+  }
+
+  // active + availability states on every picker button
+  card.querySelectorAll(".swatch, .pill").forEach(btn => {
+    const k = btn.dataset.axis, val = btn.dataset.val;
+    btn.classList.toggle("on", sel[k] === val);
+    // available = some variant pairs this value with the other current selections
+    const others = axisKeys(p).filter(a => a !== k);
+    const ok = p.variants.some(v =>
+      v[k] === val && others.every(a => sel[a] == null || v[a] === sel[a]));
+    btn.classList.toggle("na", !ok);
+  });
+}
+
+function showTab(i) {
+  document.querySelectorAll(".tab").forEach((t, n) => t.classList.toggle("on", n === i));
+  document.querySelectorAll(".panel").forEach((p, n) => p.classList.toggle("on", n === i));
+  // the "view all" button only belongs to the Tous tab (index 0)
+  const foot = document.querySelector(".range-foot");
+  if (foot) foot.style.display = (i === 0) ? "flex" : "none";
+}
+
+/* ---------- language ---------- */
+function setLang(l) {
+  const rtl = l === "ar";
+  document.documentElement.dir = rtl ? "rtl" : "ltr";
+  document.documentElement.lang = l;
+  const label = document.getElementById("langLabel");
+  if (label) label.textContent = rtl ? "العربية" : "Français";
+  const optFr = document.getElementById("opt-fr"), optAr = document.getElementById("opt-ar");
+  if (optFr) optFr.classList.toggle("on", !rtl);
+  if (optAr) optAr.classList.toggle("on", rtl);
+  const footFr = document.getElementById("foot-fr"), footAr = document.getElementById("foot-ar");
+  if (footFr) footFr.classList.toggle("on", !rtl);
+  if (footAr) footAr.classList.toggle("on", rtl);
+  const lang = document.getElementById("lang");
+  if (lang) lang.classList.remove("open");
+  try { localStorage.setItem("omi-lang", l); } catch (e) {}
+}
+
+function toggleLang(e) {
+  e.stopPropagation();
+  const l = document.getElementById("lang");
+  const open = l.classList.toggle("open");
+  l.querySelector(".lang-trigger").setAttribute("aria-expanded", open);
+}
+
+/* ---------- init ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  renderRange();
+
+  // close language menu on outside click / Escape
+  document.addEventListener("click", (e) => {
+    const l = document.getElementById("lang");
+    if (l && !l.contains(e.target)) l.classList.remove("open");
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") document.getElementById("lang").classList.remove("open");
+  });
+
+  // hide-on-scroll header
+  const header = document.querySelector(".site-header");
+  let lastY = window.scrollY, ticking = false;
+  function update() {
+    const y = window.scrollY;
+    header.classList.toggle("scrolled", y > 4);
+    if (y < 80 || y < lastY) header.classList.remove("hide");
+    else if (y > lastY) { header.classList.add("hide"); document.getElementById("lang").classList.remove("open"); }
+    lastY = y; ticking = false;
+  }
+  window.addEventListener("scroll", () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  // restore saved language
+  try { setLang(localStorage.getItem("omi-lang") || "fr"); } catch (e) { setLang("fr"); }
+});

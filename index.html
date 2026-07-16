@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OMI — Accueil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="site-header"><div class="wrap">
+  <nav class="nav">
+    <a href="#" class="nav-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.png" alt="OMI" style="height:40px;display:block"></a>
+    <div class="nav-links">
+      <a href="#"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
+      <a href="#cats"><span class="fr">Produits</span><span class="ar">المنتجات</span></a>
+      <a href="#"><span class="fr">La marque</span><span class="ar">العلامة</span></a>
+      <a href="#"><span class="fr">Contact</span><span class="ar">اتصل بنا</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang" id="lang">
+        <button class="lang-trigger" onclick="toggleLang(event)" aria-haspopup="true" aria-expanded="false">
+          <svg class="globe" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17A15 15 0 0 1 9 11.35 15.3 15.3 0 0 1 6.69 8h-2A17 17 0 0 0 7.66 12.56L2.58 17.58 4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+          <span id="langLabel">Français</span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu" role="menu">
+          <button class="lang-opt on" id="opt-fr" onclick="setLang('fr')" role="menuitem">Français</button>
+          <button class="lang-opt" id="opt-ar" onclick="setLang('ar')" role="menuitem">العربية</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div></header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="inner">
+      <h1>
+        <span class="fr">La propreté,<br><span class="hl">pensée pour durer.</span></span>
+        <span class="ar">النظافة،<br><span class="hl">مصمّمة لتدوم.</span></span>
+      </h1>
+      <p class="lead">
+        <span class="fr">OMI, c’est le réflexe propreté des familles mauritaniennes — la même qualité de confiance, jour après jour.</span>
+        <span class="ar">أومي هي عادة النظافة لدى العائلات الموريتانية — الجودة نفسها التي تثق بها، يومًا بعد يوم.</span>
+      </p>
+      <div class="hero-actions">
+        <a href="#cats" class="btn btn-primary"><span class="fr">Découvrir nos produits</span><span class="ar">اكتشف منتجاتنا</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img class="hero-photo" src="assets/hero-products.png" alt="Gamme de produits OMI">
+  </div>
+</section>
+
+<!-- ================= SERVICES / CATEGORIES ================= -->
+<section class="services"><div class="wrap">
+  <h2><span class="fr">L’Excellence au cœur de votre foyer</span><span class="ar">التميّز في قلب منزلك</span></h2>
+  <div class="services-eyebrow"><span class="fr">Une gamme pensée pour chaque pièce de la maison.</span><span class="ar">تشكيلة مصمّمة لكل غرفة في المنزل.</span></div>
+
+  <div class="services-grid">
+    <div class="svc-col">
+      <div class="svc-card c-blue">
+        <span class="svc-icon ic-floor" role="img" aria-label="Sols, surfaces et vitres"></span>
+        <h3><span class="fr">Sols, Surfaces &amp; Vitres</span><span class="ar">الأرضيات والأسطح والزجاج</span></h3>
+        <p><span class="fr">Des sols, plans de travail et vitres impeccables, sans traces.</span><span class="ar">أرضيات وأسطح وزجاج نظيفة تمامًا، بدون آثار.</span></p>
+        <a href="#cats" class="svc-more"><span class="fr">Découvrir</span><span class="ar">اكتشف</span></a>
+      </div>
+      <div class="svc-card c-cyan">
+        <span class="svc-icon ic-linge" role="img" aria-label="Entretien du linge"></span>
+        <h3><span class="fr">Entretien du Linge</span><span class="ar">العناية بالملابس</span></h3>
+        <p><span class="fr">Un linge éclatant et une fraîcheur qui dure, lavage après lavage.</span><span class="ar">غسيل ناصع ونضارة تدوم، غسلة بعد غسلة.</span></p>
+        <a href="#cats" class="svc-more"><span class="fr">Découvrir</span><span class="ar">اكتشف</span></a>
+      </div>
+    </div>
+
+    <div class="svc-center">
+      <img src="assets/woman-bucket.png" alt="Femme mauritanienne tenant un seau de produits OMI">
+    </div>
+
+    <div class="svc-col">
+      <div class="svc-card c-green">
+        <span class="svc-icon ic-vaisselle" role="img" aria-label="Vaisselle et cuisine"></span>
+        <h3><span class="fr">Vaisselle &amp; Cuisine</span><span class="ar">الأواني والمطبخ</span></h3>
+        <p><span class="fr">Une vaisselle dégraissée et brillante, sans le moindre effort.</span><span class="ar">أوانٍ نظيفة ولامعة، دون أي مجهود.</span></p>
+        <a href="#cats" class="svc-more"><span class="fr">Découvrir</span><span class="ar">اكتشف</span></a>
+      </div>
+      <div class="svc-card c-lavender">
+        <span class="svc-icon ic-hygiene" role="img" aria-label="Hygiène et soin personnel"></span>
+        <h3><span class="fr">Hygiène &amp; Soin Personnel</span><span class="ar">النظافة والعناية الشخصية</span></h3>
+        <p><span class="fr">Savons et papiers doux pour toute la famille, au quotidien.</span><span class="ar">صابون وورق ناعم لكل أفراد العائلة، كل يوم.</span></p>
+        <a href="#cats" class="svc-more"><span class="fr">Découvrir</span><span class="ar">اكتشف</span></a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ================= PRODUCT RANGE (tabs + cards rendered from data.js) ================= -->
+<section class="range" id="cats"><div class="wrap">
+  <h2><span class="fr">Découvrez notre gamme de produits.</span><span class="ar">اكتشف تشكيلة منتجاتنا.</span></h2>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div id="panels"></div>
+  <div class="range-foot">
+    <button class="btn-ghost" id="viewAll">
+      <span class="lbl-more"><span class="fr">Afficher tous les produits</span><span class="ar">عرض كل المنتجات</span></span>
+      <span class="lbl-less"><span class="fr">Afficher moins</span><span class="ar">عرض أقل</span></span>
+    </button>
+  </div>
+</div></section>
+
+<!-- ================= SHOWCASE — La marque OMI ================= -->
+<section class="showcase">
+  <div class="wrap">
+    <div class="showcase-grid">
+      <div class="showcase-copy">
+        <span class="eyebrow"><span class="fr">La marque OMI</span><span class="ar">علامة أومي</span></span>
+        <h2><span class="fr">Née en Mauritanie,<br>pour vos foyers.</span><span class="ar">وُلدت في موريتانيا،<br>من أجل بيوتكم.</span></h2>
+        <p class="body"><span class="fr">Depuis Nouakchott, OMI conçoit des produits d’entretien pour le quotidien des familles mauritaniennes : des formules efficaces, des parfums familiers et une qualité constante, gamme après gamme.</span><span class="ar">من نواكشوط، تصمّم أومي منتجات عناية ليوميات العائلات الموريتانية: تركيبات فعّالة، وعطور مألوفة، وجودة ثابتة، تشكيلةً بعد تشكيلة.</span></p>
+        <div class="brand-stats">
+          <div class="stat">
+            <span class="stat-num">6</span>
+            <span class="stat-label"><span class="fr">Gammes de produits</span><span class="ar">تشكيلات منتجات</span></span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">100%</span>
+            <span class="stat-label"><span class="fr">Fabriqué en Mauritanie</span><span class="ar">صناعة موريتانية</span></span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">N°1</span>
+            <span class="stat-label"><span class="fr">Le réflexe des familles</span><span class="ar">خيار العائلات</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="showcase-photo">
+        <img src="assets/glove-peace.png" alt="Gant de ménage jaune à motif traditionnel, utilisé pour l’entretien de la maison">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer"><div class="wrap">
+  <div class="foot-main">
+    <div class="foot-brand">
+      <a href="#" class="foot-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.png" alt="OMI"></a>
+      <p class="foot-tag"><span class="fr">La propreté de confiance, au cœur des foyers mauritaniens.</span><span class="ar">نظافة موثوقة، في قلب البيوت الموريتانية.</span></p>
+    </div>
+
+    <nav class="foot-nav">
+      <div class="foot-col">
+        <h4><span class="fr">Produits</span><span class="ar">المنتجات</span></h4>
+        <ul>
+          <li><a href="#cats"><span class="fr">Nettoyants Maison</span><span class="ar">منظفات المنزل</span></a></li>
+          <li><a href="#cats"><span class="fr">Eau de Javel</span><span class="ar">ماء جافيل</span></a></li>
+          <li><a href="#cats"><span class="fr">Soin du Linge</span><span class="ar">العناية بالملابس</span></a></li>
+          <li><a href="#cats"><span class="fr">Papiers &amp; Mouchoirs</span><span class="ar">ورق ومناديل</span></a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4><span class="fr">La marque</span><span class="ar">العلامة</span></h4>
+        <ul>
+          <li><a href="#"><span class="fr">Notre histoire</span><span class="ar">قصتنا</span></a></li>
+          <li><a href="#"><span class="fr">Contact</span><span class="ar">اتصل بنا</span></a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4><span class="fr">Contact</span><span class="ar">اتصل بنا</span></h4>
+        <ul>
+          <li><a href="tel:+22222511111" dir="ltr">+222 22 51 11 11</a></li>
+          <li><a href="mailto:commercial@omi.mr" dir="ltr">commercial@omi.mr</a></li>
+          <li class="foot-addr"><span class="fr">Nouakchott, Mauritanie</span><span class="ar">نواكشوط، موريتانيا</span></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="foot-bar">
+    <p class="foot-copy"><span class="fr">© 2026 OMI · Fabriqué en Mauritanie</span><span class="ar">© 2026 أومي · صناعة موريتانية</span></p>
+    <div class="foot-sister">
+      <span class="foot-sister-cap"><span class="fr">Marque sœur</span><span class="ar">علامة شقيقة</span></span>
+      <img class="maxiplus-logo" src="assets/maxiplus-logo.png" alt="Maxi Plus">
+    </div>
+    <div class="foot-lang">
+      <button id="foot-fr" class="on" onclick="setLang('fr')">Français</button>
+      <button id="foot-ar" onclick="setLang('ar')">العربية</button>
+    </div>
+  </div>
+</div></footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
