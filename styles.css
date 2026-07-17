@@ -151,12 +151,21 @@ a:hover{color:var(--omi-cyan-deep)}
 [dir="rtl"] .svc-card h3{font-family:var(--font);font-weight:700}
 .svc-card p{font-family:var(--font-display);font-size:14.5px;line-height:1.6;color:var(--ink-500);margin:11px 0 0}
 [dir="rtl"] .svc-card p{font-family:var(--font)}
-.svc-more{margin-top:clamp(18px,2vw,26px);align-self:flex-start;font-family:var(--font-display);font-weight:600;
-  font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--omi-navy);
-  padding-bottom:3px;border-bottom:1.5px solid var(--omi-navy);
-  transition:color var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out),gap var(--dur-base)}
-[dir="rtl"] .svc-more{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:14px}
-.svc-more:hover{color:var(--omi-cyan-deep);border-color:var(--omi-cyan-deep)}
+/* "Découvrir" link — low-key, sentence case, arrow, per-card accent colour */
+.svc-more{margin-top:clamp(16px,2vw,24px);align-self:flex-start;display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-display);font-weight:500;font-size:14px;letter-spacing:-.005em;
+  text-decoration:none;color:var(--omi-navy);transition:opacity var(--dur-fast) var(--ease-out)}
+[dir="rtl"] .svc-more{font-family:var(--font);font-size:15px}
+.svc-more::after{content:"→";font-weight:500;transition:transform var(--dur-base) var(--ease-out)}
+[dir="rtl"] .svc-more::after{content:"←"}
+.svc-more:hover::after{transform:translateX(3px)}
+[dir="rtl"] .svc-more:hover::after{transform:translateX(-3px)}
+.svc-more:hover{opacity:.78}
+/* each link takes a darker, saturated shade of its own card's tint */
+.c-blue     .svc-more{color:#1B4FD0}
+.c-gold     .svc-more{color:#9A6800}
+.c-green    .svc-more{color:#0E7C3C}
+.c-lavender .svc-more{color:#5C3EA6}
 @media(max-width:1024px){
   .services-grid{grid-template-columns:1fr;max-width:640px;margin:0 auto}
   .svc-center{order:-1;min-height:clamp(360px,60vw,520px)}
