@@ -113,32 +113,44 @@ a:hover{color:var(--omi-cyan-deep)}
 
 /* ================= TRUST STRIP =================
    Desktop/tablet: plain 4-up row, no scroll, no dots.
-   Mobile: peek carousel — active card centred, neighbours peek at the
-   viewport edges, swipe/scroll-snap, dot indicators below. */
-.trust{background:#fff;border-top:1px solid var(--ink-100);border-bottom:1px solid var(--ink-100)}
+   Mobile: peek carousel — active card centred, a sliver of the next
+   card visible at the edge, hard scroll-snap, dot indicators below. */
+.trust{background:#fff}
 .trust-inner{max-width:1520px;margin:0 auto;
-  padding:clamp(56px,7vw,90px) clamp(24px,11.38vw,173px)}
+  /* comfortable gap under the hero (top); the section below supplies the
+     gap after it, so no bottom padding here (avoids a doubled-up gap) */
+  padding:clamp(64px,7vw,96px) clamp(24px,11.38vw,173px) 0}
 .trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(36px,4vw,64px)}
 .trust-card{display:flex;flex-direction:column;align-items:center;text-align:center;
   flex:0 0 auto;scroll-snap-align:center;padding:0 clamp(4px,1vw,14px)}
-.trust-icon{display:inline-flex;width:44px;height:44px;flex:none;color:var(--omi-navy);margin-bottom:24px}
-.trust-icon svg{width:100%;height:100%;display:block}
-.trust-card h3{font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;
+/* icon: filled traced SVG recoloured to the hero blue via mask; fixed
+   square box so any icon sits consistently sized regardless of ratio */
+.trust-icon{display:inline-block;width:80px;height:80px;flex:none;margin-bottom:28px;
+  background:#1E4DFF;-webkit-mask:var(--ti) center/contain no-repeat;mask:var(--ti) center/contain no-repeat}
+.ti-quality{--ti:url("assets/advanced.svg")}
+.ti-made   {--ti:url("assets/location.svg")}
+.ti-range  {--ti:url("assets/category.svg")}
+.ti-avail  {--ti:url("assets/shopping-store.svg")}
+.trust-card h3{font-family:var(--font-display);font-weight:600;font-size:18.5px;letter-spacing:-.015em;
   line-height:1.3;color:var(--ink-900);margin:0}
-[dir="rtl"] .trust-card h3{font-family:var(--font);font-weight:700;font-size:18px}
-.trust-card p{font-family:var(--font-display);font-size:14px;line-height:1.7;color:var(--ink-500);
-  margin:12px 0 0;max-width:30ch}
-[dir="rtl"] .trust-card p{font-family:var(--font);font-size:15px;line-height:1.85}
+[dir="rtl"] .trust-card h3{font-family:var(--font);font-weight:700;font-size:19.5px}
+.trust-card p{font-family:var(--font-display);font-size:13.5px;line-height:1.65;color:var(--ink-400);
+  margin:10px 0 0;max-width:30ch}
+[dir="rtl"] .trust-card p{font-family:var(--font);font-size:14.5px;line-height:1.8}
 .trust-dots{display:none}
 
 @media(max-width:767px){
-  /* full-bleed track so neighbouring cards can peek past the screen edge */
+  /* full-bleed track so the next card peeks past the screen edge */
   .trust-inner{padding-left:0;padding-right:0;
-    padding-top:clamp(40px,7vw,56px);padding-bottom:clamp(26px,5vw,34px)}
+    padding-top:clamp(44px,9vw,60px);padding-bottom:0}
+  .trust-icon{width:72px;height:72px;margin-bottom:24px}
   .trust-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none;gap:14px;padding-inline:12vw}
+    scrollbar-width:none;gap:14px;padding-inline:8vw}
   .trust-track::-webkit-scrollbar{display:none}
-  .trust-card{width:76vw;padding:0}
+  /* scroll-snap-stop:always forces every swipe to land on exactly one
+     slide — a fast fling can no longer skip past or land in-between */
+  .trust-card{width:84vw;padding:0;scroll-snap-stop:always}
+  .trust-card p{max-width:23ch}
   .trust-dots{display:flex;justify-content:center;align-items:center;gap:5px;margin-top:26px}
   .trust-dot{width:22px;height:22px;flex:none;display:flex;align-items:center;justify-content:center;
     background:none;border:0;padding:0;cursor:pointer}
