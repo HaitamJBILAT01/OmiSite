@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
 
@@ -65,15 +65,44 @@
   </div>
 </section>
 
-<!-- ================= QUICK-NAV (4 categories) ================= -->
-<nav class="quicknav" aria-label="Catégories"><div class="wrap">
-  <div class="qn-row">
-    <button class="qn-pill" onclick="gotoCat(1)"><span class="qn-dot" style="--d:#1E5BE6"></span><span class="fr">Sols, Surfaces &amp; Vitres</span><span class="ar">الأرضيات والأسطح والزجاج</span></button>
-    <button class="qn-pill" onclick="gotoCat(2)"><span class="qn-dot" style="--d:#D99A00"></span><span class="fr">Entretien du Linge</span><span class="ar">العناية بالملابس</span></button>
-    <button class="qn-pill" onclick="gotoCat(3)"><span class="qn-dot" style="--d:#12A24E"></span><span class="fr">Vaisselle &amp; Cuisine</span><span class="ar">الأواني والمطبخ</span></button>
-    <button class="qn-pill" onclick="gotoCat(4)"><span class="qn-dot" style="--d:#7A57C7"></span><span class="fr">Hygiène &amp; Soin Personnel</span><span class="ar">النظافة والعناية الشخصية</span></button>
+<!-- ================= TRUST STRIP (peek carousel on mobile, row on desktop) ================= -->
+<section class="trust">
+  <div class="trust-inner">
+    <div class="trust-track" id="trustTrack">
+
+      <div class="trust-card">
+        <span class="trust-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.3 8 11 4.6-2.7 8-6 8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <h3><span class="fr">Qualité constante</span><span class="ar">جودة ثابتة</span></h3>
+        <p><span class="fr">Des formules fiables, testées et éprouvées jour après jour — un résultat toujours au rendez-vous.</span><span class="ar">تركيبات موثوقة، مُختبرة يوماً بعد يوم — نتيجة تكون دائماً في الموعد.</span></p>
+      </div>
+
+      <div class="trust-card">
+        <span class="trust-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13Z"/><circle cx="12" cy="9" r="2.6"/></svg></span>
+        <h3><span class="fr">Fabriqué en Mauritanie</span><span class="ar">صناعة موريتانية</span></h3>
+        <p><span class="fr">Conçu et produit à Nouakchott, pensé pour les foyers d’ici et leurs habitudes.</span><span class="ar">مصمّم ومُنتَج في نواكشوط، لبيوت هذه الأرض وعاداتها اليومية.</span></p>
+      </div>
+
+      <div class="trust-card">
+        <span class="trust-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+        <h3><span class="fr">Une gamme complète</span><span class="ar">تشكيلة متكاملة</span></h3>
+        <p><span class="fr">Un produit adapté à chaque pièce de la maison, du sol à la cuisine.</span><span class="ar">منتج يناسب كل غرفة في المنزل، من الأرضيات إلى المطبخ.</span></p>
+      </div>
+
+      <div class="trust-card">
+        <span class="trust-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M4 9v10a1 1 0 0 0 1 1h4v-6h6v6h4a1 1 0 0 0 1-1V9"/><path d="M3 9h18"/></svg></span>
+        <h3><span class="fr">Disponible partout</span><span class="ar">متوفّر في كل مكان</span></h3>
+        <p><span class="fr">Présent chez les commerçants de proximité dans tout le pays, à portée de main.</span><span class="ar">متوفّر لدى تجار الأحياء في جميع أنحاء البلاد، في متناول يدك.</span></p>
+      </div>
+
+    </div>
+    <div class="trust-dots" id="trustDots" role="tablist" aria-label="Carousel">
+      <button class="trust-dot on" data-i="0" role="tab" aria-label="1" aria-selected="true"></button>
+      <button class="trust-dot" data-i="1" role="tab" aria-label="2" aria-selected="false"></button>
+      <button class="trust-dot" data-i="2" role="tab" aria-label="3" aria-selected="false"></button>
+      <button class="trust-dot" data-i="3" role="tab" aria-label="4" aria-selected="false"></button>
+    </div>
   </div>
-</div></nav>
+</section>
 
 <!-- ================= SERVICES / CATEGORIES ================= -->
 <section class="services"><div class="wrap">
@@ -122,17 +151,8 @@
   <h2><span class="fr">Découvrez notre gamme de produits.</span><span class="ar">اكتشف تشكيلة منتجاتنا.</span></h2>
 
   <div class="filter-bar">
-    <button class="filter-toggle" id="filterToggle" aria-haspopup="true" aria-expanded="false" aria-controls="filterPanel">
-      <span class="fr">Filtrer par catégorie</span><span class="ar">تصفية حسب الفئة</span>
-      <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div class="filter-panel" id="filterPanel" hidden>
-      <div class="tabs" id="tabs" role="tablist"></div>
-      <button class="filter-clear" id="filterClear" hidden>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        <span class="fr">Effacer la sélection</span><span class="ar">مسح التحديد</span>
-      </button>
-    </div>
+    <p class="filter-label"><span class="fr">Filtrer par catégorie</span><span class="ar">تصفية حسب الفئة</span></p>
+    <div class="tabs" id="tabs" role="tablist"></div>
   </div>
 
   <div class="range-count" id="rangeCount"></div>
@@ -221,7 +241,7 @@
   </div>
 </div></footer>
 
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script src="data.js?v=18"></script>
+<script src="app.js?v=18"></script>
 </body>
 </html>

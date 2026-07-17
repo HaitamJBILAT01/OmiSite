@@ -27,6 +27,9 @@ function catProducts(cat) {
    read by selectCategory() to update the "Produits (N)" count line */
 let RANGE_COUNTS = [];
 
+/* same dot colours as the quick-nav pill strip, keyed by category.accent */
+const ACCENT_HEX = { blue: "#1E5BE6", gold: "#D99A00", green: "#12A24E", lavender: "#7A57C7" };
+
 /* ---------- render the product range from data ---------- */
 function renderRange() {
   const data = window.OMI_DATA;
@@ -35,15 +38,15 @@ function renderRange() {
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
 
-  // tabs: "Tous" first (index 0), then one per category — each category
-  // chip picks up its own colour (matching its "L'Excellence" card) via
-  // c.accent, and can carry a small brandLogo (e.g. Maxiplus) next to its label
+  // tabs: "Tous" first (index 0), then one per category — each chip gets a
+  // small colour dot (same treatment as the quick-nav strip) and can carry
+  // a small brandLogo (e.g. Maxiplus) next to its label
   tabsEl.innerHTML =
     `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
     cats.map((c, i) => {
-      const accent = c.accent ? ` c-${c.accent}` : "";
+      const dot = c.accent ? `<span class="qn-dot" style="--d:${ACCENT_HEX[c.accent]}"></span>` : "";
       const brand = c.brandLogo ? `<img class="tab-brand" src="assets/${c.brandLogo}" alt="Maxiplus">` : "";
-      return `<button class="tab${accent}" role="tab" data-tab="${i + 1}">${bi(c.name)}${brand}</button>`;
+      return `<button class="tab" role="tab" data-tab="${i + 1}">${dot}${bi(c.name)}${brand}</button>`;
     }).join("");
 
   // "Tous" panel: every variant of every product, interleaved round-robin
@@ -81,12 +84,9 @@ function renderRange() {
     catProducts(c).reduce((sum, p) => sum + p.variants.length, 0)
   )];
 
-  // picking a chip applies the filter and closes the panel automatically
+  // picking a chip applies the filter — pills are always visible, no panel to close
   tabsEl.querySelectorAll(".tab").forEach(t =>
-    t.addEventListener("click", () => {
-      selectCategory(+t.dataset.tab);
-      setFilterPanel(false);
-    })
+    t.addEventListener("click", () => selectCategory(+t.dataset.tab))
   );
 
   // "Voir plus de produits" — reveal / hide the extra cards in the Tous grid
@@ -96,30 +96,11 @@ function renderRange() {
     if (g) vb.classList.toggle("on", g.classList.toggle("show-all"));
   });
 
-  // collapsible "Filtrer par catégorie" panel (closed by default)
-  const toggle = document.getElementById("filterToggle");
-  const panel = document.getElementById("filterPanel");
-  if (toggle && panel) toggle.addEventListener("click", () => setFilterPanel(panel.hidden));
-
-  // "Effacer la sélection" — back to "Tous", panel stays open
-  const clearBtn = document.getElementById("filterClear");
-  if (clearBtn) clearBtn.addEventListener("click", () => selectCategory(0));
-
   selectCategory(0);
 }
 
-/* open/close the category filter panel + flip the toggle chevron */
-function setFilterPanel(open) {
-  const toggle = document.getElementById("filterToggle");
-  const panel = document.getElementById("filterPanel");
-  if (!toggle || !panel) return;
-  panel.hidden = !open;
-  toggle.classList.toggle("open", open);
-  toggle.setAttribute("aria-expanded", open);
-}
-
 /* pick a tab (Tous = 0, category = 1..4): swap panels, update the
-   product count line, and show/hide "Effacer la sélection" */
+   product count line, and mark the active pill */
 function selectCategory(i) {
   showTab(i);
   const count = document.getElementById("rangeCount");
@@ -127,15 +108,11 @@ function selectCategory(i) {
     fr: `Produits (${RANGE_COUNTS[i] ?? 0})`,
     ar: `المنتجات (${RANGE_COUNTS[i] ?? 0})`
   });
-  const clearBtn = document.getElementById("filterClear");
-  if (clearBtn) clearBtn.hidden = i === 0;
 }
 
-/* jump to a category from the quick-nav strip: select it, open the
-   filter panel so the choice is visible, then scroll to the grid */
+/* jump to a category from the quick-nav strip: select it, then scroll to the grid */
 function gotoCat(i) {
   selectCategory(i);
-  setFilterPanel(true);
   const el = document.getElementById("cats");
   if (el) {
     const y = el.getBoundingClientRect().top + window.scrollY - 68;
@@ -166,6 +143,49 @@ function variantSubHTML(product, variant) {
 function showTab(i) {
   document.querySelectorAll(".tab").forEach((t, n) => t.classList.toggle("on", n === i));
   document.querySelectorAll(".panel").forEach((p, n) => p.classList.toggle("on", n === i));
+}
+
+/* ---------- trust strip: peek carousel (mobile) ----------
+   Dots reflect whichever card sits nearest the track's centre, computed
+   from actual rendered positions (getBoundingClientRect) rather than
+   scrollLeft math, so it works the same in LTR and RTL. */
+function initTrustCarousel() {
+  const track = document.getElementById("trustTrack");
+  const dotsWrap = document.getElementById("trustDots");
+  if (!track || !dotsWrap) return;
+  const cards = [...track.querySelectorAll(".trust-card")];
+  const dots = [...dotsWrap.querySelectorAll(".trust-dot")];
+
+  function nearestIndex() {
+    const trackRect = track.getBoundingClientRect();
+    const trackCenter = trackRect.left + trackRect.width / 2;
+    let best = 0, bestDist = Infinity;
+    cards.forEach((c, i) => {
+      const r = c.getBoundingClientRect();
+      const d = Math.abs((r.left + r.width / 2) - trackCenter);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    return best;
+  }
+
+  function setActiveDot(i) {
+    dots.forEach((d, n) => {
+      d.classList.toggle("on", n === i);
+      d.setAttribute("aria-selected", n === i);
+    });
+  }
+
+  let ticking = false;
+  track.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { setActiveDot(nearestIndex()); ticking = false; });
+  }, { passive: true });
+
+  dots.forEach((d, i) => d.addEventListener("click", () => {
+    setActiveDot(i);
+    cards[i].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+  }));
 }
 
 /* ---------- language ---------- */
@@ -210,6 +230,7 @@ function toggleMenu(e) {
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderRange();
+  initTrustCarousel();
 
   // close language + mobile menu on outside click / Escape
   document.addEventListener("click", (e) => {

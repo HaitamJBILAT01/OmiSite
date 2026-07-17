@@ -21,7 +21,9 @@
       "mcp__visualize__show_widget",
       "Bash(mkdir -p \"C:\\\\Users\\\\Haitam JBILAT\\\\.claude\\\\projects\\\\C--Users-Haitam-JBILAT-Desktop-OMI\\\\memory\" 2>/dev/null; echo ok)",
       "Bash(node -e ' *)",
-      "Bash(node -c app.js)"
+      "Bash(node -c app.js)",
+      "Bash(python -m http.server 8777)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8777)"
     ]
   }
 }
