@@ -119,8 +119,8 @@ a:hover{color:var(--omi-cyan-deep)}
 .trust-inner{max-width:1520px;margin:0 auto;
   /* 38px gap under the hero; the section below supplies the gap after it */
   padding:38px clamp(24px,11.38vw,173px) 0}
-/* ~60px between the card text columns on desktop (cards fill their cell) */
-.trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(28px,4.5vw,60px)}
+/* tighter columns on desktop (cards fill their cell) */
+.trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.6vw,36px)}
 .trust-card{display:flex;flex-direction:column;align-items:center;text-align:center;
   flex:0 0 auto;scroll-snap-align:center;padding:0}
 /* icon: filled traced SVG recoloured to the hero blue via mask; fixed
@@ -147,13 +147,13 @@ a:hover{color:var(--omi-cyan-deep)}
   .trust-inner{padding-left:0;padding-right:0;padding-top:38px;padding-bottom:0}
   .trust-icon{width:58px;height:58px;margin-bottom:20px}
   .trust-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
-    scrollbar-width:none;gap:12px;padding-inline:15vw;scroll-padding-inline:15vw}
+    scrollbar-width:none;gap:8px;padding-inline:17vw;scroll-padding-inline:17vw}
   .trust-track::-webkit-scrollbar{display:none}
   /* Centred snap: the active card is the focus; a generous ~15vw gutter on each
      side (minus the gap) means a real chunk of the neighbouring card — its icon
      and text, not just empty margin — peeks on both edges, same as the reference.
      scroll-snap-stop:always so a fast fling still lands on exactly one card. */
-  .trust-card{flex:0 0 70vw;width:70vw;padding:0 4vw;scroll-snap-align:center;scroll-snap-stop:always}
+  .trust-card{flex:0 0 66vw;width:66vw;padding:0 2vw;scroll-snap-align:center;scroll-snap-stop:always}
   /* let the text fill the card width so the peek actually reveals content
      (the old 23ch cap left wide white margins that made the peek look blank) */
   .trust-card p{max-width:none}
