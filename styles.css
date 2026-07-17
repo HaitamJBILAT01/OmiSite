@@ -147,13 +147,16 @@ a:hover{color:var(--omi-cyan-deep)}
   .trust-inner{padding-left:0;padding-right:0;padding-top:38px;padding-bottom:0}
   .trust-icon{width:58px;height:58px;margin-bottom:20px}
   .trust-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
-    scrollbar-width:none;gap:16px;padding-inline:10vw}
+    scrollbar-width:none;gap:12px;padding-inline:15vw;scroll-padding-inline:15vw}
   .trust-track::-webkit-scrollbar{display:none}
-  /* centred snap: the active card is the focus, the next card peeks on the
-     trailing edge (and previous on the leading edge) as a "swipe" cue.
+  /* Centred snap: the active card is the focus; a generous ~15vw gutter on each
+     side (minus the gap) means a real chunk of the neighbouring card — its icon
+     and text, not just empty margin — peeks on both edges, same as the reference.
      scroll-snap-stop:always so a fast fling still lands on exactly one card. */
-  .trust-card{width:80vw;padding:0;scroll-snap-align:center;scroll-snap-stop:always}
-  .trust-card p{max-width:23ch}
+  .trust-card{flex:0 0 70vw;width:70vw;padding:0 4vw;scroll-snap-align:center;scroll-snap-stop:always}
+  /* let the text fill the card width so the peek actually reveals content
+     (the old 23ch cap left wide white margins that made the peek look blank) */
+  .trust-card p{max-width:none}
   .trust-dots{display:flex;justify-content:center;align-items:center;gap:5px;margin-top:26px}
   .trust-dot{width:22px;height:22px;flex:none;display:flex;align-items:center;justify-content:center;
     background:none;border:0;padding:0;cursor:pointer}
