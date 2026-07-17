@@ -20,7 +20,8 @@
       "mcp__visualize__read_me",
       "mcp__visualize__show_widget",
       "Bash(mkdir -p \"C:\\\\Users\\\\Haitam JBILAT\\\\.claude\\\\projects\\\\C--Users-Haitam-JBILAT-Desktop-OMI\\\\memory\" 2>/dev/null; echo ok)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(node -c app.js)"
     ]
   }
 }

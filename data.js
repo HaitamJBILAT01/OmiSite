@@ -15,6 +15,9 @@
    -----
    categories[]                      -> one tab each
      ├ name        {fr,ar}
+     ├ accent?     "blue"|"gold"|"green"|"lavender"  -> same colour as its
+     │                                  card in "L'Excellence" (services
+     │                                  section); styles the filter chip
      ├ brandLogo?  "file.png"        -> shown next to the tab label
      │                                  (e.g. Maxiplus, on category 4)
      ├ products[]  OR  groups[]      -> a category is EITHER a flat
@@ -45,6 +48,7 @@ window.OMI_DATA = {
     {
       slug: "sols-surfaces-vitres",
       name: { fr: "Sols, Surfaces & Vitres", ar: "الأرضيات والأسطح والزجاج" },
+      accent: "blue", /* matches the c-blue category card in "L'Excellence" */
       products: [
         {
           slug: "nettoyant-surfaces",
@@ -96,6 +100,7 @@ window.OMI_DATA = {
     {
       slug: "entretien-du-linge",
       name: { fr: "Entretien du Linge", ar: "العناية بالملابس" },
+      accent: "gold",
       groups: [
         {
           name: { fr: "Lessive", ar: "مسحوق الغسيل" },
@@ -159,6 +164,7 @@ window.OMI_DATA = {
     {
       slug: "vaisselle-cuisine",
       name: { fr: "Vaisselle & Cuisine", ar: "الأواني والمطبخ" },
+      accent: "green",
       products: [
         {
           slug: "liquide-vaisselle",
@@ -183,6 +189,7 @@ window.OMI_DATA = {
     {
       slug: "hygiene-soin-personnel",
       name: { fr: "Hygiène & Soin Personnel", ar: "النظافة والعناية الشخصية" },
+      accent: "lavender",
       /* this category carries the Maxiplus paper range — shown as a small
          logo on the category tab itself, not repeated on every card */
       brandLogo: "maxiplus-logo.png",

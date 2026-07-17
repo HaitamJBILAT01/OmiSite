@@ -60,10 +60,10 @@ a:hover{color:var(--omi-cyan-deep)}
 
 /* ================= HERO (single continuous canvas — blue dissolves into white) ================= */
 .hero{position:relative;display:grid;grid-template-columns:1fr 1fr;direction:ltr;
-  min-height:clamp(440px,73vh,720px)}
+  min-height:clamp(420px,56vh,600px)}
 
 /* left: premium royal-blue copy panel */
-.hero-copy{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;
+.hero-copy{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;
   background-color:#173DBF;
   background-image:
     radial-gradient(46% 52% at 16% 20%, #3A78FF 0%, rgba(58,120,255,0) 62%),
@@ -73,7 +73,7 @@ a:hover{color:var(--omi-cyan-deep)}
     radial-gradient(40% 44% at 98% 52%, #5A90FF 0%, rgba(90,144,255,0) 55%),
     linear-gradient(150deg,#0F3FE6 0%,#173DBF 100%);
   color:#fff;
-  padding-top:88px;padding-bottom:122px;
+  padding-top:clamp(56px,7vw,76px);padding-bottom:clamp(56px,7vw,76px);
   padding-right:clamp(40px,4vw,72px);
   padding-left:calc(max((100vw - 1520px) / 2, 0px) + clamp(24px,11.38vw,173px))}
 [dir="rtl"] .hero-copy{direction:rtl;text-align:right}
@@ -89,12 +89,12 @@ a:hover{color:var(--omi-cyan-deep)}
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   background-size:auto, 140px 140px;
   mix-blend-mode:soft-light;opacity:.5}
-.hero-copy .inner{position:relative;z-index:3;width:100%;max-width:440px;flex:1 1 auto;display:flex;flex-direction:column}
-.hero-copy .hero-actions{margin-top:auto}
+.hero-copy .inner{position:relative;z-index:3;width:100%;max-width:440px;display:flex;flex-direction:column}
+.hero-copy .hero-actions{margin-top:clamp(30px,3.2vw,40px)}
 .hero-copy h1{font-family:var(--font-display);font-weight:600;font-size:clamp(38px,3.6vw,54px);line-height:1.06;letter-spacing:-.028em;color:#fff;margin:0}
 .hero-copy h1 .hl{color:#fff;opacity:.72;font-weight:500}
 [dir="rtl"] .hero-copy h1{font-family:var(--font);font-weight:700;line-height:1.2;letter-spacing:-.01em}
-.hero-copy .lead{font-family:var(--font-display);font-size:clamp(15px,.95vw,16.5px);font-weight:400;line-height:1.72;color:rgba(255,255,255,.72);margin:28px 0 44px;max-width:400px}
+.hero-copy .lead{font-family:var(--font-display);font-size:clamp(15px,.95vw,16.5px);font-weight:400;line-height:1.72;color:rgba(255,255,255,.72);margin:22px 0 0;max-width:400px}
 [dir="rtl"] .hero-copy .lead{font-family:var(--font);margin-inline:0}
 .btn{font-family:var(--font-display);font-weight:600;font-size:15.5px;letter-spacing:-.01em;white-space:nowrap;border-radius:9999px;cursor:pointer;border:0;padding:15px 40px;display:inline-flex;align-items:center;gap:11px;transition:transform .4s var(--ease-out),box-shadow .4s var(--ease-out)}
 [dir="rtl"] .btn{font-family:var(--font)}
@@ -223,6 +223,20 @@ a:hover{color:var(--omi-cyan-deep)}
 [dir="rtl"] .tab{font-family:var(--font);font-weight:600;font-size:15.5px}
 .tab:hover{border-color:var(--ink-400);color:var(--ink-900)}
 .tab.on{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
+/* each category chip picks up the same colour as its "L'Excellence" card:
+   soft tint + saturated text at rest, solid fill once selected */
+.tab.c-blue    {background:#EAF1FF;border-color:#EAF1FF;color:#1B4FD0}
+.tab.c-gold    {background:#FBF3DD;border-color:#FBF3DD;color:#9A6800}
+.tab.c-green   {background:#E9F7EE;border-color:#E9F7EE;color:#0E7C3C}
+.tab.c-lavender{background:#F1ECFB;border-color:#F1ECFB;color:#5C3EA6}
+.tab.c-blue:hover    {border-color:#1E5BE6}
+.tab.c-gold:hover    {border-color:#C98A00}
+.tab.c-green:hover   {border-color:#12A24E}
+.tab.c-lavender:hover{border-color:#7A57C7}
+.tab.c-blue.on    {background:#1E5BE6;border-color:#1E5BE6;color:#fff}
+.tab.c-gold.on    {background:#C98A00;border-color:#C98A00;color:#fff}
+.tab.c-green.on   {background:#12A24E;border-color:#12A24E;color:#fff}
+.tab.c-lavender.on{background:#7A57C7;border-color:#7A57C7;color:#fff}
 /* small brand logo riding along a category tab (e.g. Maxiplus) */
 .tab-brand{height:13px;width:auto;display:inline-block;vertical-align:-2px;margin-inline-start:7px;
   border-radius:3px;transition:background var(--dur-base) var(--ease-out)}

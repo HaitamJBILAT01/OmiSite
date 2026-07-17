@@ -35,13 +35,15 @@ function renderRange() {
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
 
-  // tabs: "Tous" first (index 0), then one per category — a category
-  // can carry a small brandLogo (e.g. Maxiplus) shown next to its label
+  // tabs: "Tous" first (index 0), then one per category — each category
+  // chip picks up its own colour (matching its "L'Excellence" card) via
+  // c.accent, and can carry a small brandLogo (e.g. Maxiplus) next to its label
   tabsEl.innerHTML =
     `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
     cats.map((c, i) => {
+      const accent = c.accent ? ` c-${c.accent}` : "";
       const brand = c.brandLogo ? `<img class="tab-brand" src="assets/${c.brandLogo}" alt="Maxiplus">` : "";
-      return `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}${brand}</button>`;
+      return `<button class="tab${accent}" role="tab" data-tab="${i + 1}">${bi(c.name)}${brand}</button>`;
     }).join("");
 
   // "Tous" panel: every variant of every product, interleaved round-robin
@@ -79,8 +81,12 @@ function renderRange() {
     catProducts(c).reduce((sum, p) => sum + p.variants.length, 0)
   )];
 
+  // picking a chip applies the filter and closes the panel automatically
   tabsEl.querySelectorAll(".tab").forEach(t =>
-    t.addEventListener("click", () => selectCategory(+t.dataset.tab))
+    t.addEventListener("click", () => {
+      selectCategory(+t.dataset.tab);
+      setFilterPanel(false);
+    })
   );
 
   // "Voir plus de produits" — reveal / hide the extra cards in the Tous grid
