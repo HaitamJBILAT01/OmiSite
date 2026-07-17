@@ -196,95 +196,74 @@ a:hover{color:var(--omi-cyan-deep)}
   .qn-pill{flex:none}
 }
 
-/* product sub-group heading (e.g. Lessive / Eau de Javel inside one tab) */
-.prod-group{margin-bottom:clamp(30px,3.4vw,46px)}
-.prod-group:last-child{margin-bottom:0}
-.group-title{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.01em;color:var(--ink-700);
-  margin:0 0 clamp(16px,1.6vw,22px);padding-bottom:10px;border-bottom:1px solid var(--ink-100)}
-[dir="rtl"] .group-title{font-family:var(--font);font-size:16px}
-
-/* small brand tag on a product card (e.g. Maxiplus) */
-.pcard-tag{position:absolute;top:6px;inset-inline-start:6px;z-index:2;
-  font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
-  color:#fff;background:var(--omi-navy);padding:3px 9px;border-radius:var(--radius-pill)}
-[dir="rtl"] .pcard-tag{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:11.5px}
 
 /* ================= PRODUCT RANGE ================= */
 .range{background:#fff;padding:clamp(56px,6vw,88px) 0}
 .range h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;line-height:1.1;color:var(--ink-900);margin:0;max-width:none;white-space:nowrap}
 [dir="rtl"] .range h2{font-family:var(--font);font-weight:600;letter-spacing:-.005em;white-space:normal}
-.tabs{display:flex;gap:36px;margin:clamp(28px,3.4vw,44px) 0 clamp(32px,3.6vw,48px);border-bottom:1px solid var(--ink-100)}
-.tab{position:relative;background:none;border:0;padding:0 0 16px;font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:-.01em;color:var(--ink-400);cursor:pointer;transition:color var(--dur-base) var(--ease-out)}
-[dir="rtl"] .tab{font-family:var(--font);font-weight:600}
-.tab:hover{color:var(--ink-600)}
-.tab.on{color:var(--ink-900)}
-.tab::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:2px;background:var(--ink-900);transform:scaleX(0);transform-origin:inline-start;transition:transform var(--dur-base) var(--ease-out)}
-.tab.on::after{transform:scaleX(1)}
+
+/* tabs: clearly clickable pill buttons — Tous + 4 categories */
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:clamp(28px,3.4vw,44px) 0 clamp(32px,3.6vw,48px)}
+.tab{position:relative;background:#fff;border:1.5px solid var(--ink-200);border-radius:var(--radius-pill);
+  padding:11px 20px;font-family:var(--font-display);font-weight:500;font-size:14.5px;letter-spacing:-.005em;
+  color:var(--ink-600);cursor:pointer;transition:color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
+[dir="rtl"] .tab{font-family:var(--font);font-weight:600;font-size:15.5px}
+.tab:hover{border-color:var(--ink-400);color:var(--ink-900)}
+.tab.on{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
+/* small brand logo riding along a category tab (e.g. Maxiplus) */
+.tab-brand{height:13px;width:auto;display:inline-block;vertical-align:-2px;margin-inline-start:7px;
+  border-radius:3px;transition:background var(--dur-base) var(--ease-out)}
+.tab.on .tab-brand{background:#fff;padding:2px 4px;margin-inline-start:6px}
 .panel{display:none}
 .panel.on{display:block;animation:panelIn .5s var(--ease-out)}
 @keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(28px,3vw,52px) clamp(20px,2.2vw,36px)}
-.pcard{display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer}
-.pcard .ph{position:relative;aspect-ratio:1/1.12;overflow:hidden;display:flex;align-items:center;justify-content:center;
-  background:transparent;border:1px solid transparent;border-radius:var(--radius-md);
-  transition:transform var(--dur-base) var(--ease-out)}
-.pcard .ph img{width:100%;height:100%;object-fit:contain;padding:clamp(6px,1vw,14px);transition:transform var(--dur-base) var(--ease-out),opacity var(--dur-fast) var(--ease-out)}
-.pcard .ph img.swapping{opacity:0}
-.pcard:hover .ph img{transform:translateY(-8px) scale(1.03)}
-.pcard h3{font-family:var(--font-display);font-weight:500;font-size:clamp(15px,1.05vw,17px);letter-spacing:-.01em;line-height:1.35;color:var(--ink-900);margin:18px 0 0;text-align:center}
-[dir="rtl"] .pcard h3{font-family:var(--font);font-weight:700;line-height:1.5}
-.pcard .sub{font-family:var(--font-display);font-size:12.5px;line-height:1.5;color:var(--ink-400);margin:5px 0 0;text-align:center;min-height:1.5em}
+
+/* cards: no border, no hover motion — small, evenly spaced, image-led */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(36px,4vw,64px) clamp(24px,2.6vw,40px)}
+.pcard{display:flex;flex-direction:column;align-items:center;text-align:center}
+.pcard .ph{position:relative;aspect-ratio:1/1.05;display:flex;align-items:center;justify-content:center;background:transparent}
+.pcard .ph img{width:78%;height:78%;object-fit:contain}
+.pcard h3{font-family:var(--font-display);font-weight:500;font-size:14px;letter-spacing:-.005em;line-height:1.3;color:var(--ink-900);margin:14px 0 0;text-align:center}
+[dir="rtl"] .pcard h3{font-family:var(--font);font-weight:700;line-height:1.5;font-size:15px}
+.pcard .sub{font-family:var(--font-display);font-size:11.5px;line-height:1.4;color:var(--ink-400);margin:3px 0 0;text-align:center}
 [dir="rtl"] .pcard .sub{font-family:var(--font)}
 .pcard .sub .sep{color:var(--ink-300)}
 
-/* ---- scent / size / format pickers (rendered from data.js) ---- */
-.pickers{display:flex;flex-direction:column;align-items:center;gap:9px;margin-top:14px}
-.picker-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-/* colour swatches (scent) */
-.swatches .swatch{width:22px;height:22px;padding:0;border:0;background:transparent;border-radius:50%;
-  position:relative;cursor:pointer;transition:transform var(--dur-fast) var(--ease-out)}
-.swatch .dot{position:absolute;inset:0;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(11,27,51,.08)}
-.swatch.light .dot{box-shadow:inset 0 0 0 1px var(--ink-200)}
-.swatch::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid transparent;
-  transition:border-color var(--dur-fast) var(--ease-out)}
-.swatch:hover{transform:scale(1.09)}
-.swatch.on::after{border-color:var(--ink-900)}
-.swatch.na{opacity:.32}
-.swatch:focus-visible{outline:none}
-.swatch:focus-visible::after{border-color:var(--omi-cyan)}
-/* text pills (size / format) */
-.pills .pill{border:1.5px solid var(--ink-200);background:#fff;color:var(--ink-600);border-radius:var(--radius-pill);
-  padding:5px 13px;font-family:var(--font-display);font-weight:500;font-size:12.5px;letter-spacing:-.01em;
-  cursor:pointer;transition:border-color var(--dur-fast),color var(--dur-fast),background var(--dur-fast)}
-[dir="rtl"] .pills .pill{font-family:var(--font)}
-.pills .pill:hover{border-color:var(--ink-400);color:var(--ink-900)}
-.pills .pill.on{border-color:var(--ink-900);background:#fff;color:var(--ink-900);font-weight:600;box-shadow:inset 0 0 0 1px var(--ink-900)}
-.pills .pill.na{opacity:.4}
-/* "Tous" tab: hide extra products until "Afficher tous les produits" */
-.grid .pcard.extra{display:none}
-.grid.show-all .pcard.extra{display:flex}
-/* view-all button label swaps to "Afficher moins" when expanded */
-#viewAll .lbl-less{display:none}
-#viewAll.on .lbl-more{display:none}
-#viewAll.on .lbl-less{display:inline}
+/* "Tous" tab: hide extra products until "Voir plus de produits" */
+#allGrid .pcard:nth-child(n+9){display:none}
+#allGrid.show-all .pcard{display:flex}
 .range-foot{display:flex;justify-content:center;margin-top:clamp(52px,6.5vw,84px)}
-.btn-ghost{background:#fff;border:1.5px solid var(--ink-200);color:var(--ink-900);border-radius:9999px;padding:15px 42px;font-family:var(--font-display);font-weight:500;font-size:15.5px;letter-spacing:-.01em;cursor:pointer;transition:border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out)}
-[dir="rtl"] .btn-ghost{font-family:var(--font)}
-.btn-ghost:hover{border-color:var(--ink-900);background:var(--ink-50);transform:translateY(-2px)}
-@media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr);gap:32px}}
+/* view-more: quiet pill, chevron flips + label swaps when expanded */
+.btn-view-more{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--ink-200);
+  color:var(--ink-900);border-radius:9999px;padding:13px 24px 13px 28px;font-family:var(--font-display);
+  font-weight:500;font-size:14.5px;letter-spacing:-.005em;cursor:pointer;
+  transition:border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
+[dir="rtl"] .btn-view-more{font-family:var(--font);padding:13px 28px 13px 24px}
+.btn-view-more:hover{border-color:var(--ink-900);background:var(--ink-50)}
+.btn-view-more .lbl-less{display:none}
+.btn-view-more.on .lbl-more{display:none}
+.btn-view-more.on .lbl-less{display:inline}
+.btn-view-more .chev{transition:transform var(--dur-base) var(--ease-out)}
+.btn-view-more.on .chev{transform:rotate(180deg)}
+
+@media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr);gap:30px 24px}}
 @media(max-width:767px){
-  /* tabs scroll horizontally instead of wrapping */
-  .tabs{gap:22px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  /* section title: wrap instead of overflowing past the screen edge */
+  .range h2{white-space:normal}
+  /* tabs scroll horizontally, pill shape makes the "more to scroll" obvious */
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent);
+    -webkit-mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent)}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:none;white-space:nowrap}
-  /* one product per row: full-width neutral cards, image dominant, minimal text */
-  .grid{grid-template-columns:1fr;gap:16px}
-  .pcard{background:#fff;border:1px solid var(--ink-100);border-radius:16px;padding:16px 16px 18px}
-  .pcard .ph{aspect-ratio:1/1;border-radius:12px}
-  .pcard .ph img{padding:6px}
-  .pcard h3{margin-top:14px;font-size:16px}
-  .pcard .sub{font-size:12.5px}
-  .pickers{margin-top:12px}
+  /* small, evenly spaced two-up grid — not one giant full-width card */
+  .grid{grid-template-columns:repeat(2,1fr);gap:30px 16px}
+  .pcard .ph{aspect-ratio:1/1}
+  .pcard h3{margin-top:12px;font-size:13px}
+  .pcard .sub{font-size:11px}
+  /* "Tous" tab on mobile: show 6 before "Voir plus" */
+  #allGrid .pcard:nth-child(n+7){display:none}
+  #allGrid.show-all .pcard{display:flex}
 }
 
 /* ================= SHOWCASE — "La marque OMI" ================= */
@@ -430,10 +409,4 @@ a:hover{color:var(--omi-cyan-deep)}
   .tab,.svc-more{display:inline-flex;align-items:center}
   .foot-lang button,.foot-col a{min-height:44px;display:inline-flex;align-items:center}
   .nav-toggle{width:44px;height:44px}
-  /* enlarge colour-swatch hit area to 44px, keep the dot visually small */
-  .picker-row.swatches{gap:2px}
-  .swatch{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center}
-  .swatch .dot{position:static;width:24px;height:24px}
-  .swatch::after{inset:9px}
-  .pills .pill{min-height:40px}
 }

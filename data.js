@@ -1,9 +1,9 @@
 /* ============================================================
    OMI — content data  (single source of truth)
    ------------------------------------------------------------
-   The homepage product range (tabs + cards + pickers) renders
-   from this file at runtime by app.js. Nothing about the range
-   is hardcoded in index.html.
+   The homepage product range (Tous + 4 category tabs, one static
+   card per variant) renders from this file at runtime by app.js.
+   Nothing about the range is hardcoded in index.html.
 
    The whole site is standardised on 4 merged categories:
      1. Sols, Surfaces & Vitres
@@ -15,23 +15,26 @@
    -----
    categories[]                      -> one tab each
      ├ name        {fr,ar}
+     ├ brandLogo?  "file.png"        -> shown next to the tab label
+     │                                  (e.g. Maxiplus, on category 4)
      ├ products[]  OR  groups[]      -> a category is EITHER a flat
      │                                  product list, OR sub-groups
-     │                                  each with its own heading.
+     │                                  (groups are a data grouping only —
+     │                                  rendered as one flat card grid,
+     │                                  no sub-heading in the UI).
      │   groups[] : { name:{fr,ar}, products:[...] }
      └ (product)
-         ├ name    {fr,ar}           -> card title
-         ├ tag?    {fr,ar}           -> small badge on the card (e.g. Maxiplus)
-         ├ axes?   {scent?,size?,type?}
-         │     each axis: { label:{fr,ar}, style:"swatch"|"pill",
+         ├ name    {fr,ar}           -> card title (shared by all its variants)
+         ├ axes?   {scent?,size?,type?}  -> used only to label each variant,
+         │     each axis: { label:{fr,ar}, style:"swatch"|"pill",       there is no in-card picker
          │                  values:[ {key,label:{fr,ar},swatch?} ] }
-         └ variants[]                -> every real product that exists
-               { <axisKey>:<valueKey> ..., image, alt, sub? }
+         └ variants[]                -> every real product that exists —
+               { <axisKey>:<valueKey> ..., image, alt, sub? }   EACH becomes its own card
 
-   Picker rules: a picker row shows only for an axis with >= 2 values;
-   the subtitle auto-builds from selected labels unless a variant sets
-   its own `sub`. Bilingual {fr,ar}; Arabic triggers RTL. Images live
-   in ./assets/ (filename only).  TO EDIT THE RANGE: change this file.
+   A variant's card subtitle is its own `sub` if set, otherwise built from
+   its axis values (e.g. "Roses · 1,5 L"). Bilingual {fr,ar}; Arabic
+   triggers RTL. Images live in ./assets/ (filename only).
+   TO EDIT THE RANGE: change this file.
    ============================================================ */
 
 window.OMI_DATA = {
@@ -180,6 +183,9 @@ window.OMI_DATA = {
     {
       slug: "hygiene-soin-personnel",
       name: { fr: "Hygiène & Soin Personnel", ar: "النظافة والعناية الشخصية" },
+      /* this category carries the Maxiplus paper range — shown as a small
+         logo on the category tab itself, not repeated on every card */
+      brandLogo: "maxiplus-logo.png",
       products: [
         {
           slug: "savon-liquide-mains",
@@ -207,7 +213,6 @@ window.OMI_DATA = {
         {
           slug: "essuie-tout",
           name: { fr: "Essuie-Tout", ar: "فوط مطبخ" },
-          tag: { fr: "Maxiplus", ar: "ماكسي بلس" },
           axes: {
             type: {
               label: { fr: "Format", ar: "النوع" },
@@ -228,7 +233,6 @@ window.OMI_DATA = {
         {
           slug: "mouchoirs",
           name: { fr: "Mouchoirs", ar: "مناديل" },
-          tag: { fr: "Maxiplus", ar: "ماكسي بلس" },
           axes: {
             type: {
               label: { fr: "Format", ar: "النوع" },

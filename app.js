@@ -1,7 +1,7 @@
 /* ============================================================
    OMI — homepage behaviour
-   - renders the product range (tabs + cards + scent/size pickers)
-     from window.OMI_DATA
+   - renders the product range (Tous + 4 category tabs, one static
+     card per variant — no in-card pickers) from window.OMI_DATA
    - language switch (FR / AR) with RTL + localStorage persistence
    - hide-on-scroll sticky header
    ============================================================ */
@@ -18,6 +18,10 @@ function axisValue(product, key, valKey) {
   const ax = product.axes[key];
   return ax.values.find(v => v.key === valKey);
 }
+/* every product list belonging to a category, whether flat or grouped */
+function catProducts(cat) {
+  return cat.groups ? cat.groups.flatMap(g => g.products) : cat.products;
+}
 
 /* ---------- render the product range from data ---------- */
 function renderRange() {
@@ -27,30 +31,56 @@ function renderRange() {
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
 
-  // one tab per category (standardised on the 4 merged categories)
-  tabsEl.innerHTML = cats.map((c, i) =>
-    `<button class="tab${i === 0 ? " on" : ""}" role="tab" data-tab="${i}">${bi(c.name)}</button>`
+  // tabs: "Tous" first (index 0), then one per category — a category
+  // can carry a small brandLogo (e.g. Maxiplus) shown next to its label
+  tabsEl.innerHTML =
+    `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
+    cats.map((c, i) => {
+      const brand = c.brandLogo ? `<img class="tab-brand" src="assets/${c.brandLogo}" alt="Maxiplus">` : "";
+      return `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}${brand}</button>`;
+    }).join("");
+
+  // "Tous" panel: every variant of every product, interleaved round-robin
+  // across categories so the first cards shown span the whole range
+  // rather than being all-of-one-category before the next starts
+  const perCat = cats.map(c => catProducts(c).flatMap(p => p.variants.map(v => cardHTML(p, v))));
+  const maxLen = Math.max(...perCat.map(a => a.length));
+  const allCards = [];
+  for (let i = 0; i < maxLen; i++) perCat.forEach(arr => { if (arr[i]) allCards.push(arr[i]); });
+
+  const allPanel = `
+    <div class="panel on" id="panel-0" data-category="all">
+      <div class="grid" id="allGrid">${allCards.join("")}</div>
+      <div class="range-foot">
+        <button class="btn-view-more" id="viewMoreAll">
+          <span class="lbl-more">${bi({ fr: "Voir plus de produits", ar: "عرض المزيد من المنتجات" })}</span>
+          <span class="lbl-less">${bi({ fr: "Voir moins", ar: "عرض أقل" })}</span>
+          <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>`;
+
+  // one panel per category — every product's variants in a single flat
+  // grid (groups in the data are a content grouping only, not a UI heading)
+  const catPanels = cats.map((c, i) =>
+    `<div class="panel" id="panel-${i + 1}" data-category="${c.slug}">
+      <div class="grid">${catProducts(c).flatMap(p => p.variants.map(v => cardHTML(p, v))).join("")}</div>
+    </div>`
   ).join("");
 
-  // one panel per category; a category is either a flat product list
-  // or sub-groups (each with a heading) rendered as separate grids
-  panelsEl.innerHTML = cats.map((c, i) => {
-    const body = c.groups
-      ? c.groups.map(g => `
-          <div class="prod-group">
-            <h4 class="group-title">${bi(g.name)}</h4>
-            <div class="grid">${g.products.map(p => cardHTML(c, p)).join("")}</div>
-          </div>`).join("")
-      : `<div class="grid">${c.products.map(p => cardHTML(c, p)).join("")}</div>`;
-    return `<div class="panel${i === 0 ? " on" : ""}" id="panel-${i}" data-category="${c.slug}">${body}</div>`;
-  }).join("");
+  panelsEl.innerHTML = allPanel + catPanels;
 
   tabsEl.querySelectorAll(".tab").forEach(t =>
     t.addEventListener("click", () => showTab(+t.dataset.tab))
   );
 
-  // wire up every card (picker state + interactions)
-  document.querySelectorAll(".pcard").forEach(initCard);
+  // "Voir plus de produits" — reveal / hide the extra cards in the Tous grid
+  const vb = document.getElementById("viewMoreAll");
+  if (vb) vb.addEventListener("click", () => {
+    const g = document.getElementById("allGrid");
+    if (g) vb.classList.toggle("on", g.classList.toggle("show-all"));
+  });
+
   showTab(0);
 }
 
@@ -64,135 +94,24 @@ function gotoCat(i) {
   }
 }
 
-/* build one product card (default variant = first) */
-function cardHTML(cat, p) {
-  const first = p.variants[0];
-  const keys = axisKeys(p);
-
-  // picker rows — only for axes with >= 2 values
-  const pickers = keys.map(k => {
-    const ax = p.axes[k];
-    if (ax.values.length < 2) return "";
-    const buttons = ax.values.map(v => {
-      if (ax.style === "swatch") {
-        const light = isLight(v.swatch) ? " light" : "";
-        return `<button class="swatch${light}" data-axis="${k}" data-val="${v.key}"
-                  style="--sw:${v.swatch}"
-                  aria-label="${ax.label.fr} ${v.label.fr}"
-                  title="${v.label.fr}"><span class="dot"></span></button>`;
-      }
-      return `<button class="pill" data-axis="${k}" data-val="${v.key}"
-                aria-label="${ax.label.fr} ${v.label.fr}">${bi(v.label)}</button>`;
-    }).join("");
-    return `<div class="picker-row ${ax.style === "swatch" ? "swatches" : "pills"}" data-axis="${k}">${buttons}</div>`;
-  }).join("");
-
-  const tag = p.tag ? `<span class="pcard-tag">${bi(p.tag)}</span>` : "";
-
+/* one static card per variant: image, product name, one short sub-line.
+   No pickers — every scent/size/format of a product gets its own card. */
+function cardHTML(product, variant) {
   return `
-    <div class="pcard" data-product="${p.slug}" data-category="${cat.slug}">
-      <div class="ph">${tag}<img src="assets/${first.image}" alt="${first.alt}"></div>
-      <h3>${bi(p.name)}</h3>
-      <p class="sub"></p>
-      ${pickers ? `<div class="pickers">${pickers}</div>` : ""}
+    <div class="pcard">
+      <div class="ph"><img src="assets/${variant.image}" alt="${variant.alt || ""}" loading="lazy"></div>
+      <h3>${bi(product.name)}</h3>
+      <p class="sub">${variantSubHTML(product, variant)}</p>
     </div>`;
 }
 
-/* is a swatch colour light enough to need a visible border? */
-function isLight(hex) {
-  if (!hex) return true;
-  const c = hex.replace("#", "");
-  const r = parseInt(c.slice(0, 2), 16), g = parseInt(c.slice(2, 4), 16), b = parseInt(c.slice(4, 6), 16);
-  return (0.299 * r + 0.587 * g + 0.114 * b) > 200;
-}
-
-/* set up a card's picker state + listeners */
-function initCard(card) {
-  const cat = card.dataset.category;
-  const p = findProduct(cat, card.dataset.product);
-  if (!p) return;
-
-  // initial selection = first variant's axis values
-  const sel = {};
-  axisKeys(p).forEach(k => { if (p.variants[0][k] != null) sel[k] = p.variants[0][k]; });
-  card._omi = { product: p, sel };
-
-  card.querySelectorAll(".swatch, .pill").forEach(btn => {
-    btn.addEventListener("click", () => selectValue(card, btn.dataset.axis, btn.dataset.val));
-  });
-
-  applyVariant(card, p.variants[0]);
-}
-
-function findProduct(catSlug, prodSlug) {
-  const cat = window.OMI_DATA.categories.find(c => c.slug === catSlug);
-  if (!cat) return null;
-  const lists = cat.groups ? cat.groups.map(g => g.products) : [cat.products];
-  for (const list of lists) {
-    const p = list.find(p => p.slug === prodSlug);
-    if (p) return p;
-  }
-  return null;
-}
-
-/* handle a picker click: the clicked axis is authoritative,
-   other axes are kept if possible, otherwise repaired */
-function selectValue(card, axisKey, valKey) {
-  const { product: p, sel } = card._omi;
-  sel[axisKey] = valKey;
-
-  const cands = p.variants.filter(v => v[axisKey] === valKey);
-  let best = cands[0], bestScore = -1;
-  const others = axisKeys(p).filter(k => k !== axisKey);
-  cands.forEach(v => {
-    let score = 0;
-    others.forEach(k => { if (v[k] === sel[k]) score++; });
-    if (score > bestScore) { best = v; bestScore = score; }
-  });
-
-  // sync selection to the chosen variant across all axes
-  axisKeys(p).forEach(k => { if (best[k] != null) sel[k] = best[k]; });
-  applyVariant(card, best);
-}
-
-/* reflect a variant in the DOM: image, subtitle, active + available states */
-function applyVariant(card, variant) {
-  const { product: p, sel } = card._omi;
-  const img = card.querySelector(".ph img");
-
-  // swap image (with a soft fade)
-  if (img.getAttribute("src") !== "assets/" + variant.image) {
-    img.classList.add("swapping");
-    const swap = () => {
-      img.src = "assets/" + variant.image;
-      img.alt = variant.alt || "";
-      img.classList.remove("swapping");
-    };
-    // fade out, then swap; fallback timer in case transitionend doesn't fire
-    setTimeout(swap, 150);
-  }
-
-  // subtitle: variant override, else auto from selected axis labels
-  const sub = card.querySelector(".sub");
-  if (variant.sub) {
-    sub.innerHTML = bi(variant.sub);
-  } else {
-    const parts = axisKeys(p)
-      .filter(k => sel[k] != null)
-      .map(k => bi(axisValue(p, k, sel[k]).label));
-    sub.innerHTML = parts.join(`<span class="sep"> · </span>`);
-  }
-
-  // active + availability states on every picker button
-  card.querySelectorAll(".swatch, .pill").forEach(btn => {
-    const k = btn.dataset.axis, val = btn.dataset.val;
-    btn.classList.toggle("on", sel[k] === val);
-    // available = some variant pairs this value with the other current selections
-    const others = axisKeys(p).filter(a => a !== k);
-    const ok = p.variants.some(v =>
-      v[k] === val && others.every(a => sel[a] == null || v[a] === sel[a]));
-    btn.classList.toggle("na", !ok);
-  });
+/* short sub-line for a variant: its own `sub`, else built from axis labels */
+function variantSubHTML(product, variant) {
+  if (variant.sub) return bi(variant.sub);
+  const parts = axisKeys(product)
+    .filter(k => variant[k] != null)
+    .map(k => bi(axisValue(product, k, variant[k]).label));
+  return parts.join(`<span class="sep"> · </span>`);
 }
 
 function showTab(i) {
