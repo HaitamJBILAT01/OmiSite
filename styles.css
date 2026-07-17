@@ -256,11 +256,12 @@ a:hover{color:var(--omi-cyan-deep)}
     -webkit-mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent)}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:none;white-space:nowrap}
-  /* small, evenly spaced two-up grid — not one giant full-width card */
-  .grid{grid-template-columns:repeat(2,1fr);gap:30px 16px}
-  .pcard .ph{aspect-ratio:1/1}
-  .pcard h3{margin-top:12px;font-size:13px}
-  .pcard .sub{font-size:11px}
+  /* one product per row, comfortably sized and well spaced — not full-bleed */
+  .grid{grid-template-columns:1fr;gap:44px}
+  .pcard .ph{aspect-ratio:1/1;max-width:250px;margin:0 auto}
+  .pcard .ph img{width:82%;height:82%}
+  .pcard h3{margin-top:14px;font-size:15px}
+  .pcard .sub{font-size:12.5px}
   /* "Tous" tab on mobile: show 6 before "Voir plus" */
   #allGrid .pcard:nth-child(n+7){display:none}
   #allGrid.show-all .pcard{display:flex}
