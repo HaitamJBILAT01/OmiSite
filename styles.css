@@ -202,8 +202,21 @@ a:hover{color:var(--omi-cyan-deep)}
 .range h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;line-height:1.1;color:var(--ink-900);margin:0;max-width:none;white-space:nowrap}
 [dir="rtl"] .range h2{font-family:var(--font);font-weight:600;letter-spacing:-.005em;white-space:normal}
 
-/* tabs: clearly clickable pill buttons — Tous + 4 categories */
-.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:clamp(28px,3.4vw,44px) 0 clamp(32px,3.6vw,48px)}
+/* ---- category filter: collapsible pill, chips, count line ---- */
+.filter-bar{margin:clamp(24px,3vw,34px) 0 0}
+.filter-toggle{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--ink-200);
+  border-radius:var(--radius-pill);padding:13px 22px;font-family:var(--font-display);font-weight:500;font-size:15px;
+  letter-spacing:-.005em;color:var(--ink-900);cursor:pointer;
+  transition:border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
+[dir="rtl"] .filter-toggle{font-family:var(--font);font-weight:600;font-size:16px}
+.filter-toggle:hover{border-color:var(--ink-400)}
+.filter-toggle .chev{flex:none;transition:transform var(--dur-base) var(--ease-out)}
+.filter-toggle.open .chev{transform:rotate(180deg)}
+.filter-panel{margin-top:clamp(18px,2.2vw,26px)}
+.filter-panel[hidden]{display:none}
+
+/* tabs: clearly clickable chip buttons — Tous + 4 categories */
+.tabs{display:flex;flex-wrap:wrap;gap:10px}
 .tab{position:relative;background:#fff;border:1.5px solid var(--ink-200);border-radius:var(--radius-pill);
   padding:11px 20px;font-family:var(--font-display);font-weight:500;font-size:14.5px;letter-spacing:-.005em;
   color:var(--ink-600);cursor:pointer;transition:color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
@@ -214,6 +227,19 @@ a:hover{color:var(--omi-cyan-deep)}
 .tab-brand{height:13px;width:auto;display:inline-block;vertical-align:-2px;margin-inline-start:7px;
   border-radius:3px;transition:background var(--dur-base) var(--ease-out)}
 .tab.on .tab-brand{background:#fff;padding:2px 4px;margin-inline-start:6px}
+
+.filter-clear{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;
+  margin-top:clamp(16px,2vw,22px);background:none;border:0;padding:6px;cursor:pointer;
+  font-family:var(--font-display);font-weight:500;font-size:13.5px;color:var(--ink-500);
+  transition:color var(--dur-fast) var(--ease-out)}
+[dir="rtl"] .filter-clear{font-family:var(--font);font-size:14.5px}
+.filter-clear:hover{color:var(--ink-900)}
+.filter-clear[hidden]{display:none}
+
+.range-count{font-family:var(--font-display);font-weight:500;font-size:15px;letter-spacing:-.005em;
+  color:var(--ink-900);margin:clamp(22px,2.6vw,30px) 0 clamp(28px,3.4vw,40px)}
+[dir="rtl"] .range-count{font-family:var(--font);font-size:16px}
+
 .panel{display:none}
 .panel.on{display:block;animation:panelIn .5s var(--ease-out)}
 @keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -250,12 +276,8 @@ a:hover{color:var(--omi-cyan-deep)}
 @media(max-width:767px){
   /* section title: wrap instead of overflowing past the screen edge */
   .range h2{white-space:normal}
-  /* tabs scroll horizontally, pill shape makes the "more to scroll" obvious */
-  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-    mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent);
-    -webkit-mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent)}
-  .tabs::-webkit-scrollbar{display:none}
-  .tab{flex:none;white-space:nowrap}
+  /* filter toggle spans the full width on small screens */
+  .filter-toggle{width:100%;justify-content:space-between}
   /* one product per row, comfortably sized and well spaced — not full-bleed */
   .grid{grid-template-columns:1fr;gap:44px}
   .pcard .ph{aspect-ratio:1/1;max-width:250px;margin:0 auto}

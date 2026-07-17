@@ -23,6 +23,10 @@ function catProducts(cat) {
   return cat.groups ? cat.groups.flatMap(g => g.products) : cat.products;
 }
 
+/* number of product cards behind each tab index — filled in by renderRange,
+   read by selectCategory() to update the "Produits (N)" count line */
+let RANGE_COUNTS = [];
+
 /* ---------- render the product range from data ---------- */
 function renderRange() {
   const data = window.OMI_DATA;
@@ -70,8 +74,13 @@ function renderRange() {
 
   panelsEl.innerHTML = allPanel + catPanels;
 
+  // one product count per tab, for the "Produits (N)" line
+  RANGE_COUNTS = [allCards.length, ...cats.map(c =>
+    catProducts(c).reduce((sum, p) => sum + p.variants.length, 0)
+  )];
+
   tabsEl.querySelectorAll(".tab").forEach(t =>
-    t.addEventListener("click", () => showTab(+t.dataset.tab))
+    t.addEventListener("click", () => selectCategory(+t.dataset.tab))
   );
 
   // "Voir plus de produits" — reveal / hide the extra cards in the Tous grid
@@ -81,12 +90,46 @@ function renderRange() {
     if (g) vb.classList.toggle("on", g.classList.toggle("show-all"));
   });
 
-  showTab(0);
+  // collapsible "Filtrer par catégorie" panel (closed by default)
+  const toggle = document.getElementById("filterToggle");
+  const panel = document.getElementById("filterPanel");
+  if (toggle && panel) toggle.addEventListener("click", () => setFilterPanel(panel.hidden));
+
+  // "Effacer la sélection" — back to "Tous", panel stays open
+  const clearBtn = document.getElementById("filterClear");
+  if (clearBtn) clearBtn.addEventListener("click", () => selectCategory(0));
+
+  selectCategory(0);
 }
 
-/* jump to a category tab from the quick-nav strip, then scroll to the grid */
-function gotoCat(i) {
+/* open/close the category filter panel + flip the toggle chevron */
+function setFilterPanel(open) {
+  const toggle = document.getElementById("filterToggle");
+  const panel = document.getElementById("filterPanel");
+  if (!toggle || !panel) return;
+  panel.hidden = !open;
+  toggle.classList.toggle("open", open);
+  toggle.setAttribute("aria-expanded", open);
+}
+
+/* pick a tab (Tous = 0, category = 1..4): swap panels, update the
+   product count line, and show/hide "Effacer la sélection" */
+function selectCategory(i) {
   showTab(i);
+  const count = document.getElementById("rangeCount");
+  if (count) count.innerHTML = bi({
+    fr: `Produits (${RANGE_COUNTS[i] ?? 0})`,
+    ar: `المنتجات (${RANGE_COUNTS[i] ?? 0})`
+  });
+  const clearBtn = document.getElementById("filterClear");
+  if (clearBtn) clearBtn.hidden = i === 0;
+}
+
+/* jump to a category from the quick-nav strip: select it, open the
+   filter panel so the choice is visible, then scroll to the grid */
+function gotoCat(i) {
+  selectCategory(i);
+  setFilterPanel(true);
   const el = document.getElementById("cats");
   if (el) {
     const y = el.getBoundingClientRect().top + window.scrollY - 68;

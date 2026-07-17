@@ -117,10 +117,26 @@
   </div>
 </div></section>
 
-<!-- ================= PRODUCT RANGE (tabs + cards rendered from data.js) ================= -->
+<!-- ================= PRODUCT RANGE (filter + cards rendered from data.js) ================= -->
 <section class="range" id="cats"><div class="wrap">
   <h2><span class="fr">Découvrez notre gamme de produits.</span><span class="ar">اكتشف تشكيلة منتجاتنا.</span></h2>
-  <div class="tabs" id="tabs" role="tablist"></div>
+
+  <div class="filter-bar">
+    <button class="filter-toggle" id="filterToggle" aria-haspopup="true" aria-expanded="false" aria-controls="filterPanel">
+      <span class="fr">Filtrer par catégorie</span><span class="ar">تصفية حسب الفئة</span>
+      <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="filter-panel" id="filterPanel" hidden>
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <button class="filter-clear" id="filterClear" hidden>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <span class="fr">Effacer la sélection</span><span class="ar">مسح التحديد</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="range-count" id="rangeCount"></div>
+
   <div id="panels"></div>
 </div></section>
 
