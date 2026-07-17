@@ -120,7 +120,8 @@ a:hover{color:var(--omi-cyan-deep)}
   /* comfortable gap under the hero (top); the section below supplies the
      gap after it, so no bottom padding here (avoids a doubled-up gap) */
   padding:clamp(64px,7vw,96px) clamp(24px,11.38vw,173px) 0}
-.trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(36px,4vw,64px)}
+/* tighter gap between cards on desktop, closer to the MOO reference */
+.trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.8vw,28px)}
 .trust-card{display:flex;flex-direction:column;align-items:center;text-align:center;
   flex:0 0 auto;scroll-snap-align:center;padding:0 clamp(4px,1vw,14px)}
 /* icon: filled traced SVG recoloured to the hero blue via mask; fixed
@@ -131,11 +132,12 @@ a:hover{color:var(--omi-cyan-deep)}
 .ti-made   {--ti:url("assets/location.svg")}
 .ti-range  {--ti:url("assets/category.svg")}
 .ti-avail  {--ti:url("assets/shopping-store.svg")}
-.trust-card h3{font-family:var(--font-display);font-weight:600;font-size:18.5px;letter-spacing:-.015em;
-  line-height:1.3;color:var(--ink-900);margin:0}
-[dir="rtl"] .trust-card h3{font-family:var(--font);font-weight:700;font-size:19.5px}
+/* calm, minimal title — medium weight, not heavy (MOO-style) */
+.trust-card h3{font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:-.01em;
+  line-height:1.35;color:var(--ink-900);margin:0}
+[dir="rtl"] .trust-card h3{font-family:var(--font);font-weight:600;font-size:17px}
 .trust-card p{font-family:var(--font-display);font-size:13.5px;line-height:1.65;color:var(--ink-400);
-  margin:10px 0 0;max-width:30ch}
+  margin:8px 0 0;max-width:30ch}
 [dir="rtl"] .trust-card p{font-family:var(--font);font-size:14.5px;line-height:1.8}
 .trust-dots{display:none}
 
@@ -143,7 +145,7 @@ a:hover{color:var(--omi-cyan-deep)}
   /* full-bleed track so the next card peeks past the screen edge */
   .trust-inner{padding-left:0;padding-right:0;
     padding-top:clamp(44px,9vw,60px);padding-bottom:0}
-  .trust-icon{width:72px;height:72px;margin-bottom:24px}
+  .trust-icon{width:58px;height:58px;margin-bottom:20px}
   .trust-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;gap:14px;padding-inline:8vw}
   .trust-track::-webkit-scrollbar{display:none}
