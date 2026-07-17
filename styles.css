@@ -105,18 +105,6 @@ a:hover{color:var(--omi-cyan-deep)}
 .btn-primary:hover svg{transform:translateX(3px)}
 [dir="rtl"] .btn svg{transform:scaleX(-1)}
 [dir="rtl"] .btn-primary:hover svg{transform:scaleX(-1) translateX(3px)}
-/* hero CTA as a minimal text link (no button box) — sits on the blue panel */
-.btn-link{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:600;
-  font-size:16px;letter-spacing:-.01em;white-space:nowrap;color:#fff;text-decoration:none;cursor:pointer;
-  padding-bottom:4px;border-bottom:1.5px solid rgba(255,255,255,.4);
-  transition:border-color var(--dur-base) var(--ease-out)}
-[dir="rtl"] .btn-link{font-family:var(--font)}
-.btn-link:hover{border-bottom-color:#fff}
-.btn-link:focus-visible{outline:3px solid rgba(255,255,255,.7);outline-offset:5px;border-radius:2px}
-.btn-link svg{flex:none;display:block;transition:transform var(--dur-base) var(--ease-out)}
-.btn-link:hover svg{transform:translateX(4px)}
-[dir="rtl"] .btn-link svg{transform:scaleX(-1)}
-[dir="rtl"] .btn-link:hover svg{transform:scaleX(-1) translateX(4px)}
 
 /* right: product photo */
 .hero-visual{position:relative;overflow:hidden;background:var(--ink-50);display:flex;align-items:center;justify-content:center}
@@ -433,8 +421,10 @@ a:hover{color:var(--omi-cyan-deep)}
   .hero-copy .inner{max-width:540px;margin:0 auto;transform:none}
   .hero-copy h1{line-height:1.08}
   .hero-copy .lead{margin:clamp(10px,2.5vw,15px) auto 0;font-size:clamp(13.5px,3.5vw,15px);line-height:1.55}
-  .hero-copy .hero-actions{margin-top:clamp(16px,3.5vw,22px);justify-content:center;display:flex}
-  .hero-copy .btn{padding:13px 32px;font-size:15px}
+  .hero-copy .hero-actions{margin-top:clamp(18px,4vw,24px);justify-content:center;display:flex}
+  /* minimalist mobile CTA: slim, quieter shadow, lighter weight, tighter gap */
+  .hero-copy .btn{padding:12px 26px;font-size:14px;font-weight:500;gap:8px;box-shadow:0 4px 14px rgba(4,12,74,.14)}
+  .hero-copy .btn svg{width:15px;height:15px}
 }
 @media(max-width:560px){
   .hero-visual{height:clamp(210px,60vw,260px)}
