@@ -105,6 +105,18 @@ a:hover{color:var(--omi-cyan-deep)}
 .btn-primary:hover svg{transform:translateX(3px)}
 [dir="rtl"] .btn svg{transform:scaleX(-1)}
 [dir="rtl"] .btn-primary:hover svg{transform:scaleX(-1) translateX(3px)}
+/* hero CTA as a minimal text link (no button box) — sits on the blue panel */
+.btn-link{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:600;
+  font-size:16px;letter-spacing:-.01em;white-space:nowrap;color:#fff;text-decoration:none;cursor:pointer;
+  padding-bottom:4px;border-bottom:1.5px solid rgba(255,255,255,.4);
+  transition:border-color var(--dur-base) var(--ease-out)}
+[dir="rtl"] .btn-link{font-family:var(--font)}
+.btn-link:hover{border-bottom-color:#fff}
+.btn-link:focus-visible{outline:3px solid rgba(255,255,255,.7);outline-offset:5px;border-radius:2px}
+.btn-link svg{flex:none;display:block;transition:transform var(--dur-base) var(--ease-out)}
+.btn-link:hover svg{transform:translateX(4px)}
+[dir="rtl"] .btn-link svg{transform:scaleX(-1)}
+[dir="rtl"] .btn-link:hover svg{transform:scaleX(-1) translateX(4px)}
 
 /* right: product photo */
 .hero-visual{position:relative;overflow:hidden;background:var(--ink-50);display:flex;align-items:center;justify-content:center}
@@ -117,13 +129,12 @@ a:hover{color:var(--omi-cyan-deep)}
    card visible at the edge, hard scroll-snap, dot indicators below. */
 .trust{background:#fff}
 .trust-inner{max-width:1520px;margin:0 auto;
-  /* comfortable gap under the hero (top); the section below supplies the
-     gap after it, so no bottom padding here (avoids a doubled-up gap) */
-  padding:clamp(64px,7vw,96px) clamp(24px,11.38vw,173px) 0}
-/* tighter gap between cards on desktop, closer to the MOO reference */
-.trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.8vw,28px)}
+  /* 38px gap under the hero; the section below supplies the gap after it */
+  padding:38px clamp(24px,11.38vw,173px) 0}
+/* ~60px between the card text columns on desktop (cards fill their cell) */
+.trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(28px,4.5vw,60px)}
 .trust-card{display:flex;flex-direction:column;align-items:center;text-align:center;
-  flex:0 0 auto;scroll-snap-align:center;padding:0 clamp(4px,1vw,14px)}
+  flex:0 0 auto;scroll-snap-align:center;padding:0}
 /* icon: filled traced SVG recoloured to the hero blue via mask; fixed
    square box so any icon sits consistently sized regardless of ratio */
 .trust-icon{display:inline-block;width:80px;height:80px;flex:none;margin-bottom:28px;
@@ -140,18 +151,20 @@ a:hover{color:var(--omi-cyan-deep)}
   margin:8px 0 0;max-width:30ch}
 [dir="rtl"] .trust-card p{font-family:var(--font);font-size:14.5px;line-height:1.8}
 .trust-dots{display:none}
+/* desktop titles a touch bolder than the calm mobile weight */
+@media(min-width:768px){.trust-card h3{font-weight:600}}
 
 @media(max-width:767px){
-  /* full-bleed track so the next card peeks past the screen edge */
-  .trust-inner{padding-left:0;padding-right:0;
-    padding-top:clamp(44px,9vw,60px);padding-bottom:0}
+  /* full-bleed track; card centred with the neighbours peeking at the edges */
+  .trust-inner{padding-left:0;padding-right:0;padding-top:38px;padding-bottom:0}
   .trust-icon{width:58px;height:58px;margin-bottom:20px}
   .trust-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
-    scrollbar-width:none;gap:14px;padding-inline:8vw}
+    scrollbar-width:none;gap:16px;padding-inline:10vw}
   .trust-track::-webkit-scrollbar{display:none}
-  /* scroll-snap-stop:always forces every swipe to land on exactly one
-     slide — a fast fling can no longer skip past or land in-between */
-  .trust-card{width:84vw;padding:0;scroll-snap-stop:always}
+  /* centred snap: the active card is the focus, the next card peeks on the
+     trailing edge (and previous on the leading edge) as a "swipe" cue.
+     scroll-snap-stop:always so a fast fling still lands on exactly one card. */
+  .trust-card{width:80vw;padding:0;scroll-snap-align:center;scroll-snap-stop:always}
   .trust-card p{max-width:23ch}
   .trust-dots{display:flex;justify-content:center;align-items:center;gap:5px;margin-top:26px}
   .trust-dot{width:22px;height:22px;flex:none;display:flex;align-items:center;justify-content:center;
