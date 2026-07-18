@@ -118,8 +118,8 @@ a:hover{color:var(--omi-cyan-deep)}
 .trust{background:#fff}
 .trust-inner{max-width:1280px;margin:0 auto;
   /* generous left/right gutters keep the row centred & compact, like MOO;
-     38px gap under the hero, section below supplies the gap after it */
-  padding:38px clamp(24px,8vw,170px) 0}
+     gap under the hero, section below supplies the gap after it */
+  padding:54px clamp(24px,8vw,170px) 0}
 /* tighter columns on desktop (cards fill their cell) */
 .trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
 .trust-card{display:flex;flex-direction:column;align-items:center;text-align:center;
@@ -151,7 +151,7 @@ a:hover{color:var(--omi-cyan-deep)}
 
 @media(max-width:767px){
   /* full-bleed track; card centred with the neighbours peeking at the edges */
-  .trust-inner{padding-left:0;padding-right:0;padding-top:38px;padding-bottom:0}
+  .trust-inner{padding-left:0;padding-right:0;padding-top:50px;padding-bottom:0}
   .trust-icon{width:58px;height:58px;margin-bottom:20px}
   .trust-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;gap:8px;padding-inline:17vw;scroll-padding-inline:17vw}
@@ -244,7 +244,9 @@ a:hover{color:var(--omi-cyan-deep)}
 .qn-dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--d)}
 
 /* ================= PRODUCT RANGE ================= */
-.range{background:#fff;padding:clamp(56px,6vw,88px) 0}
+/* top padding 0: the services section above already supplies the gap, so the
+   products-to-categories spacing matches the categories-to-trust spacing */
+.range{background:#fff;padding:0 0 clamp(56px,6vw,88px)}
 .range h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;line-height:1.1;color:var(--ink-900);margin:0 0 clamp(24px,3vw,36px);max-width:none;white-space:nowrap}
 [dir="rtl"] .range h2{font-family:var(--font);font-weight:600;letter-spacing:-.005em;white-space:normal}
 
@@ -262,16 +264,19 @@ a:hover{color:var(--omi-cyan-deep)}
   transition:color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out)}
 [dir="rtl"] .tab{font-family:var(--font);font-weight:600;font-size:14.5px}
 .tab:hover{background:var(--ink-50);border-color:var(--ink-200)}
-.tab.on{background:var(--ink-900);border-color:var(--ink-900);color:#fff;box-shadow:0 4px 14px rgba(11,27,51,.13)}
+.tab.on{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
 .tab.on:hover{background:var(--ink-900);color:#fff}
 /* small brand logo riding along a category tab */
 .tab-brand{height:13px;width:auto;display:inline-block;vertical-align:-2px;margin-inline-start:2px;
   border-radius:3px;transition:background var(--dur-base) var(--ease-out)}
 .tab.on .tab-brand{background:#fff;padding:2px 4px}
-/* Maxiplus logo-only pill (no text label): give the mark room to breathe */
+/* Maxiplus logo-only pill (no text label): give the mark room to breathe.
+   Keep the logo on its light pill in every state — no navy fill, no white
+   chip — just a navy border to mark the active tab, plus the normal hover. */
 .tab-logo{padding:7px 20px}
 .tab-brand-solo{height:22px;margin:0;vertical-align:middle;display:block}
-.tab-logo.on .tab-brand-solo{background:#fff;padding:4px 9px;border-radius:8px}
+.tab-logo.on{background:#fff;border-color:var(--ink-900)}
+.tab-logo.on:hover{background:var(--ink-50)}
 
 .range-count{font-family:var(--font-display);font-weight:400;font-size:13px;letter-spacing:.01em;
   color:var(--ink-400);margin:clamp(16px,2vw,22px) 0 clamp(26px,3.2vw,38px)}

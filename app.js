@@ -51,7 +51,7 @@ function renderRange() {
       const c = cats[i];
       // logo-only tab needs an accessible name; text tabs already have one
       const inner = c.brandLogo
-        ? `<img class="tab-brand tab-brand-solo" src="assets/${c.brandLogo}" alt="${c.name.fr}">`
+        ? `<img class="tab-brand-solo" src="assets/${c.brandLogo}" alt="${c.name.fr}">`
         : bi(c.name);
       const label = c.brandLogo ? ` aria-label="${c.name.fr}"` : "";
       return `<button class="tab${c.brandLogo ? " tab-logo" : ""}" role="tab" data-tab="${i + 1}"${label}>${inner}</button>`;
