@@ -35,22 +35,33 @@ function renderRange() {
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
 
-  // tabs: "Tous" first (index 0), then one per category — clean text pills
-  // (no colour dots); can carry a small brandLogo (e.g. Maxiplus) next to its label
+  // tab display order: the brand-logo category (Maxiplus) is shown first
+  // after "Tous", then the remaining categories in natural data order.
+  const tabOrder = [
+    ...cats.map((_, i) => i).filter(i => cats[i].brandLogo),
+    ...cats.map((_, i) => i).filter(i => !cats[i].brandLogo)
+  ];
+
+  // tabs: "Tous" first (index 0), then the categories in display order.
+  // A category with a brandLogo renders as a logo-only pill (no text label);
+  // data-tab stays the category's real index so it maps to the right panel.
   tabsEl.innerHTML =
     `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
-    cats.map((c, i) => {
-      const brand = c.brandLogo ? `<img class="tab-brand" src="assets/${c.brandLogo}" alt="Maxiplus">` : "";
-      return `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}${brand}</button>`;
+    tabOrder.map(i => {
+      const c = cats[i];
+      // logo-only tab needs an accessible name; text tabs already have one
+      const inner = c.brandLogo
+        ? `<img class="tab-brand tab-brand-solo" src="assets/${c.brandLogo}" alt="${c.name.fr}">`
+        : bi(c.name);
+      const label = c.brandLogo ? ` aria-label="${c.name.fr}"` : "";
+      return `<button class="tab${c.brandLogo ? " tab-logo" : ""}" role="tab" data-tab="${i + 1}"${label}>${inner}</button>`;
     }).join("");
 
-  // "Tous" panel: every variant of every product, interleaved round-robin
-  // across categories so the first cards shown span the whole range
-  // rather than being all-of-one-category before the next starts
-  const perCat = cats.map(c => catProducts(c).flatMap(p => p.variants.map(v => cardHTML(p, v))));
-  const maxLen = Math.max(...perCat.map(a => a.length));
-  const allCards = [];
-  for (let i = 0; i < maxLen; i++) perCat.forEach(arr => { if (arr[i]) allCards.push(arr[i]); });
+  // "Tous" panel: products grouped by category, one category after another
+  // (natural order) rather than interleaved across categories.
+  const allCards = cats.flatMap(c =>
+    catProducts(c).flatMap(p => p.variants.map(v => cardHTML(p, v)))
+  );
 
   const allPanel = `
     <div class="panel on" id="panel-0" data-category="all">
@@ -99,9 +110,10 @@ function renderRange() {
 function selectCategory(i) {
   showTab(i);
   const count = document.getElementById("rangeCount");
+  const n = RANGE_COUNTS[i] ?? 0;
   if (count) count.innerHTML = bi({
-    fr: `Produits (${RANGE_COUNTS[i] ?? 0})`,
-    ar: `المنتجات (${RANGE_COUNTS[i] ?? 0})`
+    fr: `${n} produit${n > 1 ? "s" : ""}`,
+    ar: `${n} منتج`
   });
 }
 
@@ -136,8 +148,10 @@ function variantSubHTML(product, variant) {
 }
 
 function showTab(i) {
-  document.querySelectorAll(".tab").forEach((t, n) => t.classList.toggle("on", n === i));
-  document.querySelectorAll(".panel").forEach((p, n) => p.classList.toggle("on", n === i));
+  // match by data-tab / panel id (not DOM position) so a reordered tab row
+  // (e.g. the Maxiplus logo tab moved first) still maps to the right panel
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", +t.dataset.tab === i));
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", p.id === `panel-${i}`));
 }
 
 /* ---------- trust strip: peek carousel (mobile) ----------

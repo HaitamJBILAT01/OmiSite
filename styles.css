@@ -245,38 +245,37 @@ a:hover{color:var(--omi-cyan-deep)}
 
 /* ================= PRODUCT RANGE ================= */
 .range{background:#fff;padding:clamp(56px,6vw,88px) 0}
-.range h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;line-height:1.1;color:var(--ink-900);margin:0;max-width:none;white-space:nowrap}
+.range h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;line-height:1.1;color:var(--ink-900);margin:0 0 clamp(24px,3vw,36px);max-width:none;white-space:nowrap}
 [dir="rtl"] .range h2{font-family:var(--font);font-weight:600;letter-spacing:-.005em;white-space:normal}
 
-/* ---- category filter: always-visible, horizontally scrollable pill row ---- */
-.filter-bar{margin:clamp(24px,3vw,34px) 0 0}
-.filter-label{font-family:var(--font-display);font-weight:500;font-size:12.5px;letter-spacing:.03em;
-  text-transform:uppercase;color:var(--ink-400);margin:0 0 12px}
-[dir="rtl"] .filter-label{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:13.5px}
-
-/* single row, swipe/scroll — never wraps to a second line.
+/* ---- category filter: always-visible, horizontally scrollable pill row ----
+   single row, swipe/scroll — never wraps to a second line.
    Symmetric edge fade works the same in LTR and RTL. */
-.tabs{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-  mask-image:linear-gradient(to right,transparent,#000 16px,#000 calc(100% - 16px),transparent);
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 16px,#000 calc(100% - 16px),transparent)}
+.tabs{display:flex;flex-wrap:nowrap;gap:9px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding:4px 1px}
 .tabs::-webkit-scrollbar{display:none}
-/* quiet filter chip: only the dot carries colour, text stays dark navy */
+/* filter chip: clean pill — soft fill on hover, solid navy + gentle lift when active */
 .tab{position:relative;flex:none;display:inline-flex;align-items:center;gap:8px;
   background:#fff;border:1.5px solid var(--ink-200);border-radius:var(--radius-pill);
-  padding:8px 15px;font-family:var(--font-display);font-weight:500;font-size:13px;letter-spacing:-.005em;
-  color:var(--ink-900);cursor:pointer;white-space:nowrap;
-  transition:color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
-[dir="rtl"] .tab{font-family:var(--font);font-weight:600;font-size:14px}
-.tab:hover{border-color:var(--ink-400)}
-.tab.on{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
-/* small brand logo riding along a category tab (e.g. Maxiplus) */
+  padding:9px 18px;font-family:var(--font-display);font-weight:500;font-size:13.5px;letter-spacing:-.005em;
+  color:var(--ink-700);cursor:pointer;white-space:nowrap;
+  transition:color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out)}
+[dir="rtl"] .tab{font-family:var(--font);font-weight:600;font-size:14.5px}
+.tab:hover{background:var(--ink-50);border-color:var(--ink-200)}
+.tab.on{background:var(--ink-900);border-color:var(--ink-900);color:#fff;box-shadow:0 4px 14px rgba(11,27,51,.13)}
+.tab.on:hover{background:var(--ink-900);color:#fff}
+/* small brand logo riding along a category tab */
 .tab-brand{height:13px;width:auto;display:inline-block;vertical-align:-2px;margin-inline-start:2px;
   border-radius:3px;transition:background var(--dur-base) var(--ease-out)}
 .tab.on .tab-brand{background:#fff;padding:2px 4px}
+/* Maxiplus logo-only pill (no text label): give the mark room to breathe */
+.tab-logo{padding:7px 20px}
+.tab-brand-solo{height:22px;margin:0;vertical-align:middle;display:block}
+.tab-logo.on .tab-brand-solo{background:#fff;padding:4px 9px;border-radius:8px}
 
-.range-count{font-family:var(--font-display);font-weight:500;font-size:15px;letter-spacing:-.005em;
-  color:var(--ink-900);margin:clamp(22px,2.6vw,30px) 0 clamp(28px,3.4vw,40px)}
-[dir="rtl"] .range-count{font-family:var(--font);font-size:16px}
+.range-count{font-family:var(--font-display);font-weight:400;font-size:13px;letter-spacing:.01em;
+  color:var(--ink-400);margin:clamp(16px,2vw,22px) 0 clamp(26px,3.2vw,38px)}
+[dir="rtl"] .range-count{font-family:var(--font);font-size:14px}
 
 .panel{display:none}
 .panel.on{display:block;animation:panelIn .5s var(--ease-out)}
