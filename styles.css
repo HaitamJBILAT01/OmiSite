@@ -10,6 +10,8 @@
   --shadow-lg:0 20px 50px rgba(11,27,51,.12);
   --dur-fast:140ms; --dur-base:240ms; --ease-out:cubic-bezier(.22,.61,.36,1);
   --nav-h:62px;
+  /* consistent vertical rhythm between sections */
+  --sec:clamp(64px,7vw,108px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;overflow-x:hidden}
@@ -119,7 +121,7 @@ a:hover{color:var(--omi-cyan-deep)}
 .trust-inner{max-width:1280px;margin:0 auto;
   /* generous left/right gutters keep the row centred & compact, like MOO;
      gap under the hero, section below supplies the gap after it */
-  padding:54px clamp(24px,8vw,170px) 0}
+  padding:var(--sec) clamp(24px,8vw,170px) 0}
 /* tighter columns on desktop (cards fill their cell) */
 .trust-track{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
 .trust-card{display:flex;flex-direction:column;align-items:center;text-align:center;
@@ -151,7 +153,7 @@ a:hover{color:var(--omi-cyan-deep)}
 
 @media(max-width:767px){
   /* full-bleed track; card centred with the neighbours peeking at the edges */
-  .trust-inner{padding-left:0;padding-right:0;padding-top:50px;padding-bottom:0}
+  .trust-inner{padding-left:0;padding-right:0;padding-top:var(--sec);padding-bottom:0}
   .trust-icon{width:58px;height:58px;margin-bottom:20px}
   .trust-track{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;gap:8px;padding-inline:17vw;scroll-padding-inline:17vw}
@@ -174,7 +176,7 @@ a:hover{color:var(--omi-cyan-deep)}
 }
 
 /* ================= SERVICES / CATEGORIES ================= */
-.services{background:#fff;padding:clamp(56px,6vw,88px) 0}
+.services{background:#fff;padding:var(--sec) 0 0}
 .services h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;
   line-height:1.1;color:var(--ink-900);margin:0;max-width:none}
 [dir="rtl"] .services h2{font-family:var(--font);font-weight:600;letter-spacing:-.005em;line-height:1.3}
@@ -244,9 +246,9 @@ a:hover{color:var(--omi-cyan-deep)}
 .qn-dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--d)}
 
 /* ================= PRODUCT RANGE ================= */
-/* top padding 0: the services section above already supplies the gap, so the
-   products-to-categories spacing matches the categories-to-trust spacing */
-.range{background:#fff;padding:0 0 clamp(56px,6vw,88px)}
+/* symmetric: top provides the gap from the services section, bottom keeps the
+   grid / "Voir plus" button clear of the showcase block below */
+.range{background:#fff;padding:var(--sec) 0}
 .range h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;line-height:1.1;color:var(--ink-900);margin:0 0 clamp(24px,3vw,36px);max-width:none;white-space:nowrap}
 [dir="rtl"] .range h2{font-family:var(--font);font-weight:600;letter-spacing:-.005em;white-space:normal}
 
@@ -330,7 +332,7 @@ a:hover{color:var(--omi-cyan-deep)}
 }
 
 /* ================= SHOWCASE — "La marque OMI" ================= */
-.showcase{background:#F6F8FB;border-top:1px solid var(--ink-100);padding:clamp(48px,6vw,84px) 0}
+.showcase{background:#F6F8FB;border-top:1px solid var(--ink-100);padding:var(--sec) 0}
 .showcase-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,4.5vw,72px);align-items:center}
 [dir="rtl"] .showcase-grid{direction:rtl}
 /* refined eyebrow: a short rule + tracked label (no gimmick dot) */
@@ -370,6 +372,68 @@ a:hover{color:var(--omi-cyan-deep)}
   .brand-stats .stat-label{font-size:11.5px;max-width:none}
 }
 
+/* ========== MAXIPLUS — contained sibling-brand banner ==========
+   Sits inside the normal .wrap content width (never full-bleed), wide and
+   short, rounded like the showcase photo, with the copy overlaid on the
+   image's negative space. Stacks to copy-above-photo on mobile. */
+.mx{background:#fff;padding:var(--sec) 0}
+.mx-banner{position:relative;overflow:hidden;border-radius:18px;
+  min-height:clamp(240px,23vw,330px);display:flex;align-items:center}
+/* photo layer */
+.mx-media{position:absolute;inset:0;z-index:0;
+  background:url("assets/Maxi-plus-banner.png") center/cover no-repeat}
+/* soft scrim so the white copy stays legible over any part of the photo */
+.mx-banner::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(8,14,32,.66) 0%,rgba(8,14,32,.38) 44%,rgba(8,14,32,0) 74%)}
+[dir="rtl"] .mx-banner{direction:rtl}
+[dir="rtl"] .mx-banner::before{background:linear-gradient(270deg,rgba(8,14,32,.66) 0%,rgba(8,14,32,.38) 44%,rgba(8,14,32,0) 74%)}
+/* Arabic: the copy moves to the right, so mirror the photo to bring its
+   negative space along with it. Overlay layout only — the stacked mobile
+   view keeps the photo unflipped since the copy sits above it, not on it. */
+@media(min-width:768px){[dir="rtl"] .mx-media{transform:scaleX(-1)}}
+.mx-copy{position:relative;z-index:2;max-width:54%;padding:clamp(28px,3.2vw,48px) clamp(24px,3.2vw,54px)}
+[dir="rtl"] .mx-copy{text-align:right}
+/* brand mark carries the name, so the copy never repeats "Maxiplus".
+   Rendered white to sit cleanly on the photo alongside the light type. */
+.mx-logo{height:clamp(24px,2.2vw,32px);width:auto;display:inline-block;
+  margin-bottom:clamp(14px,1.6vw,20px);filter:brightness(0) invert(1);opacity:.95}
+/* minimal, modern type: medium-weight headline, larger with tight tracking */
+.mx-copy h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.6vw,38px);letter-spacing:-.03em;
+  line-height:1.08;color:#fff;margin:0;max-width:17ch}
+[dir="rtl"] .mx-copy h2{font-family:var(--font);font-weight:600;letter-spacing:-.01em;line-height:1.32}
+.mx-copy p{font-family:var(--font-display);font-size:clamp(13.5px,1.02vw,15.5px);font-weight:400;line-height:1.72;
+  color:rgba(255,255,255,.76);margin:14px 0 0;max-width:40ch}
+[dir="rtl"] .mx-copy p{font-family:var(--font);line-height:1.95}
+/* ghost CTA: thin light outline, no fill — sits on the photo instead of
+   popping off it; pill radius to match every other button on the site */
+.mx-btn{margin-top:clamp(20px,2.4vw,30px);
+  background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:var(--radius-pill);
+  padding:13px 32px;font-size:14px;font-weight:500;letter-spacing:0;box-shadow:none;
+  transition:background var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out)}
+.mx-btn:hover{background:#fff;border-color:#fff;color:var(--ink-900)}
+@media(max-width:1024px){.mx-copy{max-width:64%}}
+/* mobile: full-bleed photo band edge-to-edge, minimal centred copy beneath */
+@media(max-width:767px){
+  /* break out of the wrap gutters so the photo spans the full screen width */
+  .mx .wrap{padding-left:0;padding-right:0}
+  .mx-banner{flex-direction:column;align-items:stretch;min-height:0;background:#fff;border-radius:0}
+  .mx-banner::before{display:none}
+  .mx-media{position:static;order:-1;width:100%;height:clamp(230px,66vw,330px)}
+  /* copy gets its own gutters back; text runs the full padded width */
+  .mx-copy,[dir="rtl"] .mx-copy{max-width:none;background:transparent;text-align:center;
+    padding:clamp(22px,6vw,28px) clamp(22px,6vw,28px) 0}
+  /* logo is desktop-only — the headline leads on mobile */
+  .mx-logo{display:none}
+  .mx-copy h2{color:var(--ink-900);font-weight:600;font-size:clamp(20px,5.6vw,26px);line-height:1.25;
+    letter-spacing:-.02em;max-width:20ch;margin:0 auto}
+  .mx-copy p{color:var(--ink-500);font-size:clamp(14px,3.9vw,15.5px);line-height:1.62;
+    max-width:32ch;margin:12px auto 0}
+  /* same outline CTA as desktop — full-contrast dark border, not washed out */
+  .mx-btn{margin-top:clamp(20px,5vw,26px);padding:13px 32px;font-size:14px;
+    background:transparent;border:1.5px solid var(--ink-900);color:var(--ink-900)}
+  .mx-btn:hover{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
+}
+
 /* ================= FOOTER — hero-blue / minimal ================= */
 .footer{color:rgba(255,255,255,.66);position:relative;overflow:hidden;
   /* modern blue mesh gradient — soft light-blue glows melting into a deep base */
@@ -379,7 +443,7 @@ a:hover{color:var(--omi-cyan-deep)}
     radial-gradient(75% 120% at 102% 8%, #1E50FF 0%, rgba(30,80,255,0) 55%),
     radial-gradient(120% 140% at 88% 120%, #0A1F94 0%, rgba(10,31,148,0) 58%),
     linear-gradient(158deg,#134AF0 0%,#123AD6 48%,#0C2AA6 100%);
-  padding:clamp(54px,6vw,88px) 0 clamp(22px,2.4vw,30px)}
+  padding:var(--sec) 0 clamp(22px,2.4vw,30px)}
 .footer a{color:rgba(255,255,255,.66);transition:color var(--dur-fast) var(--ease-out)}
 .footer a:hover{color:#fff}
 /* even four-column grid (brand · quick links · products · contact) */
@@ -418,12 +482,6 @@ a:hover{color:var(--omi-cyan-deep)}
 [dir="rtl"] .foot-bar{font-family:var(--font)}
 .foot-copy{margin:0;letter-spacing:.01em}
 .foot-bar-right{display:flex;align-items:center;gap:22px}
-.foot-sister{display:flex;align-items:center;gap:11px}
-.foot-sister-cap{font-family:var(--font-display);font-size:10px;font-weight:500;letter-spacing:.1em;
-  text-transform:uppercase;color:rgba(255,255,255,.42)}
-[dir="rtl"] .foot-sister-cap{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:12px}
-.maxiplus-logo{height:22px;width:auto;display:block;opacity:.85;transition:opacity var(--dur-fast)}
-.foot-sister:hover .maxiplus-logo{opacity:1}
 /* minimal segmented FR/AR toggle */
 .foot-lang{display:inline-flex;align-items:center;gap:2px;
   border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-pill);padding:3px}
