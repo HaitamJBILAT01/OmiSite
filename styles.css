@@ -545,6 +545,13 @@ a:hover{color:var(--omi-cyan-deep)}
     padding:12px clamp(24px,11.38vw,173px);font-size:16px;color:var(--ink-700)}
   .nav-links a:hover{background:var(--ink-50);color:var(--ink-900)}
 }
+@media(max-width:767px){
+  /* tighter gutters so the logo and hamburger sit close to the screen edges
+     instead of inheriting the wide .wrap padding */
+  .site-header .wrap{padding-left:20px;padding-right:20px}
+  /* dropdown links line up with the logo */
+  .nav-links a{padding-inline:20px}
+}
 @media(max-width:560px){
   #langLabel{display:none}
   .lang-trigger{gap:5px;padding:8px 2px}
