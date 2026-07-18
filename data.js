@@ -220,6 +220,7 @@ window.OMI_DATA = {
         {
           slug: "essuie-tout",
           name: { fr: "Essuie-Tout", ar: "فوط مطبخ" },
+          brand: "maxiplus",
           axes: {
             type: {
               label: { fr: "Format", ar: "النوع" },
@@ -240,6 +241,7 @@ window.OMI_DATA = {
         {
           slug: "mouchoirs",
           name: { fr: "Mouchoirs", ar: "مناديل" },
+          brand: "maxiplus",
           axes: {
             type: {
               label: { fr: "Format", ar: "النوع" },

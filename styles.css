@@ -28,6 +28,9 @@ a:hover{color:var(--omi-cyan-deep)}
 .site-header.hide{transform:translateY(-100%)}
 .site-header.scrolled{background:rgba(255,255,255,.82);border-bottom-color:var(--ink-100);box-shadow:var(--shadow-sm)}
 .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:var(--nav-h);gap:24px;direction:ltr}
+/* Arabic: mirror the whole bar — logo to the right, lang + burger to the left.
+   justify-self start/end are logical, so they follow automatically. */
+[dir="rtl"] .nav{direction:rtl}
 .nav-logo{justify-self:start;display:inline-flex}
 .nav-links{justify-self:center;display:flex;gap:54px;align-items:center;font-family:var(--font-display);font-weight:500;font-size:14.5px;letter-spacing:-.005em}
 [dir="rtl"] .nav-links{font-family:var(--font);font-weight:600}
@@ -79,6 +82,22 @@ a:hover{color:var(--omi-cyan-deep)}
   padding-right:clamp(40px,4vw,72px);
   padding-left:calc(max((100vw - 1520px) / 2, 0px) + clamp(24px,11.38vw,173px))}
 [dir="rtl"] .hero-copy{direction:rtl;text-align:right}
+/* Arabic: mirror the two panels — copy on the right, photo on the left.
+   (.hero forces direction:ltr, so RTL has to opt back in.) */
+[dir="rtl"] .hero{direction:rtl}
+@media(min-width:1024px){
+  /* mirror the copy panel's asymmetric gutter so the text still lines up
+     with the site's content edge, now on the right */
+  [dir="rtl"] .hero-copy{
+    padding-right:calc(max((100vw - 1520px) / 2, 0px) + clamp(24px,11.38vw,173px));
+    padding-left:clamp(40px,4vw,72px)}
+  /* mirror the photo crop to keep the same composition after the flip */
+  [dir="rtl"] .hero-photo{object-position:36% center}
+}
+@media(max-width:1023px){
+  /* stacked layout: keep the copy centred like the French version */
+  [dir="rtl"] .hero-copy{text-align:center}
+}
 /* soft light bloom behind headline */
 .hero-copy::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
   background:
@@ -379,18 +398,15 @@ a:hover{color:var(--omi-cyan-deep)}
 .mx{background:#fff;padding:var(--sec) 0}
 .mx-banner{position:relative;overflow:hidden;border-radius:18px;
   min-height:clamp(240px,23vw,330px);display:flex;align-items:center}
-/* photo layer */
+/* photo layer — a dedicated artwork per language (no CSS mirroring) */
 .mx-media{position:absolute;inset:0;z-index:0;
-  background:url("assets/Maxi-plus-banner.png") center/cover no-repeat}
+  background:url("assets/Maxi-plus-bannerFR.png") center/cover no-repeat}
+[dir="rtl"] .mx-media{background-image:url("assets/Maxi-plus-bannerAR.png")}
 /* soft scrim so the white copy stays legible over any part of the photo */
 .mx-banner::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(90deg,rgba(8,14,32,.66) 0%,rgba(8,14,32,.38) 44%,rgba(8,14,32,0) 74%)}
 [dir="rtl"] .mx-banner{direction:rtl}
 [dir="rtl"] .mx-banner::before{background:linear-gradient(270deg,rgba(8,14,32,.66) 0%,rgba(8,14,32,.38) 44%,rgba(8,14,32,0) 74%)}
-/* Arabic: the copy moves to the right, so mirror the photo to bring its
-   negative space along with it. Overlay layout only — the stacked mobile
-   view keeps the photo unflipped since the copy sits above it, not on it. */
-@media(min-width:768px){[dir="rtl"] .mx-media{transform:scaleX(-1)}}
 .mx-copy{position:relative;z-index:2;max-width:54%;padding:clamp(28px,3.2vw,48px) clamp(24px,3.2vw,54px)}
 [dir="rtl"] .mx-copy{text-align:right}
 /* brand mark carries the name, so the copy never repeats "Maxiplus".
@@ -529,11 +545,12 @@ a:hover{color:var(--omi-cyan-deep)}
 
 /* ================= NAVBAR RESPONSIVE ================= */
 @media(max-width:1024px){
-  /* nav-links is absolute here, so use flex to pin logo left + controls right */
+  /* nav-links is absolute here, so use flex to pin the logo and controls to
+     opposite edges (which side is which follows the language direction) */
   .nav{display:flex;justify-content:space-between}
   .nav-toggle{display:inline-flex}
-  /* icon flush to the inline-end edge, mirroring the logo on the left */
-  .nav-toggle span{left:auto;right:0;width:22px}
+  /* bars flush to the inline-end edge — mirrors automatically in Arabic */
+  .nav-toggle span{inset-inline-start:auto;inset-inline-end:0;width:22px}
   .nav-links{position:absolute;top:100%;left:0;right:0;
     flex-direction:column;align-items:stretch;gap:0;
     background:#fff;border-top:1px solid var(--ink-100);box-shadow:var(--shadow-md);

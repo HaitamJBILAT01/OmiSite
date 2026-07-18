@@ -27,6 +27,9 @@ function catProducts(cat) {
    read by selectCategory() to update the "Produits (N)" count line */
 let RANGE_COUNTS = [];
 
+/* tab index of the virtual Maxiplus tab — assigned by renderRange */
+let MAXI_TAB = 0;
+
 /* ---------- render the product range from data ---------- */
 function renderRange() {
   const data = window.OMI_DATA;
@@ -35,27 +38,22 @@ function renderRange() {
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
 
-  // tab display order: the brand-logo category (Maxiplus) is shown first
-  // after "Tous", then the remaining categories in natural data order.
-  const tabOrder = [
-    ...cats.map((_, i) => i).filter(i => cats[i].brandLogo),
-    ...cats.map((_, i) => i).filter(i => !cats[i].brandLogo)
-  ];
+  /* Maxiplus is a brand that lives inside a category (Hygiène), so it gets its
+     own virtual tab after the categories' indices: 0 = Tous, 1..n = categories,
+     n+1 = Maxiplus. Its panel holds only the products flagged brand:"maxiplus";
+     the Hygiène category tab still shows all of its products, Maxiplus included. */
+  MAXI_TAB = cats.length + 1;
+  const maxiLogo = (cats.find(c => c.brandLogo) || {}).brandLogo;
+  const maxiProducts = cats.flatMap(c => catProducts(c).filter(p => p.brand === "maxiplus"));
+  const hasMaxi = !!(maxiLogo && maxiProducts.length);
 
-  // tabs: "Tous" first (index 0), then the categories in display order.
-  // A category with a brandLogo renders as a logo-only pill (no text label);
-  // data-tab stays the category's real index so it maps to the right panel.
+  // tabs: "Tous", then the Maxiplus logo pill, then the categories in data order
   tabsEl.innerHTML =
     `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
-    tabOrder.map(i => {
-      const c = cats[i];
-      // logo-only tab needs an accessible name; text tabs already have one
-      const inner = c.brandLogo
-        ? `<img class="tab-brand-solo" src="assets/${c.brandLogo}" alt="${c.name.fr}">`
-        : bi(c.name);
-      const label = c.brandLogo ? ` aria-label="${c.name.fr}"` : "";
-      return `<button class="tab${c.brandLogo ? " tab-logo" : ""}" role="tab" data-tab="${i + 1}"${label}>${inner}</button>`;
-    }).join("");
+    (hasMaxi
+      ? `<button class="tab tab-logo" role="tab" data-tab="${MAXI_TAB}" aria-label="Maxiplus"><img class="tab-brand-solo" src="assets/${maxiLogo}" alt="Maxiplus"></button>`
+      : "") +
+    cats.map((c, i) => `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}</button>`).join("");
 
   // "Tous" panel: products grouped by category, one category after another
   // (natural order) rather than interleaved across categories.
@@ -83,12 +81,20 @@ function renderRange() {
     </div>`
   ).join("");
 
-  panelsEl.innerHTML = allPanel + catPanels;
+  // Maxiplus panel: only the Maxiplus-branded products
+  const maxiPanel = hasMaxi
+    ? `<div class="panel" id="panel-${MAXI_TAB}" data-category="maxiplus">
+        <div class="grid">${maxiProducts.flatMap(p => p.variants.map(v => cardHTML(p, v))).join("")}</div>
+      </div>`
+    : "";
+
+  panelsEl.innerHTML = allPanel + catPanels + maxiPanel;
 
   // one product count per tab, for the "Produits (N)" line
   RANGE_COUNTS = [allCards.length, ...cats.map(c =>
     catProducts(c).reduce((sum, p) => sum + p.variants.length, 0)
   )];
+  if (hasMaxi) RANGE_COUNTS[MAXI_TAB] = maxiProducts.reduce((s, p) => s + p.variants.length, 0);
 
   // picking a chip applies the filter — pills are always visible, no panel to close
   tabsEl.querySelectorAll(".tab").forEach(t =>
@@ -116,6 +122,9 @@ function selectCategory(i) {
     ar: `${n} منتج`
   });
 }
+
+/* jump straight to the Maxiplus tab (used by the Maxiplus banner CTA) */
+function gotoMaxiplus() { if (MAXI_TAB) gotoCat(MAXI_TAB); }
 
 /* jump to a category from the quick-nav strip: select it, then scroll to the grid */
 function gotoCat(i) {
