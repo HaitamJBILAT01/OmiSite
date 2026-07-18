@@ -326,9 +326,10 @@ a:hover{color:var(--omi-cyan-deep)}
 .btn-view-more{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--ink-200);
   color:var(--ink-900);border-radius:9999px;padding:13px 24px 13px 28px;font-family:var(--font-display);
   font-weight:500;font-size:14.5px;letter-spacing:-.005em;cursor:pointer;
-  transition:border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
+  transition:border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out)}
 [dir="rtl"] .btn-view-more{font-family:var(--font);padding:13px 28px 13px 24px}
-.btn-view-more:hover{border-color:var(--ink-900);background:var(--ink-50)}
+/* inverts on hover, same language as the active filter pill */
+.btn-view-more:hover{border-color:var(--ink-900);background:var(--ink-900);color:#fff}
 .btn-view-more .lbl-less{display:none}
 .btn-view-more.on .lbl-more{display:none}
 .btn-view-more.on .lbl-less{display:inline}
@@ -434,6 +435,8 @@ a:hover{color:var(--omi-cyan-deep)}
   .mx .wrap{padding-left:0;padding-right:0}
   .mx-banner{flex-direction:column;align-items:stretch;min-height:0;background:#fff;border-radius:0}
   .mx-banner::before{display:none}
+  /* one shared mobile artwork for both languages (beats the [dir=rtl] rule) */
+  .mx-media,[dir="rtl"] .mx-media{background-image:url("assets/Maxi-plus-bannerMOBILE.png")}
   .mx-media{position:static;order:-1;width:100%;height:clamp(230px,66vw,330px)}
   /* copy gets its own gutters back; text runs the full padded width */
   .mx-copy,[dir="rtl"] .mx-copy{max-width:none;background:transparent;text-align:center;
