@@ -27,9 +27,6 @@ function catProducts(cat) {
    read by selectCategory() to update the "Produits (N)" count line */
 let RANGE_COUNTS = [];
 
-/* same dot colours as the quick-nav pill strip, keyed by category.accent */
-const ACCENT_HEX = { blue: "#1E5BE6", gold: "#D99A00", green: "#12A24E", lavender: "#7A57C7" };
-
 /* ---------- render the product range from data ---------- */
 function renderRange() {
   const data = window.OMI_DATA;
@@ -38,15 +35,13 @@ function renderRange() {
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
 
-  // tabs: "Tous" first (index 0), then one per category — each chip gets a
-  // small colour dot (same treatment as the quick-nav strip) and can carry
-  // a small brandLogo (e.g. Maxiplus) next to its label
+  // tabs: "Tous" first (index 0), then one per category — clean text pills
+  // (no colour dots); can carry a small brandLogo (e.g. Maxiplus) next to its label
   tabsEl.innerHTML =
     `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
     cats.map((c, i) => {
-      const dot = c.accent ? `<span class="qn-dot" style="--d:${ACCENT_HEX[c.accent]}"></span>` : "";
       const brand = c.brandLogo ? `<img class="tab-brand" src="assets/${c.brandLogo}" alt="Maxiplus">` : "";
-      return `<button class="tab" role="tab" data-tab="${i + 1}">${dot}${bi(c.name)}${brand}</button>`;
+      return `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}${brand}</button>`;
     }).join("");
 
   // "Tous" panel: every variant of every product, interleaved round-robin
