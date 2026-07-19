@@ -28,7 +28,8 @@
       "Bash(curl -s -o /dev/null -w \"banner asset: HTTP %{http_code}\\\\n\" \"http://localhost:8777/assets/Maxi-plus-banner.png\")",
       "Bash(node --check app.js)",
       "Bash(node --check data.js)",
-      "Bash(curl -s -o /dev/null -w \"mobile banner: HTTP %{http_code}\\\\n\" \"http://localhost:8777/assets/Maxi-plus-bannerMOBILE.png\")"
+      "Bash(curl -s -o /dev/null -w \"mobile banner: HTTP %{http_code}\\\\n\" \"http://localhost:8777/assets/Maxi-plus-bannerMOBILE.png\")",
+      "Bash(curl -s -o /dev/null -w \"categorie.html: HTTP %{http_code}\\\\n\" \"http://localhost:8777/categorie.html?cat=maxiplus\")"
     ]
   }
 }

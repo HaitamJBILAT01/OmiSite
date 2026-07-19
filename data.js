@@ -48,6 +48,8 @@ window.OMI_DATA = {
     {
       slug: "sols-surfaces-vitres",
       name: { fr: "Sols, Surfaces & Vitres", ar: "الأرضيات والأسطح والزجاج" },
+      desc: { fr: "Des sols, plans de travail et vitres impeccables, sans traces.",
+              ar: "أرضيات وأسطح وزجاج نظيفة تمامًا، بدون آثار." },
       accent: "blue", /* matches the c-blue category card in "L'Excellence" */
       products: [
         {
@@ -100,6 +102,8 @@ window.OMI_DATA = {
     {
       slug: "entretien-du-linge",
       name: { fr: "Entretien du Linge", ar: "العناية بالملابس" },
+      desc: { fr: "Un linge éclatant et une fraîcheur qui dure, lavage après lavage.",
+              ar: "غسيل ناصع ونضارة تدوم، غسلة بعد غسلة." },
       accent: "gold",
       groups: [
         {
@@ -164,6 +168,8 @@ window.OMI_DATA = {
     {
       slug: "vaisselle-cuisine",
       name: { fr: "Vaisselle & Cuisine", ar: "الأواني والمطبخ" },
+      desc: { fr: "Une vaisselle dégraissée et brillante, sans le moindre effort.",
+              ar: "أوانٍ نظيفة ولامعة، دون أي مجهود." },
       accent: "green",
       products: [
         {
@@ -189,6 +195,8 @@ window.OMI_DATA = {
     {
       slug: "hygiene-soin-personnel",
       name: { fr: "Hygiène & Soin Personnel", ar: "النظافة والعناية الشخصية" },
+      desc: { fr: "Savons et papiers doux pour toute la famille, au quotidien.",
+              ar: "صابون وورق ناعم لكل أفراد العائلة، كل يوم." },
       accent: "lavender",
       /* this category carries the Maxiplus paper range — shown as a small
          logo on the category tab itself, not repeated on every card */

@@ -37,6 +37,7 @@ function renderRange() {
   const cats = data.categories;
   const tabsEl = document.getElementById("tabs");
   const panelsEl = document.getElementById("panels");
+  if (!tabsEl || !panelsEl) return;   // not on the homepage
 
   /* Maxiplus is a brand that lives inside a category (Hygiène), so it gets its
      own virtual tab after the categories' indices: 0 = Tous, 1..n = categories,

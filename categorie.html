@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OMI — Nos gammes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=69">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="site-header"><div class="wrap">
+  <nav class="nav">
+    <a href="index.html" class="nav-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.png" alt="OMI" style="height:40px;display:block"></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
+      <a href="index.html#cats"><span class="fr">Produits</span><span class="ar">المنتجات</span></a>
+      <a href="index.html"><span class="fr">La marque</span><span class="ar">العلامة</span></a>
+      <a href="#"><span class="fr">Contact</span><span class="ar">اتصل بنا</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang" id="lang">
+        <button class="lang-trigger" onclick="toggleLang(event)" aria-haspopup="true" aria-expanded="false">
+          <svg class="globe" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17A15 15 0 0 1 9 11.35 15.3 15.3 0 0 1 6.69 8h-2A17 17 0 0 0 7.66 12.56L2.58 17.58 4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+          <span id="langLabel">Français</span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu" role="menu">
+          <button class="lang-opt on" id="opt-fr" onclick="setLang('fr')" role="menuitem">Français</button>
+          <button class="lang-opt" id="opt-ar" onclick="setLang('ar')" role="menuitem">العربية</button>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleMenu(event)"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</div></header>
+
+<!-- ================= CATEGORY HERO (photo + title, filled by category.js) ================= -->
+<section class="cat-hero">
+  <div class="cat-hero-media" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="cat-hero-eyebrow"><span class="fr">Nos gammes</span><span class="ar">تشكيلاتنا</span></span>
+    <h1 id="catTitle"></h1>
+    <p id="catDesc"></p>
+  </div>
+</section>
+
+<!-- ================= CATEGORY SWITCHER ================= -->
+<div class="cat-switch"><div class="wrap">
+  <div class="tabs" id="catSwitch" role="tablist"></div>
+</div></div>
+
+<!-- ================= PRODUCTS ================= -->
+<section class="cat-range"><div class="wrap">
+  <p class="range-count" id="catCount"></p>
+  <div class="grid" id="catGrid"></div>
+</div></section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer"><div class="wrap">
+  <div class="foot-main">
+
+    <div class="foot-brand">
+      <a href="index.html" class="foot-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.png" alt="OMI"></a>
+      <p class="foot-tag"><span class="fr">La propreté de confiance, au cœur des foyers mauritaniens.</span><span class="ar">نظافة موثوقة، في قلب البيوت الموريتانية.</span></p>
+      <div class="foot-social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <h4><span class="fr">Liens rapides</span><span class="ar">روابط سريعة</span></h4>
+      <ul>
+        <li><a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a></li>
+        <li><a href="index.html#cats"><span class="fr">Produits</span><span class="ar">المنتجات</span></a></li>
+        <li><a href="index.html"><span class="fr">La marque</span><span class="ar">العلامة</span></a></li>
+        <li><a href="#"><span class="fr">Contact</span><span class="ar">اتصل بنا</span></a></li>
+      </ul>
+    </div>
+
+    <div class="foot-col">
+      <h4><span class="fr">Nos produits</span><span class="ar">منتجاتنا</span></h4>
+      <ul>
+        <li><a href="categorie.html?cat=sols-surfaces-vitres"><span class="fr">Sols, Surfaces &amp; Vitres</span><span class="ar">الأرضيات والأسطح والزجاج</span></a></li>
+        <li><a href="categorie.html?cat=entretien-du-linge"><span class="fr">Entretien du Linge</span><span class="ar">العناية بالملابس</span></a></li>
+        <li><a href="categorie.html?cat=vaisselle-cuisine"><span class="fr">Vaisselle &amp; Cuisine</span><span class="ar">الأواني والمطبخ</span></a></li>
+        <li><a href="categorie.html?cat=hygiene-soin-personnel"><span class="fr">Hygiène &amp; Soin Personnel</span><span class="ar">النظافة والعناية الشخصية</span></a></li>
+      </ul>
+    </div>
+
+    <div class="foot-col foot-col-contact">
+      <h4><span class="fr">Contact</span><span class="ar">اتصل بنا</span></h4>
+      <ul>
+        <li class="foot-ci">
+          <span class="foot-ci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="fr">Nouakchott, Mauritanie</span><span class="ar">نواكشوط، موريتانيا</span>
+        </li>
+        <li class="foot-ci">
+          <span class="foot-ci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <a href="mailto:commercial@omi.mr" dir="ltr">commercial@omi.mr</a>
+        </li>
+        <li class="foot-ci">
+          <span class="foot-ci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></span>
+          <a href="tel:+22222511111" dir="ltr">+222 22 51 11 11</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="foot-bar">
+    <p class="foot-copy"><span class="fr">© 2026 OMI · Fabriqué en Mauritanie</span><span class="ar">© 2026 أومي · صناعة موريتانية</span></p>
+    <div class="foot-bar-right">
+      <div class="foot-lang">
+        <button id="foot-fr" class="on" onclick="setLang('fr')">Français</button>
+        <button id="foot-ar" onclick="setLang('ar')">العربية</button>
+      </div>
+    </div>
+  </div>
+</div></footer>
+
+<script src="data.js?v=69"></script>
+<script src="app.js?v=69"></script>
+<script src="category.js?v=69"></script>
+</body>
+</html>
