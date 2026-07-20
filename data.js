@@ -51,6 +51,12 @@ window.OMI_DATA = {
       desc: { fr: "Des sols, plans de travail et vitres impeccables, sans traces.",
               ar: "أرضيات وأسطح وزجاج نظيفة تمامًا، بدون آثار." },
       hero: "banner-Sols, Surfaces & Vitres.png",
+      benefits: [
+        { fr: "Sans traces ni résidus", ar: "بدون آثار أو بقايا" },
+        { fr: "Séchage rapide", ar: "جفاف سريع" },
+        { fr: "Parfum longue durée", ar: "عطر يدوم طويلاً" },
+        { fr: "Adapté à toutes les surfaces", ar: "مناسب لجميع الأسطح" }
+      ],
       accent: "blue", /* matches the c-blue category card in "L'Excellence" */
       products: [
         {
@@ -106,6 +112,12 @@ window.OMI_DATA = {
       desc: { fr: "Un linge éclatant et une fraîcheur qui dure, lavage après lavage.",
               ar: "غسيل ناصع ونضارة تدوم، غسلة بعد غسلة." },
       hero: "banner-Entretien du Linge.png",
+      benefits: [
+        { fr: "Action anti-taches puissante", ar: "فعالية قوية ضد البقع" },
+        { fr: "Fraîcheur qui dure", ar: "نضارة تدوم" },
+        { fr: "Doux pour les fibres", ar: "لطيف على الأنسجة" },
+        { fr: "Parfums variés", ar: "عطور متنوعة" }
+      ],
       accent: "gold",
       groups: [
         {
@@ -173,6 +185,12 @@ window.OMI_DATA = {
       desc: { fr: "Une vaisselle dégraissée et brillante, sans le moindre effort.",
               ar: "أوانٍ نظيفة ولامعة، دون أي مجهود." },
       hero: "banner-Vaisselle & Cuisine.png",
+      benefits: [
+        { fr: "Dégraissage express", ar: "إزالة سريعة للدهون" },
+        { fr: "Brillance sans traces", ar: "لمعان بدون آثار" },
+        { fr: "Doux pour les mains", ar: "لطيف على اليدين" },
+        { fr: "Multi-usages", ar: "متعدد الاستعمالات" }
+      ],
       accent: "green",
       products: [
         {
@@ -201,6 +219,12 @@ window.OMI_DATA = {
       desc: { fr: "Savons et papiers doux pour toute la famille, au quotidien.",
               ar: "صابون وورق ناعم لكل أفراد العائلة، كل يوم." },
       hero: "banner-Hygiène & Soin Personnel.png",
+      benefits: [
+        { fr: "Douceur au quotidien", ar: "نعومة يومية" },
+        { fr: "Hydratation et fraîcheur", ar: "ترطيب وانتعاش" },
+        { fr: "Formules délicates", ar: "تركيبات لطيفة" },
+        { fr: "Pour toute la famille", ar: "لكل أفراد العائلة" }
+      ],
       accent: "lavender",
       /* this category carries the Maxiplus paper range — shown as a small
          logo on the category tab itself, not repeated on every card */

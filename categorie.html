@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=79">
+<link rel="stylesheet" href="styles.css?v=80">
 </head>
 <body>
 
@@ -42,6 +42,11 @@
 <!-- ================= CATEGORY HERO (photo + title, filled by category.js) ================= -->
 <section class="cat-hero">
   <div class="cat-hero-media" aria-hidden="true"></div>
+  <nav class="cat-crumbs" aria-label="Fil d'Ariane"><div class="wrap">
+    <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
+    <a href="index.html#cats"><span class="fr">Nos gammes</span><span class="ar">تشكيلاتنا</span></a>
+    <span id="crumbCat" aria-current="page"></span>
+  </div></nav>
   <div class="wrap">
     <span class="cat-hero-eyebrow"><span class="fr">Nos gammes</span><span class="ar">تشكيلاتنا</span></span>
     <h1 id="catTitle"></h1>
@@ -63,6 +68,12 @@
 <section class="cat-range"><div class="wrap">
   <p class="range-count" id="catCount"></p>
   <div class="grid" id="catGrid"></div>
+</div></section>
+
+<!-- ================= BENEFITS (per category, filled by category.js) ================= -->
+<section class="cat-benefits" hidden><div class="wrap">
+  <h2><span class="fr">Les atouts de la gamme</span><span class="ar">مزايا التشكيلة</span></h2>
+  <div class="cat-benefits-grid" id="catBenefits"></div>
 </div></section>
 
 <!-- ================= FOOTER ================= -->
@@ -129,8 +140,8 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=79"></script>
-<script src="app.js?v=79"></script>
-<script src="category.js?v=79"></script>
+<script src="data.js?v=80"></script>
+<script src="app.js?v=80"></script>
+<script src="category.js?v=80"></script>
 </body>
 </html>

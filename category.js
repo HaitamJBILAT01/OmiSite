@@ -20,6 +20,8 @@
   const maxiLogo = (cats.find(c => c.brandLogo) || {}).brandLogo;
   const maxiProducts = cats.flatMap(c => catProducts(c).filter(p => p.brand === "maxiplus"));
 
+  const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.2 2.5 2.5 4.7-5.2"/></svg>';
+
   /* selectable entries: the real categories, then Maxiplus as a virtual one */
   /* tab order: Maxi Plus · then the real categories */
   const entries = [];
@@ -33,11 +35,17 @@
               ar: "ورق ومناديل ناعمة، مصمّمة لكل أفراد العائلة." },
       hero: host.hero,
       logo: maxiLogo,
+      benefits: [
+        { fr: "Ultra absorbant", ar: "امتصاص فائق" },
+        { fr: "Résistant et solide", ar: "متين وقوي" },
+        { fr: "Doux au toucher", ar: "ناعم الملمس" },
+        { fr: "Pour toute la famille", ar: "لكل أفراد العائلة" }
+      ],
       products: maxiProducts
     });
   }
   cats.forEach(c => entries.push({
-    slug: c.slug, name: c.name, desc: c.desc, hero: c.hero,
+    slug: c.slug, name: c.name, desc: c.desc, hero: c.hero, benefits: c.benefits,
     products: catProducts(c)
   }));
 
@@ -46,6 +54,9 @@
   const mediaEl  = document.querySelector(".cat-hero-media");
   const switchEl = document.getElementById("catSwitch");
   const countEl  = document.getElementById("catCount");
+  const crumbEl  = document.getElementById("crumbCat");
+  const beneWrap = document.querySelector(".cat-benefits");
+  const beneEl   = document.getElementById("catBenefits");
 
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {
@@ -72,6 +83,18 @@
 
     switchEl.querySelectorAll(".tab").forEach(t =>
       t.classList.toggle("on", t.dataset.cat === e.slug));
+
+    // breadcrumb: last crumb = current category
+    if (crumbEl) crumbEl.innerHTML = bi(e.name);
+
+    // per-category benefits strip (hidden if a category has none)
+    if (beneWrap && beneEl) {
+      const list = e.benefits || [];
+      beneWrap.hidden = list.length === 0;
+      beneEl.innerHTML = list.map(b =>
+        `<div class="cat-benefit"><span class="cat-benefit-ic">${CHECK}</span><span class="cat-benefit-lbl">${bi(b)}</span></div>`
+      ).join("");
+    }
 
     document.title = `OMI — ${e.name.fr}`;
     if (updateUrl) history.replaceState(null, "", `?cat=${e.slug}`);
