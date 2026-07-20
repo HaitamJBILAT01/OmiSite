@@ -29,7 +29,12 @@
       "Bash(node --check app.js)",
       "Bash(node --check data.js)",
       "Bash(curl -s -o /dev/null -w \"mobile banner: HTTP %{http_code}\\\\n\" \"http://localhost:8777/assets/Maxi-plus-bannerMOBILE.png\")",
-      "Bash(curl -s -o /dev/null -w \"categorie.html: HTTP %{http_code}\\\\n\" \"http://localhost:8777/categorie.html?cat=maxiplus\")"
+      "Bash(curl -s -o /dev/null -w \"categorie.html: HTTP %{http_code}\\\\n\" \"http://localhost:8777/categorie.html?cat=maxiplus\")",
+      "Bash(node --check category.js)",
+      "Bash(sed -i 's/?v=69/?v=70/g' index.html categorie.html)",
+      "Bash(sed -i 's/?v=70/?v=71/g' index.html categorie.html)",
+      "Bash(sed -i 's/?v=71/?v=72/g' index.html categorie.html)",
+      "Bash(sed -i 's/?v=73/?v=74/g' index.html categorie.html)"
     ]
   }
 }

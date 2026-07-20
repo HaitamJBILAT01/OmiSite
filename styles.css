@@ -268,32 +268,42 @@ a:hover{color:var(--omi-cyan-deep)}
    Simple photo hero + centred category switcher + product grid.
    The grid/pills reuse the homepage components, so this page inherits
    every approved product-card and filter-pill style. */
-/* curved bottom edge (Dettol-style arc): both bottom corners take a wide
-   elliptical radius, so the photo dips lowest at the centre */
+/* short, minimal photo band with a full-width curved bottom edge (Dettol-style):
+   a white SVG wave sits along the bottom and sweeps up toward the sides */
 .cat-hero{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
-  min-height:clamp(260px,30vw,380px);text-align:center;color:#fff;
-  border-radius:0 0 50% 50% / 0 0 clamp(30px,4.5vw,72px) clamp(30px,4.5vw,72px)}
+  min-height:clamp(280px,32vw,400px);text-align:center;color:#fff}
 .cat-hero-media{position:absolute;inset:0;z-index:0;background:#173DBF center/cover no-repeat}
-/* scrim keeps the copy legible over any photo */
+/* one neutral scrim for every category — just enough to hold the white type,
+   letting each banner's own colours come through */
 .cat-hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(7,17,58,.44) 0%,rgba(7,17,58,.68) 100%)}
-.cat-hero .wrap{position:relative;z-index:2}
-.cat-hero-eyebrow{display:inline-block;font-family:var(--font-display);font-weight:600;font-size:11.5px;
-  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72)}
-[dir="rtl"] .cat-hero-eyebrow{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:14px}
-.cat-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3.2vw,44px);
-  letter-spacing:-.03em;line-height:1.1;color:#fff;margin:14px 0 0}
-[dir="rtl"] .cat-hero h1{font-family:var(--font);font-weight:700;letter-spacing:-.01em;line-height:1.3}
-.cat-hero p{font-family:var(--font-display);font-size:clamp(14px,1vw,16px);font-weight:400;line-height:1.7;
-  color:rgba(255,255,255,.8);margin:14px auto 0;max-width:56ch}
-[dir="rtl"] .cat-hero p{font-family:var(--font);line-height:1.95}
+  background:linear-gradient(180deg,rgba(10,18,42,.30) 0%,rgba(10,18,42,.42) 58%,rgba(10,18,42,.10) 100%)}
+/* the curve: white wave pinned to the bottom, stretched to any width */
+.cat-hero::before{content:"";position:absolute;left:0;right:0;bottom:-1px;z-index:2;pointer-events:none;
+  height:clamp(28px,3.6vw,58px);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0,0 Q720,96 1440,0 L1440,80 L0,80 Z' fill='%23ffffff'/%3E%3C/svg%3E") bottom center/100% 100% no-repeat}
+.cat-hero .wrap{position:relative;z-index:3}
+.cat-hero-eyebrow{display:inline-block;font-family:var(--font-display);font-weight:500;font-size:11px;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+[dir="rtl"] .cat-hero-eyebrow{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:13.5px}
+/* lighter, smaller title — minimal, not a heavy banner headline */
+.cat-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.6vw,34px);
+  letter-spacing:-.025em;line-height:1.12;color:#fff;margin:10px 0 0}
+[dir="rtl"] .cat-hero h1{font-family:var(--font);font-weight:600;letter-spacing:-.005em;line-height:1.3}
+.cat-hero p{font-family:var(--font-display);font-size:clamp(13.5px,.95vw,15px);font-weight:400;line-height:1.65;
+  color:rgba(255,255,255,.78);margin:10px auto 0;max-width:52ch}
+[dir="rtl"] .cat-hero p{font-family:var(--font);line-height:1.9}
 /* switcher: minimal underline tabs (reference style), centred over a hairline
    that spans the content width. fit-content + auto margins centres the row and
    still lets it scroll from the start when the tabs overflow on small screens.
    Selectors are .cat-switch .tabs .tab so they outrank the homepage pill rules. */
-.cat-switch{background:#fff;padding:clamp(26px,3vw,38px) 0 0}
+/* one quiet intro line above the picker */
+.cat-intro{background:#fff;padding:clamp(34px,4vw,54px) 0 0;text-align:center}
+.cat-intro p{font-family:var(--font-display);font-size:clamp(14px,1vw,16px);font-weight:400;line-height:1.7;
+  color:var(--ink-500);margin:0 auto;max-width:60ch}
+[dir="rtl"] .cat-intro p{font-family:var(--font);line-height:1.95}
+.cat-switch{background:#fff;padding:clamp(24px,2.8vw,34px) 0 0}
 .cat-switch .wrap{border-bottom:1px solid var(--ink-200)}
-.cat-switch .tabs{width:fit-content;max-width:100%;margin:0 auto -1px;padding:0;gap:clamp(18px,3vw,44px)}
+.cat-switch .tabs{width:fit-content;max-width:100%;margin:0 auto -1px;padding:0;gap:clamp(16px,2.1vw,32px)}
 .cat-switch .tabs .tab{flex:none;position:relative;white-space:nowrap;
   background:none;border:0;border-radius:0;box-shadow:none;padding:0 2px 14px;
   font-family:var(--font-display);font-weight:500;font-size:clamp(14px,1.05vw,16px);letter-spacing:-.005em;
@@ -308,6 +318,12 @@ a:hover{color:var(--omi-cyan-deep)}
 .cat-switch .tabs .tab-brand-solo{height:18px}
 .cat-range{background:#fff;padding:clamp(18px,2.2vw,26px) 0 var(--sec)}
 @media(min-width:768px){.cat-range .range-count{text-align:center}}
+@media(max-width:767px){
+  /* drop the full-width hairline under the tabs (keeps the active underline) */
+  .cat-switch .wrap{border-bottom:0}
+  /* deeper wave so the bottom edge reads as a clear curve, not a flat line */
+  .cat-hero::before{height:clamp(38px,11vw,52px)}
+}
 
 /* ================= PRODUCT RANGE ================= */
 /* symmetric: top provides the gap from the services section, bottom keeps the

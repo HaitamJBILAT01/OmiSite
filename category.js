@@ -21,18 +21,25 @@
   const maxiProducts = cats.flatMap(c => catProducts(c).filter(p => p.brand === "maxiplus"));
 
   /* selectable entries: the real categories, then Maxiplus as a virtual one */
-  const entries = cats.map(c => ({
+  /* tab order: Maxi Plus · then the real categories */
+  const entries = [];
+  if (maxiLogo && maxiProducts.length) {
+    // Maxiplus lives inside a category, so it borrows that category's banner
+    const host = cats.find(c => catProducts(c).some(p => p.brand === "maxiplus")) || {};
+    entries.push({
+      slug: "maxiplus",
+      name: { fr: "Maxi Plus", ar: "ماكسي بلس" },
+      desc: { fr: "Papiers et mouchoirs doux, pensés pour toute la famille.",
+              ar: "ورق ومناديل ناعمة، مصمّمة لكل أفراد العائلة." },
+      hero: host.hero,
+      logo: maxiLogo,
+      products: maxiProducts
+    });
+  }
+  cats.forEach(c => entries.push({
     slug: c.slug, name: c.name, desc: c.desc, hero: c.hero,
     products: catProducts(c)
   }));
-  if (maxiLogo && maxiProducts.length) entries.push({
-    slug: "maxiplus",
-    name: { fr: "Maxi Plus", ar: "ماكسي بلس" },
-    desc: { fr: "Papiers et mouchoirs doux, pensés pour toute la famille.",
-            ar: "ورق ومناديل ناعمة، مصمّمة لكل أفراد العائلة." },
-    logo: maxiLogo,
-    products: maxiProducts
-  });
 
   const titleEl  = document.getElementById("catTitle");
   const descEl   = document.getElementById("catDesc");
@@ -51,8 +58,10 @@
 
     titleEl.innerHTML = bi(e.name);
     descEl.innerHTML = e.desc ? bi(e.desc) : "";
-    // optional per-category `hero` in data.js, else the shared range photo
-    mediaEl.style.backgroundImage = `url("assets/${e.hero || "hero-products.png"}")`;
+    // per-category banner from data.js — encodeURI because the filenames
+    // contain spaces, accents and "&"
+    mediaEl.style.backgroundImage =
+      `url("${encodeURI("assets/" + (e.hero || "hero-products.png"))}")`;
 
     const cards = e.products.flatMap(p => p.variants.map(v => cardHTML(p, v)));
     grid.innerHTML = cards.join("");
