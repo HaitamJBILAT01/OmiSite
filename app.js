@@ -308,7 +308,7 @@ function buildMobileMenu() {
     `<div class="nav-m-foot">
        <div class="nav-m-contact">
          <a href="tel:+22222511111" dir="ltr">${icPhone}<span>+222 22 51 11 11</span></a>
-         <a href="mailto:commercial@omi.mr" dir="ltr">${icMail}<span>commercial@omi.mr</span></a>
+         <a href="mailto:info@omi.mr" dir="ltr">${icMail}<span>info@omi.mr</span></a>
        </div>
        <div class="nav-m-social">
          <a href="https://web.facebook.com/profile.php?id=61557716205802&amp;mibextid=LQQJ4d&amp;_rdc=1&amp;_rdr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">${icFb}</a>
