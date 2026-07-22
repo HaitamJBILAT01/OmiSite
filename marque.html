@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OMI — Nos gammes</title>
+<title>OMI — La marque</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     <div class="nav-links" id="nav-links">
       <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
       <a href="index.html#cats"><span class="fr">Produits</span><span class="ar">المنتجات</span></a>
-      <a href="marque.html"><span class="fr">La marque</span><span class="ar">العلامة</span></a>
+      <a href="marque.html" aria-current="page"><span class="fr">La marque</span><span class="ar">العلامة</span></a>
       <a href="contact.html"><span class="fr">Contact</span><span class="ar">اتصل بنا</span></a>
     </div>
     <div class="nav-right">
@@ -40,30 +40,83 @@
   </nav>
 </div></header>
 
-<!-- ================= CATEGORY HERO (photo + title, filled by category.js) ================= -->
-<section class="cat-hero">
-  <div class="cat-hero-media" aria-hidden="true"></div>
-  <nav class="cat-crumbs" aria-label="Fil d'Ariane"><div class="wrap">
-    <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
-    <a href="index.html#cats"><span class="fr">Nos gammes</span><span class="ar">تشكيلاتنا</span></a>
-    <span id="crumbCat" aria-current="page"></span>
-  </div></nav>
-  <div class="wrap">
-    <span class="cat-hero-eyebrow"><span class="fr">Nos gammes</span><span class="ar">تشكيلاتنا</span></span>
-    <h1 id="catTitle"></h1>
-    <p id="catDesc"></p>
+<!-- ================= BRAND HERO (reuses .showcase) ================= -->
+<section class="showcase"><div class="wrap">
+  <div class="showcase-grid">
+    <div>
+      <span class="eyebrow"><span class="fr">La marque</span><span class="ar">العلامة</span></span>
+      <h2>
+        <span class="fr">Née en Mauritanie,<br>pour vos foyers.</span>
+        <span class="ar">وُلدت في موريتانيا،<br>من أجل بيوتكم.</span>
+      </h2>
+      <p class="body">
+        <span class="fr">OMI est une marque mauritanienne de produits d'entretien, conçue et fabriquée à Nouakchott. Nous mettons la même exigence de qualité dans chaque produit, pour une propreté de confiance au quotidien — au cœur des foyers d'ici.</span>
+        <span class="ar">أومي علامة موريتانية لمنتجات التنظيف، مصمّمة ومصنوعة في نواكشوط. نضع المعيار نفسه من الجودة في كل منتج، من أجل نظافة موثوقة كل يوم — في قلب بيوت بلدنا.</span>
+      </p>
+      <div class="marque-cta-row">
+        <a href="index.html#cats" class="marque-btn"><span class="fr">Découvrir nos produits</span><span class="ar">اكتشف منتجاتنا</span></a>
+      </div>
+    </div>
+    <div class="showcase-photo">
+      <img src="assets/woman-bucket.webp" alt="Femme mauritanienne tenant un seau de produits OMI">
+    </div>
   </div>
-</section>
+</div></section>
 
-<!-- ================= CATEGORY SWITCHER ================= -->
-<div class="cat-switch"><div class="wrap">
-  <div class="tabs" id="catSwitch" role="tablist"></div>
-</div></div>
+<!-- ================= VALUES ================= -->
+<section class="marque-values"><div class="wrap">
+  <div class="marque-values-head">
+    <h2><span class="fr">Ce qui nous définit</span><span class="ar">ما يميّزنا</span></h2>
+  </div>
+  <div class="marque-values-grid">
+    <div class="marque-value">
+      <span class="trust-icon ti-quality" role="img" aria-label="Qualité constante"></span>
+      <h3><span class="fr">Qualité constante</span><span class="ar">جودة ثابتة</span></h3>
+      <p><span class="fr">Des formules fiables, testées et éprouvées.</span><span class="ar">تركيبات موثوقة، مُختبرة ومجرّبة.</span></p>
+    </div>
+    <div class="marque-value">
+      <span class="trust-icon ti-made" role="img" aria-label="Fabriqué en Mauritanie"></span>
+      <h3><span class="fr">Fabriqué en Mauritanie</span><span class="ar">صناعة موريتانية</span></h3>
+      <p><span class="fr">Conçu et produit à Nouakchott.</span><span class="ar">مصمّم ومُنتَج في نواكشوط.</span></p>
+    </div>
+    <div class="marque-value">
+      <span class="trust-icon ti-range" role="img" aria-label="Une gamme complète"></span>
+      <h3><span class="fr">Une gamme complète</span><span class="ar">تشكيلة متكاملة</span></h3>
+      <p><span class="fr">Un produit pour chaque pièce de la maison.</span><span class="ar">منتج لكل غرفة في المنزل.</span></p>
+    </div>
+    <div class="marque-value">
+      <span class="trust-icon ti-avail" role="img" aria-label="Disponible partout"></span>
+      <h3><span class="fr">Disponible partout</span><span class="ar">متوفّر في كل مكان</span></h3>
+      <p><span class="fr">Chez les commerçants de proximité, partout au pays.</span><span class="ar">لدى تجار الأحياء، في كل أنحاء البلاد.</span></p>
+    </div>
+  </div>
+</div></section>
 
-<!-- ================= PRODUCTS ================= -->
-<section class="cat-range"><div class="wrap">
-  <p class="range-count" id="catCount"></p>
-  <div class="grid" id="catGrid"></div>
+<!-- ================= STATS ================= -->
+<section class="marque-stats"><div class="wrap">
+  <div class="brand-stats">
+    <div class="stat">
+      <span class="stat-num" id="statCount">34</span>
+      <span class="stat-label"><span class="fr">Produits</span><span class="ar">منتج</span></span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label"><span class="fr">Fabriqué en Mauritanie</span><span class="ar">صناعة موريتانية</span></span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">N°1</span>
+      <span class="stat-label"><span class="fr">Le réflexe des familles</span><span class="ar">خيار العائلات</span></span>
+    </div>
+  </div>
+</div></section>
+
+<!-- ================= CLOSING CTA ================= -->
+<section class="marque-cta"><div class="wrap">
+  <h2><span class="fr">La propreté de confiance, à portée de main.</span><span class="ar">نظافة موثوقة، في متناول اليد.</span></h2>
+  <div class="marque-cta-row">
+    <a href="index.html#cats" class="marque-btn"><span class="fr">Découvrir nos produits</span><span class="ar">اكتشف منتجاتنا</span></a>
+    <a href="contact.html" class="marque-btn-ghost"><span class="fr">Nous contacter</span><span class="ar">اتصل بنا</span></a>
+  </div>
 </div></section>
 
 <!-- ================= FOOTER ================= -->
@@ -134,6 +187,18 @@
 
 <script src="data.js?v=118"></script>
 <script src="app.js?v=118"></script>
-<script src="category.js?v=118"></script>
+<script>
+  /* keep the "Produits" stat in sync with the live catalogue */
+  (function () {
+    var el = document.getElementById("statCount");
+    var d = window.OMI_DATA;
+    if (el && d && d.categories) {
+      var cp = function (c) { return c.groups ? c.groups.flatMap(function (g) { return g.products; }) : c.products; };
+      el.textContent = d.categories.reduce(function (n, c) {
+        return n + cp(c).reduce(function (m, p) { return m + p.variants.length; }, 0);
+      }, 0);
+    }
+  })();
+</script>
 </body>
 </html>
