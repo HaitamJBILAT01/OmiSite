@@ -18,7 +18,7 @@
      ├ accent?     "blue"|"gold"|"green"|"lavender"  -> same colour as its
      │                                  card in "L'Excellence" (services
      │                                  section); styles the filter chip
-     ├ brandLogo?  "file.png"        -> shown next to the tab label
+     ├ brandLogo?  "file.webp"        -> shown next to the tab label
      │                                  (e.g. Maxiplus, on category 4)
      ├ products[]  OR  groups[]      -> a category is EITHER a flat
      │                                  product list, OR sub-groups
@@ -84,20 +84,20 @@ window.OMI_DATA = {
             }
           },
           variants: [
-            { scent: "roses",     size: "5l",   image: "surface-roses-5000.png",    alt: "OMI Nettoyant Surfaces Roses 5 L" },
-            { scent: "lavande",   size: "5l",   image: "surface-lavande-5000.png",  alt: "OMI Nettoyant Surfaces Lavande 5 L" },
-            { scent: "fraicheur", size: "5l",   image: "surface-fraicheur-5000.png", alt: "OMI Nettoyant Surfaces Fraîcheur 5 L" },
-            { scent: "roses",     size: "1.5l", image: "surface-roses-1500.png",    alt: "OMI Nettoyant Surfaces Roses 1,5 L" },
-            { scent: "citron",    size: "1.5l", image: "surface-citron-1500.png",   alt: "OMI Nettoyant Surfaces Citron 1,5 L" },
-            { scent: "original",  size: "1.5l", image: "surface-original-1500.png", alt: "OMI Nettoyant Surfaces Original 1,5 L" },
-            { scent: "lavande",   size: "1l",   image: "surface-lavande-1000.png",  alt: "OMI Nettoyant Surfaces Lavande 1 L" }
+            { scent: "roses",     size: "5l",   image: "surface-roses-5000.webp",    alt: "OMI Nettoyant Surfaces Roses 5 L" },
+            { scent: "lavande",   size: "5l",   image: "surface-lavande-5000.webp",  alt: "OMI Nettoyant Surfaces Lavande 5 L" },
+            { scent: "fraicheur", size: "5l",   image: "surface-fraicheur-5000.webp", alt: "OMI Nettoyant Surfaces Fraîcheur 5 L" },
+            { scent: "roses",     size: "1.5l", image: "surface-roses-1500.webp",    alt: "OMI Nettoyant Surfaces Roses 1,5 L" },
+            { scent: "citron",    size: "1.5l", image: "surface-citron-1500.webp",   alt: "OMI Nettoyant Surfaces Citron 1,5 L" },
+            { scent: "original",  size: "1.5l", image: "surface-original-1500.webp", alt: "OMI Nettoyant Surfaces Original 1,5 L" },
+            { scent: "lavande",   size: "1l",   image: "surface-lavande-1000.webp",  alt: "OMI Nettoyant Surfaces Lavande 1 L" }
           ]
         },
         {
           slug: "vitres-surfaces",
           name: { fr: "Vitres & Surfaces", ar: "الزجاج والأسطح" },
           variants: [
-            { image: "vitres-spray.png", alt: "OMI Nettoyant Vitres & Surfaces 3 en 1 sans traces",
+            { image: "vitres-spray.webp", alt: "OMI Nettoyant Vitres & Surfaces 3 en 1 sans traces",
               sub: { fr: "Spray 3 en 1 · sans traces", ar: "بخاخ 3 في 1 · بدون آثار" } }
           ]
         }
@@ -125,7 +125,7 @@ window.OMI_DATA = {
               slug: "lessive-gel-matic",
               name: { fr: "Lessive Gel Matic", ar: "جل غسيل ماتيك" },
               variants: [
-                { image: "lessive-gel-matic.png", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
+                { image: "lessive-gel-matic.webp", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
                   sub: { fr: "Power Gel · 2 en 1 · 3 Kg", ar: "جل قوي · 2 في 1 · 3 كغ" } }
               ]
             },
@@ -133,7 +133,7 @@ window.OMI_DATA = {
               slug: "detergent-poudre",
               name: { fr: "Détergent en Poudre", ar: "مسحوق الغسيل" },
               variants: [
-                { image: "detergent-poudre.png", alt: "Maxi Clean Détergent en Poudre 90 g",
+                { image: "detergent-poudre.webp", alt: "Maxi Clean Détergent en Poudre 90 g",
                   sub: { fr: "Maxi Clean · lavage main", ar: "ماكسي كلين · غسيل يدوي" } }
               ]
             }
@@ -165,11 +165,11 @@ window.OMI_DATA = {
                 }
               },
               variants: [
-                { scent: "original", size: "4l", image: "javel-original-4l.png", alt: "OMI Eau de Javel Original 4 L" },
-                { scent: "lavande",  size: "4l", image: "javel-lavande-4l.png",  alt: "OMI Eau de Javel Lavande 4 L" },
-                { scent: "citron",   size: "4l", image: "javel-citron-4l.png",   alt: "OMI Eau de Javel Citron 4 L" },
-                { scent: "original", size: "1l", image: "javel-original-1l.png", alt: "OMI Eau de Javel Original 1 L" },
-                { scent: "lavande",  size: "1l", image: "toadd2.png",            alt: "OMI Eau de Javel Lavande Blancheur & Protection 1 L" }
+                { scent: "original", size: "4l", image: "javel-original-4l.webp", alt: "OMI Eau de Javel Original 4 L" },
+                { scent: "lavande",  size: "4l", image: "javel-lavande-4l.webp",  alt: "OMI Eau de Javel Lavande 4 L" },
+                { scent: "citron",   size: "4l", image: "javel-citron-4l.webp",   alt: "OMI Eau de Javel Citron 4 L" },
+                { scent: "original", size: "1l", image: "javel-original-1l.webp", alt: "OMI Eau de Javel Original 1 L" },
+                { scent: "lavande",  size: "1l", image: "toadd2.webp",            alt: "OMI Eau de Javel Lavande Blancheur & Protection 1 L" }
               ]
             }
           ]
@@ -195,15 +195,15 @@ window.OMI_DATA = {
           slug: "liquide-vaisselle",
           name: { fr: "Liquide Vaisselle", ar: "سائل الأواني" },
           variants: [
-            { image: "toadd3.png", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 800 ml",
+            { image: "toadd3.webp", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 800 ml",
               sub: { fr: "Lavande · 800 ml", ar: "الخزامة · 800 مل" } },
-            { image: "toadd6.png", alt: "OMI Liquide Vaisselle Super Dégraissant Original 750 ml",
+            { image: "toadd6.webp", alt: "OMI Liquide Vaisselle Super Dégraissant Original 750 ml",
               sub: { fr: "Original · 750 ml", ar: "أصلي · 750 مل" } },
-            { image: "toadd5.png", alt: "OMI Liquide Vaisselle Super Dégraissant Citron 750 ml",
+            { image: "toadd5.webp", alt: "OMI Liquide Vaisselle Super Dégraissant Citron 750 ml",
               sub: { fr: "Citron · 750 ml", ar: "ليمون · 750 مل" } },
-            { image: "toadd4.png", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 750 ml",
+            { image: "toadd4.webp", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 750 ml",
               sub: { fr: "Lavande · 750 ml", ar: "الخزامة · 750 مل" } },
-            { image: "vaisselle-liquide-citron.png", alt: "OMI Liquide Vaisselle Multi-Usages 3x1 Citron",
+            { image: "vaisselle-liquide-citron.webp", alt: "OMI Liquide Vaisselle Multi-Usages 3x1 Citron",
               sub: { fr: "Multi-usages 3×1 · Citron", ar: "متعدد الاستعمالات 3×1 · ليمون" } }
           ]
         },
@@ -211,7 +211,7 @@ window.OMI_DATA = {
           slug: "pate-lavante",
           name: { fr: "Pâte Lavante", ar: "عجينة الجلي" },
           variants: [
-            { image: "vaisselle-pate-citron.png", alt: "OMI Pâte Lavante Multi-Usage Citron",
+            { image: "vaisselle-pate-citron.webp", alt: "OMI Pâte Lavante Multi-Usage Citron",
               sub: { fr: "Multi-usage · Citron", ar: "متعدد الاستعمالات · ليمون" } }
           ]
         }
@@ -233,7 +233,7 @@ window.OMI_DATA = {
       accent: "lavender",
       /* this category carries the Maxiplus paper range — shown as a small
          logo on the category tab itself, not repeated on every card */
-      brandLogo: "maxiplus-logo.png",
+      brandLogo: "maxiplus-logo.webp",
       products: [
         {
           slug: "savon-liquide-mains",
@@ -250,11 +250,11 @@ window.OMI_DATA = {
             }
           },
           variants: [
-            { scent: "original",  image: "savon-original.png",  alt: "OMI Savon Liquide Mains Original",
+            { scent: "original",  image: "savon-original.webp",  alt: "OMI Savon Liquide Mains Original",
               sub: { fr: "Hydratation intense · 300 & 500 ml", ar: "ترطيب مكثف · 300 و 500 مل" } },
-            { scent: "lavande",   image: "savon-lavande.png",   alt: "OMI Savon Liquide Mains Lavande",
+            { scent: "lavande",   image: "savon-lavande.webp",   alt: "OMI Savon Liquide Mains Lavande",
               sub: { fr: "Parfum lavande · 300 ml", ar: "عطر الخزامة · 300 مل" } },
-            { scent: "camomille", image: "savon-camomille.png", alt: "OMI Savon Liquide Mains Camomille",
+            { scent: "camomille", image: "savon-camomille.webp", alt: "OMI Savon Liquide Mains Camomille",
               sub: { fr: "Camomille · 300 & 500 ml", ar: "بابونج · 300 و 500 مل" } }
           ]
         },
@@ -274,9 +274,9 @@ window.OMI_DATA = {
             }
           },
           variants: [
-            { type: "classic", image: "maxi-essuie-tout.png",      alt: "Maxi Plus Essuie-Tout Classic" },
-            { type: "jumbo",   image: "maxi-essuie-tout-jumbo.png", alt: "Maxi Plus Essuie-Tout Jumbo" },
-            { type: "cuisine", image: "maxi-kitchen-roll.png",      alt: "Maxi Plus Essuie-Tout Cuisine ×2 Ultra Absorbant" }
+            { type: "classic", image: "maxi-essuie-tout.webp",      alt: "Maxi Plus Essuie-Tout Classic" },
+            { type: "jumbo",   image: "maxi-essuie-tout-jumbo.webp", alt: "Maxi Plus Essuie-Tout Jumbo" },
+            { type: "cuisine", image: "maxi-kitchen-roll.webp",      alt: "Maxi Plus Essuie-Tout Cuisine ×2 Ultra Absorbant" }
           ]
         },
         {
@@ -294,8 +294,8 @@ window.OMI_DATA = {
             }
           },
           variants: [
-            { type: "pack", image: "maxi-mouchoirs-pack.png", alt: "Maxi Plus Mouchoirs Classic Pack ×6" },
-            { type: "box",  image: "maxi-mouchoirs-box.png",  alt: "Maxi Plus Mouchoirs Classic Boîte 2 plis" }
+            { type: "pack", image: "maxi-mouchoirs-pack.webp", alt: "Maxi Plus Mouchoirs Classic Pack ×6" },
+            { type: "box",  image: "maxi-mouchoirs-box.webp",  alt: "Maxi Plus Mouchoirs Classic Boîte 2 plis" }
           ]
         },
         {
@@ -303,7 +303,7 @@ window.OMI_DATA = {
           name: { fr: "Serviettes de Table", ar: "مناديل المائدة" },
           brand: "maxiplus",
           variants: [
-            { image: "toadd1.png", alt: "Maxi Plus Serviettes de Table Original 80",
+            { image: "toadd1.webp", alt: "Maxi Plus Serviettes de Table Original 80",
               sub: { fr: "Original · 80 serviettes", ar: "أصلي · 80 منديلاً" } }
           ]
         },
@@ -312,7 +312,7 @@ window.OMI_DATA = {
           name: { fr: "Papier Hygiénique", ar: "ورق تواليت" },
           brand: "maxiplus",
           variants: [
-            { image: "toadd7.png", alt: "Maxi Plus Papier Hygiénique Confort 12 Rouleaux",
+            { image: "toadd7.webp", alt: "Maxi Plus Papier Hygiénique Confort 12 Rouleaux",
               sub: { fr: "Confort · 12 rouleaux", ar: "كومفور · 12 لفة" } }
           ]
         }

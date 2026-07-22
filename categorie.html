@@ -7,15 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=90">
+<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=102" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=102" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=102">
 </head>
 <body>
 
 <!-- ================= NAVBAR ================= -->
 <header class="site-header"><div class="wrap">
   <nav class="nav">
-    <a href="index.html" class="nav-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.png" alt="OMI" style="height:40px;display:block"></a>
+    <a href="index.html" class="nav-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.webp" alt="OMI" style="height:40px;display:block"></a>
     <div class="nav-links" id="nav-links">
       <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
       <a href="index.html#cats"><span class="fr">Produits</span><span class="ar">المنتجات</span></a>
@@ -54,21 +55,10 @@
   </div>
 </section>
 
-<!-- ================= INTRO (one quiet line above the picker) ================= -->
-<section class="cat-intro"><div class="wrap">
-  <p><span class="fr">Des produits pensés pour chaque pièce de la maison, efficaces sur la saleté et doux pour vos surfaces.</span><span class="ar">منتجات مصمّمة لكل غرفة في المنزل، فعّالة على الأوساخ ولطيفة على أسطحكم.</span></p>
-</div></section>
-
 <!-- ================= CATEGORY SWITCHER ================= -->
 <div class="cat-switch"><div class="wrap">
   <div class="tabs" id="catSwitch" role="tablist"></div>
 </div></div>
-
-<!-- ================= BENEFITS (per category, filled by category.js) ================= -->
-<section class="cat-benefits reveal" hidden><div class="wrap">
-  <h2><span class="fr">Les atouts de la gamme</span><span class="ar">مزايا التشكيلة</span></h2>
-  <div class="cat-benefits-grid" id="catBenefits"></div>
-</div></section>
 
 <!-- ================= PRODUCTS ================= -->
 <section class="cat-range"><div class="wrap">
@@ -81,7 +71,7 @@
   <div class="foot-main">
 
     <div class="foot-brand">
-      <a href="index.html" class="foot-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.png" alt="OMI"></a>
+      <a href="index.html" class="foot-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.webp" alt="OMI"></a>
       <p class="foot-tag"><span class="fr">La propreté de confiance, au cœur des foyers mauritaniens.</span><span class="ar">نظافة موثوقة، في قلب البيوت الموريتانية.</span></p>
       <div class="foot-social">
         <a href="https://web.facebook.com/profile.php?id=61557716205802&amp;mibextid=LQQJ4d&amp;_rdc=1&amp;_rdr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg></a>
@@ -140,8 +130,8 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=90"></script>
-<script src="app.js?v=90"></script>
-<script src="category.js?v=90"></script>
+<script src="data.js?v=102"></script>
+<script src="app.js?v=102"></script>
+<script src="category.js?v=102"></script>
 </body>
 </html>

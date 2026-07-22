@@ -22,7 +22,7 @@
 
   /* one shared hero banner for every category — loaded once, never swapped,
      so switching category is instant (no image reload) */
-  const BANNER = "bannerCAT.png";
+  const BANNER = "bannerCAT.webp";
 
   /* line-art feature icons (Dettol-style), cycled across the benefits */
   const ICONS = [
@@ -108,11 +108,7 @@
 
   /* switcher pills — same styling as the homepage filter row */
   switchEl.innerHTML = entries.map(e => {
-    const inner = e.logo
-      ? `<img class="tab-brand-solo" src="assets/${e.logo}" alt="${e.name.fr}">`
-      : bi(e.name);
-    const label = e.logo ? ` aria-label="${e.name.fr}"` : "";
-    return `<button class="tab${e.logo ? " tab-logo" : ""}" role="tab" data-cat="${e.slug}"${label}>${inner}</button>`;
+    return `<button class="tab" role="tab" data-cat="${e.slug}">${bi(e.name)}</button>`;
   }).join("");
 
   const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

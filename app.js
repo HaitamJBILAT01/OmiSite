@@ -48,11 +48,11 @@ function renderRange() {
   const maxiProducts = cats.flatMap(c => catProducts(c).filter(p => p.brand === "maxiplus"));
   const hasMaxi = !!(maxiLogo && maxiProducts.length);
 
-  // tabs: "Tous", then the Maxiplus logo pill, then the categories in data order
+  // tabs: "Tous", then the Maxi Plus text pill, then the categories in data order
   tabsEl.innerHTML =
     `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
     (hasMaxi
-      ? `<button class="tab tab-logo" role="tab" data-tab="${MAXI_TAB}" aria-label="Maxiplus"><img class="tab-brand-solo" src="assets/${maxiLogo}" alt="Maxiplus"></button>`
+      ? `<button class="tab" role="tab" data-tab="${MAXI_TAB}">${bi({ fr: "Maxi Plus", ar: "ماكسي بلس" })}</button>`
       : "") +
     cats.map((c, i) => `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}</button>`).join("");
 

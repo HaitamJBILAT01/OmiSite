@@ -1,0 +1,13 @@
+# Claude Code local settings (not part of the site)
+.claude/
+
+# Old PNG source images — superseded by .webp, kept locally as backups only
+assets/*.png
+
+# Dependencies / build tooling (never used by the static site)
+node_modules/
+
+# OS / editor cruft
+Thumbs.db
+.DS_Store
+*.log
