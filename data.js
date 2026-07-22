@@ -211,8 +211,10 @@ window.OMI_DATA = {
               sub: { fr: "Citron · 750 ml", ar: "ليمون · 750 مل" } },
             { image: "toadd4.webp", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 750 ml",
               sub: { fr: "Lavande · 750 ml", ar: "الخزامة · 750 مل" } },
-            { image: "vaisselle-liquide-citron.webp", alt: "OMI Liquide Vaisselle Multi-Usages 3x1 Citron",
-              sub: { fr: "Multi-usages 3×1 · Citron", ar: "متعدد الاستعمالات 3×1 · ليمون" } }
+            { image: "vaisselle-citron-750.webp", alt: "OMI Liquide Vaisselle Multi-Usages 3x1 Citron 750 ml",
+              sub: { fr: "Multi-usages 3×1 · Citron · 750 ml", ar: "متعدد الاستعمالات 3×1 · ليمون · 750 مل" } },
+            { image: "vaisselle-citron-300.webp", alt: "OMI Liquide Vaisselle Multi-Usages 3x1 Citron 300 ml",
+              sub: { fr: "Multi-usages 3×1 · Citron · 300 ml", ar: "متعدد الاستعمالات 3×1 · ليمون · 300 مل" } }
           ]
         },
         {
@@ -258,12 +260,16 @@ window.OMI_DATA = {
             }
           },
           variants: [
-            { scent: "original",  image: "savon-original.webp",  alt: "OMI Savon Liquide Mains Original",
-              sub: { fr: "Hydratation intense · 300 & 500 ml", ar: "ترطيب مكثف · 300 و 500 مل" } },
+            { scent: "original",  image: "savon-original-500.webp",  alt: "OMI Savon Liquide Mains Original 500 ml",
+              sub: { fr: "Original · 500 ml", ar: "أصلي · 500 مل" } },
+            { scent: "original",  image: "savon-original-300.webp",  alt: "OMI Savon Liquide Mains Original 300 ml",
+              sub: { fr: "Original · 300 ml", ar: "أصلي · 300 مل" } },
             { scent: "lavande",   image: "savon-lavande.webp",   alt: "OMI Savon Liquide Mains Lavande",
               sub: { fr: "Parfum lavande · 300 ml", ar: "عطر الخزامة · 300 مل" } },
-            { scent: "camomille", image: "savon-camomille.webp", alt: "OMI Savon Liquide Mains Camomille",
-              sub: { fr: "Camomille · 300 & 500 ml", ar: "بابونج · 300 و 500 مل" } }
+            { scent: "camomille", image: "savon-camomille-500.webp", alt: "OMI Savon Liquide Mains Camomille 500 ml",
+              sub: { fr: "Camomille · 500 ml", ar: "بابونج · 500 مل" } },
+            { scent: "camomille", image: "savon-camomille-300.webp", alt: "OMI Savon Liquide Mains Camomille 300 ml",
+              sub: { fr: "Camomille · 300 ml", ar: "بابونج · 300 مل" } }
           ]
         },
         {
