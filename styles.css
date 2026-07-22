@@ -1,9 +1,9 @@
 /* General Sans — self-hosted from our own domain (Fontshare CDN is unreliable
    on some networks). ?v query busts any stale/failed font cache. */
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=105') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=105') format('woff2');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=105') format('woff2');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=105') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=106') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=106') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=106') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=106') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
 :root{
   --ink-900:#0B1B33; --ink-700:#2F415A; --ink-600:#3d4d63; --ink-500:#56677E;
