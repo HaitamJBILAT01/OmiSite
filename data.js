@@ -1,15 +1,16 @@
 /* ============================================================
    OMI — content data  (single source of truth)
    ------------------------------------------------------------
-   The homepage product range (Tous + 4 category tabs, one static
+   The homepage product range (Tous + 5 category tabs, one static
    card per variant) renders from this file at runtime by app.js.
    Nothing about the range is hardcoded in index.html.
 
-   The whole site is standardised on 4 merged categories:
+   The whole site is standardised on 5 categories:
      1. Sols, Surfaces & Vitres
-     2. Entretien du Linge      (Lessive + Eau de Javel)
-     3. Vaisselle & Cuisine
-     4. Hygiène & Soin Personnel (Savon mains + Papiers/Maxiplus)
+     2. Entretien du Linge      (Lessive)
+     3. Eau de Javel
+     4. Vaisselle & Cuisine
+     5. Hygiène & Soin Personnel (Savon mains + Papiers/Maxiplus)
 
    MODEL
    -----
@@ -104,7 +105,7 @@ window.OMI_DATA = {
       ]
     },
 
-    /* ========== 2 · ENTRETIEN DU LINGE (Lessive + Javel) ====== */
+    /* ========== 2 · ENTRETIEN DU LINGE (Lessive) ============== */
     {
       slug: "entretien-du-linge",
       name: { fr: "Entretien du Linge", ar: "العناية بالملابس" },
@@ -117,67 +118,74 @@ window.OMI_DATA = {
         { fr: "Parfums variés", ar: "عطور متنوعة" }
       ],
       accent: "gold",
-      groups: [
+      products: [
         {
-          name: { fr: "Lessive", ar: "مسحوق الغسيل" },
-          products: [
-            {
-              slug: "lessive-gel-matic",
-              name: { fr: "Lessive Gel Matic", ar: "جل غسيل ماتيك" },
-              variants: [
-                { image: "lessive-gel-matic.webp", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
-                  sub: { fr: "Power Gel · 2 en 1 · 3 Kg", ar: "جل قوي · 2 في 1 · 3 كغ" } }
-              ]
-            },
-            {
-              slug: "detergent-poudre",
-              name: { fr: "Détergent en Poudre", ar: "مسحوق الغسيل" },
-              variants: [
-                { image: "detergent-poudre.webp", alt: "Maxi Clean Détergent en Poudre 90 g",
-                  sub: { fr: "Maxi Clean · lavage main", ar: "ماكسي كلين · غسيل يدوي" } }
-              ]
-            }
+          slug: "lessive-gel-matic",
+          name: { fr: "Lessive Gel Matic", ar: "جل غسيل ماتيك" },
+          variants: [
+            { image: "lessive-gel-matic.webp", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
+              sub: { fr: "Power Gel · 2 en 1 · 3 Kg", ar: "جل قوي · 2 في 1 · 3 كغ" } }
           ]
         },
         {
-          name: { fr: "Eau de Javel", ar: "ماء جافيل" },
-          products: [
-            {
-              slug: "eau-de-javel",
-              name: { fr: "Eau de Javel", ar: "ماء جافيل" },
-              axes: {
-                scent: {
-                  label: { fr: "Parfum", ar: "العطر" },
-                  style: "swatch",
-                  values: [
-                    { key: "original", label: { fr: "Original", ar: "أصلي" },   swatch: "#eaf0f6" },
-                    { key: "lavande",  label: { fr: "Lavande",  ar: "الخزامة" }, swatch: "#8a6fd6" },
-                    { key: "citron",   label: { fr: "Citron",   ar: "الليمون" }, swatch: "#f2d024" }
-                  ]
-                },
-                size: {
-                  label: { fr: "Format", ar: "الحجم" },
-                  style: "pill",
-                  values: [
-                    { key: "1l", label: { fr: "1 L", ar: "1 لتر" } },
-                    { key: "4l", label: { fr: "4 L", ar: "4 لتر" } }
-                  ]
-                }
-              },
-              variants: [
-                { scent: "original", size: "4l", image: "javel-original-4l.webp", alt: "OMI Eau de Javel Original 4 L" },
-                { scent: "lavande",  size: "4l", image: "javel-lavande-4l.webp",  alt: "OMI Eau de Javel Lavande 4 L" },
-                { scent: "citron",   size: "4l", image: "javel-citron-4l.webp",   alt: "OMI Eau de Javel Citron 4 L" },
-                { scent: "original", size: "1l", image: "javel-original-1l.webp", alt: "OMI Eau de Javel Original 1 L" },
-                { scent: "lavande",  size: "1l", image: "toadd2.webp",            alt: "OMI Eau de Javel Lavande Blancheur & Protection 1 L" }
-              ]
-            }
+          slug: "detergent-poudre",
+          name: { fr: "Détergent en Poudre", ar: "مسحوق الغسيل" },
+          variants: [
+            { image: "detergent-poudre.webp", alt: "Maxi Clean Détergent en Poudre 90 g",
+              sub: { fr: "Maxi Clean · lavage main", ar: "ماكسي كلين · غسيل يدوي" } }
           ]
         }
       ]
     },
 
-    /* ========== 3 · VAISSELLE & CUISINE ======================= */
+    /* ========== 3 · EAU DE JAVEL ============================== */
+    {
+      slug: "javel",
+      name: { fr: "Eau de Javel", ar: "ماء جافيل" },
+      desc: { fr: "Désinfecte, blanchit et élimine les taches, pour une maison saine.",
+              ar: "تُطهّر وتُبيّض وتزيل البقع، من أجل منزل صحي ونظيف." },
+      benefits: [
+        { fr: "Désinfection en profondeur", ar: "تطهير عميق" },
+        { fr: "Blancheur éclatante", ar: "بياض ناصع" },
+        { fr: "Élimine germes & bactéries", ar: "يقضي على الجراثيم والبكتيريا" },
+        { fr: "Parfums variés", ar: "عطور متنوعة" }
+      ],
+      accent: "cyan",
+      products: [
+        {
+          slug: "eau-de-javel",
+          name: { fr: "Eau de Javel", ar: "ماء جافيل" },
+          axes: {
+            scent: {
+              label: { fr: "Parfum", ar: "العطر" },
+              style: "swatch",
+              values: [
+                { key: "original", label: { fr: "Original", ar: "أصلي" },   swatch: "#eaf0f6" },
+                { key: "lavande",  label: { fr: "Lavande",  ar: "الخزامة" }, swatch: "#8a6fd6" },
+                { key: "citron",   label: { fr: "Citron",   ar: "الليمون" }, swatch: "#f2d024" }
+              ]
+            },
+            size: {
+              label: { fr: "Format", ar: "الحجم" },
+              style: "pill",
+              values: [
+                { key: "1l", label: { fr: "1 L", ar: "1 لتر" } },
+                { key: "4l", label: { fr: "4 L", ar: "4 لتر" } }
+              ]
+            }
+          },
+          variants: [
+            { scent: "original", size: "4l", image: "javel-original-4l.webp", alt: "OMI Eau de Javel Original 4 L" },
+            { scent: "lavande",  size: "4l", image: "javel-lavande-4l.webp",  alt: "OMI Eau de Javel Lavande 4 L" },
+            { scent: "citron",   size: "4l", image: "javel-citron-4l.webp",   alt: "OMI Eau de Javel Citron 4 L" },
+            { scent: "original", size: "1l", image: "javel-original-1l.webp", alt: "OMI Eau de Javel Original 1 L" },
+            { scent: "lavande",  size: "1l", image: "toadd2.webp",            alt: "OMI Eau de Javel Lavande Blancheur & Protection 1 L" }
+          ]
+        }
+      ]
+    },
+
+    /* ========== 4 · VAISSELLE & CUISINE ======================= */
     {
       slug: "vaisselle-cuisine",
       name: { fr: "Vaisselle & Cuisine", ar: "الأواني والمطبخ" },
@@ -218,7 +226,7 @@ window.OMI_DATA = {
       ]
     },
 
-    /* ========== 4 · HYGIÈNE & SOIN PERSONNEL ================== */
+    /* ========== 5 · HYGIÈNE & SOIN PERSONNEL ================== */
     {
       slug: "hygiene-soin-personnel",
       name: { fr: "Hygiène & Soin Personnel", ar: "النظافة والعناية الشخصية" },

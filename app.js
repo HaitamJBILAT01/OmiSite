@@ -39,6 +39,13 @@ function renderRange() {
   const panelsEl = document.getElementById("panels");
   if (!tabsEl || !panelsEl) return;   // not on the homepage
 
+  // brand-section stat: live count of every product variant in the catalogue
+  const statEl = document.getElementById("statCount");
+  if (statEl) {
+    statEl.textContent = cats.reduce(
+      (n, c) => n + catProducts(c).reduce((m, p) => m + p.variants.length, 0), 0);
+  }
+
   /* Maxiplus is a brand that lives inside a category (Hygiène), so it gets its
      own virtual tab after the categories' indices: 0 = Tous, 1..n = categories,
      n+1 = Maxiplus. Its panel holds only the products flagged brand:"maxiplus";
