@@ -1,9 +1,9 @@
 /* General Sans — self-hosted from our own domain (Fontshare CDN is unreliable
    on some networks). ?v query busts any stale/failed font cache. */
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=110') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=110') format('woff2');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=110') format('woff2');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=110') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=111') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=111') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=111') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=111') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
 :root{
   --ink-900:#0B1B33; --ink-700:#2F415A; --ink-600:#3d4d63; --ink-500:#56677E;
@@ -44,6 +44,7 @@ a:hover{color:var(--omi-cyan-deep)}
 .nav-links a{color:var(--ink-600);transition:color var(--dur-fast) var(--ease-out)}
 .nav-links a:hover{color:var(--ink-900)}
 .nav-m{display:none}                 /* rich drawer extras: mobile-only */
+.nav-m-sub,.nav-m-caret{display:none}/* accordion parts: mobile-only */
 html.nav-locked{overflow:hidden}     /* freeze the page while the drawer is open */
 @keyframes navItemIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .nav-right{justify-self:end;display:flex;align-items:center;gap:10px}
@@ -700,16 +701,21 @@ html.nav-locked{overflow:hidden}     /* freeze the page while the drawer is open
     padding:15px clamp(26px,7vw,36px);font-size:19px;font-weight:500;letter-spacing:-.01em;
     color:var(--ink-900)}
   .nav-links > a:active{background:var(--ink-50)}
-  /* mobile-only rich block: category list + contact/social */
-  .nav-m{display:flex;flex-direction:column;padding:clamp(18px,5vw,24px) clamp(26px,7vw,36px) 0}
-  .nav-m-label{font-family:var(--font-display);font-weight:500;font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--ink-400);margin-bottom:8px}
-  [dir="rtl"] .nav-m-label{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:14px}
-  .nav-m-cats{display:flex;flex-direction:column}
-  .nav-m-cat{display:flex;align-items:center;min-height:50px;
-    font-family:var(--font-display);font-weight:500;font-size:17px;letter-spacing:-.01em;color:var(--ink-700)}
-  [dir="rtl"] .nav-m-cat{font-family:var(--font);font-size:18px}
+  /* "Produits" = tap-to-expand accordion: text left, rotating caret right */
+  .nav-links > a.nav-m-parent{justify-content:space-between}
+  .nav-m-caret{display:block;flex:none;width:20px;height:20px;color:var(--ink-400);
+    transition:transform var(--dur-base) var(--ease-out)}
+  .nav-links > a.nav-m-parent.open .nav-m-caret{transform:rotate(180deg)}
+  .nav-m-sub{display:block;overflow:hidden;max-height:0;opacity:0;background:var(--ink-50);
+    transition:max-height .32s var(--ease-out),opacity .26s var(--ease-out)}
+  .nav-m-sub.open{max-height:600px;opacity:1}
+  .nav-m-cat{display:flex;align-items:center;min-height:48px;
+    padding:0 clamp(26px,7vw,36px) 0 clamp(42px,11vw,54px);
+    font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:-.01em;color:var(--ink-600)}
+  [dir="rtl"] .nav-m-cat{font-family:var(--font);font-size:17px}
   .nav-m-cat:active{color:var(--ink-900)}
+  /* mobile-only footer block: contact/social */
+  .nav-m{display:flex;flex-direction:column;padding:0 clamp(26px,7vw,36px)}
   .nav-m-foot{margin-top:clamp(22px,6vw,28px);padding-top:clamp(18px,5vw,22px);
     border-top:1px solid var(--ink-100);display:flex;flex-direction:column;gap:16px}
   .nav-m-contact{display:flex;flex-direction:column;gap:12px}
