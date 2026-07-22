@@ -1,9 +1,9 @@
 /* General Sans — self-hosted from our own domain (Fontshare CDN is unreliable
    on some networks). ?v query busts any stale/failed font cache. */
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=108') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=108') format('woff2');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=108') format('woff2');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=108') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=109') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=109') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=109') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=109') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
 :root{
   --ink-900:#0B1B33; --ink-700:#2F415A; --ink-600:#3d4d63; --ink-500:#56677E;
@@ -708,14 +708,14 @@ html.nav-locked{overflow:hidden}     /* freeze the page while the drawer is open
     text-transform:uppercase;color:var(--ink-400);margin-bottom:6px}
   [dir="rtl"] .nav-m-label{font-family:var(--font);letter-spacing:0;text-transform:none;font-size:14px}
   .nav-m-cats{display:flex;flex-direction:column}
-  .nav-m-cat{display:flex;align-items:center;gap:11px;min-height:46px;
-    font-family:var(--font-display);font-weight:500;font-size:15px;color:var(--ink-600)}
-  [dir="rtl"] .nav-m-cat{font-family:var(--font);font-size:16px}
+  .nav-m-cat{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;
+    font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:-.01em;color:var(--ink-700);
+    border-bottom:1px solid var(--ink-100)}
+  .nav-m-cat:last-child{border-bottom:0}
+  .nav-m-cat::after{content:"›";color:var(--ink-300);font-size:18px;font-weight:400}
+  [dir="rtl"] .nav-m-cat{font-family:var(--font);font-size:17px}
+  [dir="rtl"] .nav-m-cat::after{content:"‹"}
   .nav-m-cat:active{color:var(--ink-900)}
-  .nav-m-dot{width:9px;height:9px;border-radius:50%;flex:none}
-  .nav-m-dot-blue{background:#1E5BE6}.nav-m-dot-gold{background:#C98A00}
-  .nav-m-dot-green{background:#12A24E}.nav-m-dot-lavender{background:#7A57C7}
-  .nav-m-dot-cyan{background:#0F9BD1}
   .nav-m-foot{margin-top:clamp(22px,6vw,28px);padding-top:clamp(18px,5vw,22px);
     border-top:1px solid var(--ink-100);display:flex;flex-direction:column;gap:16px}
   .nav-m-contact{display:flex;flex-direction:column;gap:12px}

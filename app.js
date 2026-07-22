@@ -263,7 +263,7 @@ function buildMobileMenu() {
   if (!menu || !data || menu.querySelector(".nav-m")) return;
 
   const catLinks = (data.categories || []).map(c =>
-    `<a class="nav-m-cat" href="categorie.html?cat=${c.slug}"><span class="nav-m-dot nav-m-dot-${c.accent}"></span>${bi(c.name)}</a>`
+    `<a class="nav-m-cat" href="categorie.html?cat=${c.slug}">${bi(c.name)}</a>`
   ).join("");
 
   const icPhone = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>';
