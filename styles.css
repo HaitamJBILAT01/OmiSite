@@ -1,9 +1,9 @@
 /* General Sans — self-hosted from our own domain (Fontshare CDN is unreliable
    on some networks). ?v query busts any stale/failed font cache. */
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=113') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=113') format('woff2');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=113') format('woff2');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=113') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=114') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=114') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=114') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=114') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
 :root{
   --ink-900:#0B1B33; --ink-700:#2F415A; --ink-600:#3d4d63; --ink-500:#56677E;
@@ -455,7 +455,7 @@ html.nav-locked{overflow:hidden}     /* freeze the page while the drawer is open
 #allGrid.show-all .pcard{display:flex}
 .range-foot{display:flex;justify-content:center;margin-top:clamp(52px,6.5vw,84px)}
 /* view-more: quiet pill, chevron flips + label swaps when expanded */
-.btn-view-more{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--ink-200);
+.btn-view-more{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--ink-300);
   color:var(--ink-900);border-radius:9999px;padding:13px 24px 13px 28px;font-family:var(--font-display);
   font-weight:500;font-size:14.5px;letter-spacing:-.005em;cursor:pointer;
   transition:border-color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out)}
@@ -579,9 +579,9 @@ html.nav-locked{overflow:hidden}     /* freeze the page while the drawer is open
     letter-spacing:-.02em;max-width:20ch;margin:0 auto}
   .mx-copy p{color:var(--ink-500);font-size:clamp(14px,3.9vw,15.5px);line-height:1.62;
     max-width:32ch;margin:12px auto 0}
-  /* same outline CTA as desktop — full-contrast dark border, not washed out */
-  .mx-btn{margin-top:clamp(20px,5vw,26px);padding:13px 32px;font-size:14px;
-    background:transparent;border:1.5px solid var(--ink-900);color:var(--ink-900)}
+  /* match the "Voir plus de produits" button: soft border, navy text */
+  .mx-btn{margin-top:clamp(20px,5vw,26px);padding:13px 32px;font-size:14.5px;
+    background:transparent;border:1.5px solid var(--ink-300);color:var(--ink-900)}
   .mx-btn:hover{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
 }
 
