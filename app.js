@@ -237,6 +237,7 @@ function setMenu(open) {
   const h = document.querySelector(".site-header");
   if (!h) return;
   h.classList.toggle("menu-open", open);
+  document.documentElement.classList.toggle("nav-locked", open); // freeze page scroll
   const btn = document.getElementById("navToggle");
   if (btn) btn.setAttribute("aria-expanded", open);
 }
@@ -246,10 +247,46 @@ function toggleMenu(e) {
   setMenu(!h.classList.contains("menu-open"));
 }
 
+/* ---------- rich mobile drawer: built once from the catalogue ----------
+   Adds a "Nos produits" category list + contact/social footer to the menu.
+   These extras are display:none on desktop, so the top-bar nav is untouched. */
+function buildMobileMenu() {
+  const menu = document.getElementById("nav-links");
+  const data = window.OMI_DATA;
+  if (!menu || !data || menu.querySelector(".nav-m")) return;
+
+  const catLinks = (data.categories || []).map(c =>
+    `<a class="nav-m-cat" href="categorie.html?cat=${c.slug}"><span class="nav-m-dot nav-m-dot-${c.accent}"></span>${bi(c.name)}</a>`
+  ).join("");
+
+  const icPhone = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>';
+  const icMail = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+  const icFb = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>';
+  const icIg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>';
+
+  const m = document.createElement("div");
+  m.className = "nav-m";
+  m.innerHTML =
+    `<span class="nav-m-label">${bi({ fr: "Nos produits", ar: "منتجاتنا" })}</span>
+     <div class="nav-m-cats">${catLinks}</div>
+     <div class="nav-m-foot">
+       <div class="nav-m-contact">
+         <a href="tel:+22222511111" dir="ltr">${icPhone}<span>+222 22 51 11 11</span></a>
+         <a href="mailto:commercial@omi.mr" dir="ltr">${icMail}<span>commercial@omi.mr</span></a>
+       </div>
+       <div class="nav-m-social">
+         <a href="https://web.facebook.com/profile.php?id=61557716205802&amp;mibextid=LQQJ4d&amp;_rdc=1&amp;_rdr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">${icFb}</a>
+         <a href="https://www.instagram.com/omiibdaemr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">${icIg}</a>
+       </div>
+     </div>`;
+  menu.appendChild(m);
+}
+
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderRange();
   initTrustCarousel();
+  buildMobileMenu();
 
   // close language + mobile menu on outside click / Escape
   document.addEventListener("click", (e) => {
@@ -266,6 +303,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // close the mobile menu after tapping a link
   document.querySelectorAll(".nav-links a").forEach((a) =>
     a.addEventListener("click", () => setMenu(false)));
+
+  // if the viewport grows to desktop while the drawer is open, close it
+  // (otherwise the scroll-lock would linger on the desktop layout)
+  const deskMq = window.matchMedia("(min-width:1025px)");
+  deskMq.addEventListener("change", (e) => { if (e.matches) setMenu(false); });
 
   // hide-on-scroll header
   const header = document.querySelector(".site-header");

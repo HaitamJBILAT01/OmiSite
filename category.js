@@ -20,20 +20,27 @@
   const maxiLogo = (cats.find(c => c.brandLogo) || {}).brandLogo;
   const maxiProducts = cats.flatMap(c => catProducts(c).filter(p => p.brand === "maxiplus"));
 
-  const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12.2 2.5 2.5 4.7-5.2"/></svg>';
+  /* one shared hero banner for every category — loaded once, never swapped,
+     so switching category is instant (no image reload) */
+  const BANNER = "bannerCAT.png";
+
+  /* line-art feature icons (Dettol-style), cycled across the benefits */
+  const ICONS = [
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><path d="M18.6 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s6 6.3 6 10.5a6 6 0 0 1-12 0c0-4.2 6-10.5 6-10.5z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.3-3 7.4-7 8.5-4-1.1-7-4.2-7-8.5V6z"/><path d="m9 12 2 2 4.2-4.4"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c0 8-4.4 14-11 14a6 6 0 0 1-5-9.2C7 4 14 4 20 4z"/><path d="M5 19c3.4-4 7-7 12-9"/></svg>'
+  ];
 
   /* selectable entries: the real categories, then Maxiplus as a virtual one */
   /* tab order: Maxi Plus · then the real categories */
   const entries = [];
   if (maxiLogo && maxiProducts.length) {
-    // Maxiplus lives inside a category, so it borrows that category's banner
-    const host = cats.find(c => catProducts(c).some(p => p.brand === "maxiplus")) || {};
     entries.push({
       slug: "maxiplus",
       name: { fr: "Maxi Plus", ar: "ماكسي بلس" },
       desc: { fr: "Papiers et mouchoirs doux, pensés pour toute la famille.",
               ar: "ورق ومناديل ناعمة، مصمّمة لكل أفراد العائلة." },
-      hero: host.hero,
       logo: maxiLogo,
       benefits: [
         { fr: "Ultra absorbant", ar: "امتصاص فائق" },
@@ -45,7 +52,7 @@
     });
   }
   cats.forEach(c => entries.push({
-    slug: c.slug, name: c.name, desc: c.desc, hero: c.hero, benefits: c.benefits,
+    slug: c.slug, name: c.name, desc: c.desc, benefits: c.benefits,
     products: catProducts(c)
   }));
 
@@ -58,6 +65,9 @@
   const beneWrap = document.querySelector(".cat-benefits");
   const beneEl   = document.getElementById("catBenefits");
 
+  // one banner, set a single time — category switches never touch it
+  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}")`;
+
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {
     const q = new URLSearchParams(location.search).get("cat");
@@ -69,10 +79,6 @@
 
     titleEl.innerHTML = bi(e.name);
     descEl.innerHTML = e.desc ? bi(e.desc) : "";
-    // per-category banner from data.js — encodeURI because the filenames
-    // contain spaces, accents and "&"
-    mediaEl.style.backgroundImage =
-      `url("${encodeURI("assets/" + (e.hero || "hero-products.png"))}")`;
 
     const cards = e.products.flatMap(p => p.variants.map(v => cardHTML(p, v)));
     grid.innerHTML = cards.join("");
@@ -91,8 +97,8 @@
     if (beneWrap && beneEl) {
       const list = e.benefits || [];
       beneWrap.hidden = list.length === 0;
-      beneEl.innerHTML = list.map(b =>
-        `<div class="cat-benefit"><span class="cat-benefit-ic">${CHECK}</span><span class="cat-benefit-lbl">${bi(b)}</span></div>`
+      beneEl.innerHTML = list.map((b, i) =>
+        `<div class="cat-benefit"><span class="cat-benefit-ic">${ICONS[i % ICONS.length]}</span><span class="cat-benefit-lbl">${bi(b)}</span></div>`
       ).join("");
     }
 
@@ -109,8 +115,35 @@
     return `<button class="tab${e.logo ? " tab-logo" : ""}" role="tab" data-cat="${e.slug}"${label}>${inner}</button>`;
   }).join("");
 
+  const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const heroWrap = titleEl.closest(".wrap");   // the title/desc wrap, not the breadcrumb
+
+  /* switching a tab crossfades only the hero copy (the banner is shared, so it
+     never changes) while the grid + benefits re-render with their own stagger */
+  function selectTab(slug) {
+    if (REDUCE) { render(slug, true); return; }
+    if (heroWrap) heroWrap.classList.add("cat-out");
+    setTimeout(() => {
+      render(slug, true);
+      if (heroWrap) heroWrap.classList.remove("cat-out");
+    }, 150);
+  }
+
   switchEl.querySelectorAll(".tab").forEach(t =>
-    t.addEventListener("click", () => render(t.dataset.cat, true)));
+    t.addEventListener("click", () => selectTab(t.dataset.cat)));
 
   render(slugFromUrl(), false);
+
+  /* reveal below-the-fold sections as they scroll into view */
+  const reveals = document.querySelectorAll(".reveal");
+  if (!REDUCE && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.14 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add("in"));
+  }
 })();

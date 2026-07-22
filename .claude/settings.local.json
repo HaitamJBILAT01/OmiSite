@@ -35,7 +35,10 @@
       "Bash(sed -i 's/?v=70/?v=71/g' index.html categorie.html)",
       "Bash(sed -i 's/?v=71/?v=72/g' index.html categorie.html)",
       "Bash(sed -i 's/?v=73/?v=74/g' index.html categorie.html)",
-      "Bash(sed -i 's/?v=79/?v=80/g' index.html categorie.html)"
+      "Bash(sed -i 's/?v=79/?v=80/g' index.html categorie.html)",
+      "Bash(curl -s -o /dev/null -w \"home: HTTP %{http_code}\\\\n\" \"http://localhost:8777/\")",
+      "Bash(awk '{print $5, $NF}')",
+      "Bash(sed -i 's/?v=84/?v=85/g' index.html categorie.html)"
     ]
   }
 }

@@ -50,7 +50,6 @@ window.OMI_DATA = {
       name: { fr: "Sols, Surfaces & Vitres", ar: "الأرضيات والأسطح والزجاج" },
       desc: { fr: "Des sols, plans de travail et vitres impeccables, sans traces.",
               ar: "أرضيات وأسطح وزجاج نظيفة تمامًا، بدون آثار." },
-      hero: "banner-Sols, Surfaces & Vitres.png",
       benefits: [
         { fr: "Sans traces ni résidus", ar: "بدون آثار أو بقايا" },
         { fr: "Séchage rapide", ar: "جفاف سريع" },
@@ -85,13 +84,13 @@ window.OMI_DATA = {
             }
           },
           variants: [
-            { scent: "roses",     size: "1.5l", image: "surface-roses-1500.png",    alt: "OMI Nettoyant Surfaces Roses 1,5 L" },
             { scent: "roses",     size: "5l",   image: "surface-roses-5000.png",    alt: "OMI Nettoyant Surfaces Roses 5 L" },
-            { scent: "citron",    size: "1.5l", image: "surface-citron-1500.png",   alt: "OMI Nettoyant Surfaces Citron 1,5 L" },
-            { scent: "lavande",   size: "1l",   image: "surface-lavande-1000.png",  alt: "OMI Nettoyant Surfaces Lavande 1 L" },
             { scent: "lavande",   size: "5l",   image: "surface-lavande-5000.png",  alt: "OMI Nettoyant Surfaces Lavande 5 L" },
+            { scent: "fraicheur", size: "5l",   image: "surface-fraicheur-5000.png", alt: "OMI Nettoyant Surfaces Fraîcheur 5 L" },
+            { scent: "roses",     size: "1.5l", image: "surface-roses-1500.png",    alt: "OMI Nettoyant Surfaces Roses 1,5 L" },
+            { scent: "citron",    size: "1.5l", image: "surface-citron-1500.png",   alt: "OMI Nettoyant Surfaces Citron 1,5 L" },
             { scent: "original",  size: "1.5l", image: "surface-original-1500.png", alt: "OMI Nettoyant Surfaces Original 1,5 L" },
-            { scent: "fraicheur", size: "5l",   image: "surface-fraicheur-5000.png", alt: "OMI Nettoyant Surfaces Fraîcheur 5 L" }
+            { scent: "lavande",   size: "1l",   image: "surface-lavande-1000.png",  alt: "OMI Nettoyant Surfaces Lavande 1 L" }
           ]
         },
         {
@@ -111,7 +110,6 @@ window.OMI_DATA = {
       name: { fr: "Entretien du Linge", ar: "العناية بالملابس" },
       desc: { fr: "Un linge éclatant et une fraîcheur qui dure, lavage après lavage.",
               ar: "غسيل ناصع ونضارة تدوم، غسلة بعد غسلة." },
-      hero: "banner-Entretien du Linge.png",
       benefits: [
         { fr: "Action anti-taches puissante", ar: "فعالية قوية ضد البقع" },
         { fr: "Fraîcheur qui dure", ar: "نضارة تدوم" },
@@ -168,9 +166,10 @@ window.OMI_DATA = {
               },
               variants: [
                 { scent: "original", size: "4l", image: "javel-original-4l.png", alt: "OMI Eau de Javel Original 4 L" },
-                { scent: "original", size: "1l", image: "javel-original-1l.png", alt: "OMI Eau de Javel Original 1 L" },
                 { scent: "lavande",  size: "4l", image: "javel-lavande-4l.png",  alt: "OMI Eau de Javel Lavande 4 L" },
-                { scent: "citron",   size: "4l", image: "javel-citron-4l.png",   alt: "OMI Eau de Javel Citron 4 L" }
+                { scent: "citron",   size: "4l", image: "javel-citron-4l.png",   alt: "OMI Eau de Javel Citron 4 L" },
+                { scent: "original", size: "1l", image: "javel-original-1l.png", alt: "OMI Eau de Javel Original 1 L" },
+                { scent: "lavande",  size: "1l", image: "toadd2.png",            alt: "OMI Eau de Javel Lavande Blancheur & Protection 1 L" }
               ]
             }
           ]
@@ -184,7 +183,6 @@ window.OMI_DATA = {
       name: { fr: "Vaisselle & Cuisine", ar: "الأواني والمطبخ" },
       desc: { fr: "Une vaisselle dégraissée et brillante, sans le moindre effort.",
               ar: "أوانٍ نظيفة ولامعة، دون أي مجهود." },
-      hero: "banner-Vaisselle & Cuisine.png",
       benefits: [
         { fr: "Dégraissage express", ar: "إزالة سريعة للدهون" },
         { fr: "Brillance sans traces", ar: "لمعان بدون آثار" },
@@ -197,6 +195,14 @@ window.OMI_DATA = {
           slug: "liquide-vaisselle",
           name: { fr: "Liquide Vaisselle", ar: "سائل الأواني" },
           variants: [
+            { image: "toadd3.png", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 800 ml",
+              sub: { fr: "Lavande · 800 ml", ar: "الخزامة · 800 مل" } },
+            { image: "toadd6.png", alt: "OMI Liquide Vaisselle Super Dégraissant Original 750 ml",
+              sub: { fr: "Original · 750 ml", ar: "أصلي · 750 مل" } },
+            { image: "toadd5.png", alt: "OMI Liquide Vaisselle Super Dégraissant Citron 750 ml",
+              sub: { fr: "Citron · 750 ml", ar: "ليمون · 750 مل" } },
+            { image: "toadd4.png", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 750 ml",
+              sub: { fr: "Lavande · 750 ml", ar: "الخزامة · 750 مل" } },
             { image: "vaisselle-liquide-citron.png", alt: "OMI Liquide Vaisselle Multi-Usages 3x1 Citron",
               sub: { fr: "Multi-usages 3×1 · Citron", ar: "متعدد الاستعمالات 3×1 · ليمون" } }
           ]
@@ -218,7 +224,6 @@ window.OMI_DATA = {
       name: { fr: "Hygiène & Soin Personnel", ar: "النظافة والعناية الشخصية" },
       desc: { fr: "Savons et papiers doux pour toute la famille, au quotidien.",
               ar: "صابون وورق ناعم لكل أفراد العائلة، كل يوم." },
-      hero: "banner-Hygiène & Soin Personnel.png",
       benefits: [
         { fr: "Douceur au quotidien", ar: "نعومة يومية" },
         { fr: "Hydratation et fraîcheur", ar: "ترطيب وانتعاش" },
@@ -291,6 +296,24 @@ window.OMI_DATA = {
           variants: [
             { type: "pack", image: "maxi-mouchoirs-pack.png", alt: "Maxi Plus Mouchoirs Classic Pack ×6" },
             { type: "box",  image: "maxi-mouchoirs-box.png",  alt: "Maxi Plus Mouchoirs Classic Boîte 2 plis" }
+          ]
+        },
+        {
+          slug: "serviettes-table",
+          name: { fr: "Serviettes de Table", ar: "مناديل المائدة" },
+          brand: "maxiplus",
+          variants: [
+            { image: "toadd1.png", alt: "Maxi Plus Serviettes de Table Original 80",
+              sub: { fr: "Original · 80 serviettes", ar: "أصلي · 80 منديلاً" } }
+          ]
+        },
+        {
+          slug: "papier-hygienique",
+          name: { fr: "Papier Hygiénique", ar: "ورق تواليت" },
+          brand: "maxiplus",
+          variants: [
+            { image: "toadd7.png", alt: "Maxi Plus Papier Hygiénique Confort 12 Rouleaux",
+              sub: { fr: "Confort · 12 rouleaux", ar: "كومفور · 12 لفة" } }
           ]
         }
       ]
