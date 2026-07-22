@@ -289,12 +289,14 @@ function buildMobileMenu() {
     sub.innerHTML = catLinks;
     produits.insertAdjacentElement("afterend", sub);
     produits.setAttribute("aria-expanded", "false");
+    const car = produits.querySelector(".nav-m-caret");
     produits.addEventListener("click", (e) => {
       if (!window.matchMedia("(max-width:1024px)").matches) return; // desktop: normal link
       e.preventDefault();
       const open = !produits.classList.contains("open");
       produits.classList.toggle("open", open);
       sub.classList.toggle("open", open);
+      if (car) car.style.transform = open ? "rotate(180deg)" : "";
       produits.setAttribute("aria-expanded", String(open));
     });
   }
