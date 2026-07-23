@@ -169,5 +169,99 @@
     }
   }
 
+  /* ---------- Dettol-style sections (features / how-to / callout /
+     safety / did-you-know / related), all data-driven ---------- */
+  const CONTENT = (window.OMI_DATA.categoryContent || {})[category.slug] || {};
+  const G = window.OMI_DATA;
+
+  function iconSlot(icon) {
+    // placeholder showing the flaticon search keyword until a real SVG is added
+    return `<span class="psec-ic" data-icon="${icon}" aria-hidden="true"></span>`;
+  }
+  function photoBox(file, hint) {
+    if (file) return `<img src="assets/${file}" alt="" loading="lazy" decoding="async">`;
+    return `<div class="psec-ph" role="img" aria-label="Photo à ajouter">
+      <svg viewBox="0 0 48 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="42" height="30" rx="4"/><circle cx="15" cy="16" r="4"/><path d="M7 33l13-12 9 8 5-4 7 7"/></svg>
+      <span class="psec-ph-t">${hint}</span></div>`;
+  }
+  function fill(id, inner) {
+    const el = document.getElementById(id);
+    if (el) { el.innerHTML = inner; el.hidden = false; }
+  }
+
+  function renderExtraSections() {
+    const v = currentVariant() || product.variants[0];
+
+    if (CONTENT.features && CONTENT.features.length) {
+      fill("pFeatures", `<div class="wrap">
+        <h2 class="psec-head">${bi({ fr: "Caractéristiques", ar: "المميزات" })}</h2>
+        <div class="pfeat-grid">${CONTENT.features.map(f =>
+          `<div class="pfeat">${iconSlot(f.icon)}<span class="pfeat-lbl">${bi(f.label)}</span></div>`
+        ).join("")}</div></div>`);
+    }
+
+    if (CONTENT.howto && CONTENT.howto.length) {
+      fill("pHow", `<div class="wrap">
+        <h2 class="psec-head">${bi({ fr: "Comment l'utiliser", ar: "طريقة الاستعمال" })}</h2>
+        <ol class="phow-list">${CONTENT.howto.map((s, i) =>
+          `<li class="phow-step"><span class="phow-n">${i + 1}</span><span class="phow-t">${bi(s)}</span></li>`
+        ).join("")}</ol></div>`);
+    }
+
+    if (CONTENT.callout) {
+      const c = CONTENT.callout;
+      const shot = v ? `<img src="assets/${product.photo || v.image}" alt="${(v && v.alt) || product.name.fr}" loading="lazy" decoding="async">` : "";
+      fill("pCallout", `<div class="wrap"><div class="pcallout-grid">
+        <div class="pcallout-media">${photoBox(c.photo, bi({ fr: "Photo d'ambiance", ar: "صورة أجواء" }))}</div>
+        <div class="pcallout-body">
+          <span class="pcallout-tag">${bi(category.name)}</span>
+          <h2>${bi(c.title)}</h2>
+          <p>${bi(c.text)}</p>
+          <div class="pcallout-shot">${shot}</div>
+        </div></div></div>`);
+    }
+
+    if (G.safety && G.safety.tips && G.safety.tips.length) {
+      const s = G.safety;
+      fill("pSafety", `<div class="wrap">
+        <h2 class="psec-head">${bi({ fr: "Précautions d'emploi", ar: "إرشادات السلامة" })}</h2>
+        <div class="psafe-grid">
+          <div class="psafe-media">${photoBox(s.photo, bi({ fr: "Photo sécurité", ar: "صورة السلامة" }))}</div>
+          <ul class="psafe-list">${s.tips.map(t =>
+            `<li class="psafe-item">${iconSlot(t.icon)}<span>${bi(t.label)}</span></li>`
+          ).join("")}</ul>
+        </div></div>`);
+    }
+
+    if (G.didYouKnow) {
+      const d = G.didYouKnow;
+      const bg = d.photo ? ` style="background-image:url('assets/${d.photo}')"` : "";
+      fill("pDyk", `<div class="wrap"><div class="pdyk-inner${d.photo ? " has-photo" : ""}"${bg}>
+        ${d.photo ? "" : photoBox("", bi({ fr: "Photo de fond", ar: "صورة الخلفية" }))}
+        <div class="pdyk-card">
+          <span class="pdyk-eyebrow">${bi(d.title)}</span>
+          <p>${bi(d.text)}</p>
+        </div></div></div>`);
+    }
+
+    // related = other products in this category, topped up from other categories
+    const rel = catProducts(category).filter(p => p.slug !== product.slug);
+    if (rel.length < 3) {
+      for (const c of window.OMI_DATA.categories) {
+        if (c.slug === category.slug) continue;
+        for (const p of catProducts(c)) { if (rel.length >= 4) break; rel.push(p); }
+        if (rel.length >= 4) break;
+      }
+    }
+    if (rel.length) {
+      fill("pRelated", `<div class="wrap">
+        <h2 class="psec-head">${bi({ fr: "Produits similaires", ar: "منتجات مشابهة" })}</h2>
+        <div class="prelated-grid">${rel.slice(0, 4).map(p => cardHTML(p, p.variants[0])).join("")}</div></div>`);
+    }
+
+    if (window.revealScan) window.revealScan();   // animate the new sections in
+  }
+
   render(false);
+  renderExtraSections();
 })();

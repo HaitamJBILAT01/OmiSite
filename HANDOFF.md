@@ -74,6 +74,11 @@ Layout mirrors Dettol: 2-col grid — **left** = breadcrumb, H1, short desc, pil
 - **Incomplete combinations are normal** (Citron only exists in 1,5 L). Unreachable values are dimmed (`.pdp-opt.off`) but stay clickable — clicking one snaps the *other* axes to the nearest real variant, so you can never dead-end. Verified: 44 combinations, 0 dead ends, 34/34 variants reachable.
 - **Photo = the selected variant's own `image`**, so it swaps as you pick. A product may set `photo: "file.webp"` to pin ONE image for all its variants instead. `.pdp-photo` has a fixed `aspect-ratio` and the img uses `max-*` + auto sizing (same pattern as `.pcard .ph img`), so photos of differing intrinsic sizes are never distorted and cause **no layout shift** — that's why the `<img>` needs no width/height here.
 - Product cards everywhere are now `<a class="pcard">` → `produit.html?p=…` with the clicked variant's axis values in the query string, so the card you tapped arrives pre-selected (`productHref()` in app.js).
+- **Dettol-style sections below the PDP hero** (all data-driven, `renderExtraSections()` in product.js, each `<section class="psec" hidden>` unhides only if it has data): **Features · How to use · Callout · Safety · Did you know · Related products**. Minimalist (white / faint `--ink-50`, no colour bands).
+  - **features / howto / callout are PER CATEGORY** in `window.OMI_DATA.categoryContent[<slug>]` (appended at the bottom of data.js). **safety / didYouKnow are GLOBAL** (`OMI_DATA.safety`, `OMI_DATA.didYouKnow`).
+  - **Icons are placeholders:** `icon:"keyword"` renders a dashed circle showing the flaticon search term (`.psec-ic::after{content:attr(data-icon)}`). To use real icons, drop the SVG and swap that span. **Photos are placeholders too:** any `photo:""` → a dashed placeholder box; set a filename in `./assets/` to use a real image.
+  - **Related** = other products in the same category, topped up from other categories (max 4), reusing `cardHTML`.
+  - These render after load, so product.js calls `window.revealScan()` (exposed by app.js) to animate them in.
 
 ## data.js catalog (current: **34 variants**, 6 categories)
 1. sols-surfaces-vitres (accent blue, **8**)

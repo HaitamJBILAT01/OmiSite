@@ -361,3 +361,154 @@ window.OMI_DATA = {
 
   ]
 };
+
+/* ============================================================
+   PRODUCT-PAGE content (produit.html) — the Dettol-style sections.
+   - features / howto / callout  = PER CATEGORY (every product in a
+     category shares them), keyed by category slug below.
+   - safety / didYouKnow          = GLOBAL (same across the whole site).
+   `icon:"keyword"` is a PLACEHOLDER — the term to search on flaticon.
+   Until a real SVG is added it renders as a small labelled placeholder.
+   Any `*photo:""` renders a labelled placeholder box; set a filename in
+   ./assets/ to use a real image.  TO EDIT: change this block.
+   ============================================================ */
+window.OMI_DATA.categoryContent = {
+
+  "sols-surfaces-vitres": {
+    features: [
+      { icon: "sparkle-clean", label: { fr: "Sans traces",         ar: "بدون آثار" } },
+      { icon: "fast-dry",      label: { fr: "Séchage rapide",       ar: "جفاف سريع" } },
+      { icon: "air-freshener", label: { fr: "Parfum longue durée",  ar: "عطر يدوم طويلاً" } },
+      { icon: "surfaces",      label: { fr: "Toutes surfaces",      ar: "لكل الأسطح" } }
+    ],
+    howto: [
+      { fr: "Diluer un bouchon dans l'eau, ou vaporiser directement.", ar: "خفّف غطاءً في الماء، أو رشّ مباشرة." },
+      { fr: "Appliquer sur la surface à nettoyer.", ar: "طبّق على السطح المراد تنظيفه." },
+      { fr: "Essuyer avec un chiffon propre.", ar: "امسح بقطعة قماش نظيفة." },
+      { fr: "Laisser sécher — aucun rinçage nécessaire.", ar: "اترك حتى يجف — دون حاجة للشطف." }
+    ],
+    callout: {
+      title: { fr: "Une maison éclatante, sans effort.", ar: "منزل مشرق، دون عناء." },
+      text:  { fr: "Sols, plans de travail et vitres retrouvent leur brillance, sans traces ni résidus.", ar: "الأرضيات والأسطح والزجاج تستعيد لمعانها، بدون آثار أو بقايا." },
+      photo: ""
+    }
+  },
+
+  "entretien-du-linge": {
+    features: [
+      { icon: "stain-removal", label: { fr: "Anti-taches",       ar: "مزيل للبقع" } },
+      { icon: "freshness",     label: { fr: "Fraîcheur durable", ar: "نضارة تدوم" } },
+      { icon: "fabric-care",   label: { fr: "Doux pour les fibres", ar: "لطيف على الأنسجة" } },
+      { icon: "scent",         label: { fr: "Parfums variés",    ar: "عطور متنوعة" } }
+    ],
+    howto: [
+      { fr: "Doser selon la charge de linge.", ar: "حدّد الكمية حسب حجم الغسيل." },
+      { fr: "Verser dans le tambour ou le bac.", ar: "صبّ في الحلة أو الدرج." },
+      { fr: "Laver au programme habituel.", ar: "اغسل بالبرنامج المعتاد." },
+      { fr: "Profiter d'un linge propre et parfumé.", ar: "استمتع بغسيل نظيف ومعطّر." }
+    ],
+    callout: {
+      title: { fr: "Un linge éclatant, lavage après lavage.", ar: "غسيل ناصع، مرة بعد مرة." },
+      text:  { fr: "Une action anti-taches puissante et une fraîcheur qui dure, tout en respectant les fibres.", ar: "فعالية قوية ضد البقع ونضارة تدوم، مع الحفاظ على الأنسجة." },
+      photo: ""
+    }
+  },
+
+  "javel": {
+    features: [
+      { icon: "disinfect", label: { fr: "Désinfecte",   ar: "تُطهّر" } },
+      { icon: "whitening", label: { fr: "Blancheur",    ar: "بياض ناصع" } },
+      { icon: "germs",     label: { fr: "Anti-germes",  ar: "مضاد للجراثيم" } },
+      { icon: "scent",     label: { fr: "Parfums variés", ar: "عطور متنوعة" } }
+    ],
+    howto: [
+      { fr: "Diluer un bouchon dans un litre d'eau.", ar: "خفّف غطاءً في لتر من الماء." },
+      { fr: "Appliquer sur la surface ou le linge blanc.", ar: "طبّق على السطح أو الغسيل الأبيض." },
+      { fr: "Laisser agir quelques minutes.", ar: "اتركه يعمل بضع دقائق." },
+      { fr: "Rincer abondamment à l'eau claire.", ar: "اشطف جيداً بالماء النظيف." }
+    ],
+    callout: {
+      title: { fr: "Une propreté saine et désinfectée.", ar: "نظافة صحية ومُطهّرة." },
+      text:  { fr: "Élimine les germes et les bactéries, blanchit et ravive, pour une maison plus saine.", ar: "يقضي على الجراثيم والبكتيريا، ويُبيّض وينعش، لمنزل أكثر صحة." },
+      photo: ""
+    }
+  },
+
+  "vaisselle-cuisine": {
+    features: [
+      { icon: "grease-cut", label: { fr: "Dégraissant",    ar: "مزيل للدهون" } },
+      { icon: "shine",      label: { fr: "Brillance",      ar: "لمعان" } },
+      { icon: "hand-care",  label: { fr: "Doux pour les mains", ar: "لطيف على اليدين" } },
+      { icon: "multi-use",  label: { fr: "Multi-usages",   ar: "متعدد الاستعمالات" } }
+    ],
+    howto: [
+      { fr: "Verser quelques gouttes sur l'éponge humide.", ar: "ضع بضع قطرات على الإسفنجة المبللة." },
+      { fr: "Laver la vaisselle.", ar: "اغسل الأواني." },
+      { fr: "Rincer à l'eau claire.", ar: "اشطف بالماء النظيف." },
+      { fr: "Laisser briller.", ar: "اتركها تلمع." }
+    ],
+    callout: {
+      title: { fr: "Une vaisselle brillante, sans effort.", ar: "أوانٍ لامعة، دون عناء." },
+      text:  { fr: "Un dégraissage express et une brillance sans traces, tout en douceur pour les mains.", ar: "إزالة سريعة للدهون ولمعان بدون آثار، مع لطف على اليدين." },
+      photo: ""
+    }
+  },
+
+  "hygiene-soin-personnel": {
+    features: [
+      { icon: "soft-drop",  label: { fr: "Douceur",       ar: "نعومة" } },
+      { icon: "moisture",   label: { fr: "Hydratation",   ar: "ترطيب" } },
+      { icon: "gentle",     label: { fr: "Formule délicate", ar: "تركيبة لطيفة" } },
+      { icon: "family",     label: { fr: "Toute la famille", ar: "لكل العائلة" } }
+    ],
+    howto: [
+      { fr: "Appliquer une noisette sur mains humides.", ar: "ضع قليلاً على اليدين المبللتين." },
+      { fr: "Faire mousser une vingtaine de secondes.", ar: "دلّك لتكوين رغوة نحو 20 ثانية." },
+      { fr: "Rincer à l'eau claire.", ar: "اشطف بالماء النظيف." },
+      { fr: "Sécher — peau douce et fraîche.", ar: "جفّف — بشرة ناعمة ومنتعشة." }
+    ],
+    callout: {
+      title: { fr: "La douceur au quotidien.", ar: "نعومة كل يوم." },
+      text:  { fr: "Des formules délicates qui nettoient tout en hydratant, pour toute la famille.", ar: "تركيبات لطيفة تنظّف وترطّب، لكل أفراد العائلة." },
+      photo: ""
+    }
+  },
+
+  "maxiplus": {
+    features: [
+      { icon: "absorbent",  label: { fr: "Ultra absorbant", ar: "امتصاص فائق" } },
+      { icon: "strong",     label: { fr: "Résistant",       ar: "متين" } },
+      { icon: "soft-touch", label: { fr: "Doux au toucher", ar: "ناعم الملمس" } },
+      { icon: "family",     label: { fr: "Toute la famille", ar: "لكل العائلة" } }
+    ],
+    howto: [
+      { fr: "Détacher une feuille selon le besoin.", ar: "افصل ورقة حسب الحاجة." },
+      { fr: "Essuyer ou nettoyer la surface.", ar: "امسح أو نظّف السطح." },
+      { fr: "Jeter après usage.", ar: "تخلّص منها بعد الاستعمال." }
+    ],
+    callout: {
+      title: { fr: "Douceur et résistance, chaque jour.", ar: "نعومة ومتانة، كل يوم." },
+      text:  { fr: "Des papiers et mouchoirs ultra absorbants et solides, pensés pour toute la famille.", ar: "ورق ومناديل فائقة الامتصاص ومتينة، مصمّمة لكل العائلة." },
+      photo: ""
+    }
+  }
+
+};
+
+/* GLOBAL — one safety block + one did-you-know for the whole site */
+window.OMI_DATA.safety = {
+  photo: "",
+  tips: [
+    { icon: "as-directed",  label: { fr: "Utiliser selon les indications.", ar: "استعمل حسب التعليمات." } },
+    { icon: "no-children",  label: { fr: "Tenir hors de portée des enfants.", ar: "يُحفظ بعيداً عن متناول الأطفال." } },
+    { icon: "eye-rinse",    label: { fr: "En cas de contact avec les yeux, rincer abondamment à l'eau.", ar: "عند ملامسة العينين، اشطف بكثير من الماء." } },
+    { icon: "if-swallowed", label: { fr: "En cas d'ingestion, consulter un médecin.", ar: "في حال الابتلاع، استشر الطبيب." } }
+  ]
+};
+
+window.OMI_DATA.didYouKnow = {
+  photo: "",
+  title: { fr: "Le saviez-vous ?", ar: "هل تعلم؟" },
+  text:  { fr: "Nettoyer réduit la propagation des germes, mais certaines bactéries persistent. Désinfecter régulièrement garde la maison plus saine.",
+           ar: "التنظيف يقلّل انتشار الجراثيم، لكن بعض البكتيريا تبقى. التطهير المنتظم يحافظ على منزل أكثر صحة." }
+};

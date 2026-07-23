@@ -7,9 +7,9 @@
 <!-- Fonts self-hosted (@font-face in styles.css). Cairo (Arabic) is subset by
      unicode-range and only downloads once AR is selected. No render-blocking
      third-party requests. -->
-<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=128" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=128" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=128">
+<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=129" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=129" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=129">
 <!-- reveal-on-scroll flag: set before first paint so blocks start hidden with
      no flash; skipped for reduced motion. If app.js never boots, the timer
      strips the flag so nothing stays invisible. -->
@@ -74,6 +74,15 @@
 
     </div>
   </div>
+
+  <!-- ===== Dettol-style sections below, all filled by product.js from
+       data.js. Each stays empty/hidden if its data is missing. ===== -->
+  <section class="psec pfeatures" id="pFeatures" hidden></section>
+  <section class="psec phow"      id="pHow"      hidden></section>
+  <section class="psec pcallout"  id="pCallout"  hidden></section>
+  <section class="psec psafety"   id="pSafety"   hidden></section>
+  <section class="psec pdyk"      id="pDyk"      hidden></section>
+  <section class="psec prelated"  id="pRelated"  hidden></section>
 </main>
 
 <!-- ================= FOOTER ================= -->
@@ -143,8 +152,8 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=128"></script>
-<script src="app.js?v=128"></script>
-<script src="product.js?v=128"></script>
+<script src="data.js?v=129"></script>
+<script src="app.js?v=129"></script>
+<script src="product.js?v=129"></script>
 </body>
 </html>

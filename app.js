@@ -318,10 +318,17 @@ const REVEAL_SEL = [
   ".showcase-grid > div:not(.showcase-photo)",
   ".marque-values-head", ".marque-value", ".marque-cta > .wrap > *",
   ".contact-info", ".contact-form",
-  ".pdp-copy > *"
+  ".pdp-copy > *",
+  // product-page extra sections (rendered by product.js after load)
+  ".psec-head", ".pfeat", ".phow-step", ".pcallout-media", ".pcallout-body",
+  ".psafe-item", ".psafe-media", ".pdyk-inner", ".prelated .pcard"
 ].join(",");
 
-function initReveal() {
+let _revealIO = null;
+/* Observe any not-yet-tracked reveal targets. Idempotent, so JS-rendered
+   sections (product.js, category.js) can call window.revealScan() after they
+   inject content and their blocks will animate in too. */
+function revealScan() {
   const root = document.documentElement;
   if (!root.classList.contains("reveal-on")) return;   // reduced motion / disabled
   root.classList.add("reveal-ready");                  // tell the head fallback we booted
@@ -330,20 +337,23 @@ function initReveal() {
     els.forEach(el => el.classList.add("rv-in"));
     return;
   }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(en => {
-      if (en.isIntersecting) { en.target.classList.add("rv-in"); io.unobserve(en.target); }
-    });
-  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
-  els.forEach(el => io.observe(el));
+  if (!_revealIO) {
+    _revealIO = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) { en.target.classList.add("rv-in"); _revealIO.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+  }
+  els.forEach(el => { if (!el.dataset.rvObs) { el.dataset.rvObs = "1"; _revealIO.observe(el); } });
 }
+window.revealScan = revealScan;
 
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderRange();
   initTrustCarousel();
   buildMobileMenu();
-  initReveal();
+  revealScan();
 
   // close language + mobile menu on outside click / Escape
   document.addEventListener("click", (e) => {
