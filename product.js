@@ -183,7 +183,9 @@
   function featIcon(icon) {
     const ready = (window.OMI_DATA.iconsReady || []).indexOf(icon) !== -1;
     if (!ready) return iconSlot(icon);
-    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg')" aria-hidden="true"></span>`;
+    // ?v busts the 1-year SVG cache when an icon file is replaced (bumped with
+    // the site version — product.js is part of the ?v=N bump set now)
+    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=137')" aria-hidden="true"></span>`;
   }
   function photoBox(file, hint) {
     if (file) return `<img src="assets/${file}" alt="" loading="lazy" decoding="async">`;
