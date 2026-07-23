@@ -27,9 +27,6 @@ function catProducts(cat) {
    read by selectCategory() to update the "Produits (N)" count line */
 let RANGE_COUNTS = [];
 
-/* tab index of the virtual Maxiplus tab — assigned by renderRange */
-let MAXI_TAB = 0;
-
 /* ---------- render the product range from data ---------- */
 function renderRange() {
   const data = window.OMI_DATA;
@@ -46,21 +43,10 @@ function renderRange() {
       (n, c) => n + catProducts(c).reduce((m, p) => m + p.variants.length, 0), 0);
   }
 
-  /* Maxiplus is a brand that lives inside a category (Hygiène), so it gets its
-     own virtual tab after the categories' indices: 0 = Tous, 1..n = categories,
-     n+1 = Maxiplus. Its panel holds only the products flagged brand:"maxiplus";
-     the Hygiène category tab still shows all of its products, Maxiplus included. */
-  MAXI_TAB = cats.length + 1;
-  const maxiLogo = (cats.find(c => c.brandLogo) || {}).brandLogo;
-  const maxiProducts = cats.flatMap(c => catProducts(c).filter(p => p.brand === "maxiplus"));
-  const hasMaxi = !!(maxiLogo && maxiProducts.length);
-
-  // tabs: "Tous", then the Maxi Plus text pill, then the categories in data order
+  /* tabs: "Tous", then the 6 categories in data order (Maxi Plus is a real
+     category since the restructure — no virtual brand tab anymore) */
   tabsEl.innerHTML =
     `<button class="tab on" role="tab" data-tab="0">${bi({ fr: "Tous", ar: "الكل" })}</button>` +
-    (hasMaxi
-      ? `<button class="tab" role="tab" data-tab="${MAXI_TAB}">${bi({ fr: "Maxi Plus", ar: "ماكسي بلس" })}</button>`
-      : "") +
     cats.map((c, i) => `<button class="tab" role="tab" data-tab="${i + 1}">${bi(c.name)}</button>`).join("");
 
   // "Tous" panel: products grouped by category, one category after another
@@ -89,20 +75,12 @@ function renderRange() {
     </div>`
   ).join("");
 
-  // Maxiplus panel: only the Maxiplus-branded products
-  const maxiPanel = hasMaxi
-    ? `<div class="panel" id="panel-${MAXI_TAB}" data-category="maxiplus">
-        <div class="grid">${maxiProducts.flatMap(p => p.variants.map(v => cardHTML(p, v))).join("")}</div>
-      </div>`
-    : "";
-
-  panelsEl.innerHTML = allPanel + catPanels + maxiPanel;
+  panelsEl.innerHTML = allPanel + catPanels;
 
   // one product count per tab, for the "Produits (N)" line
   RANGE_COUNTS = [allCards.length, ...cats.map(c =>
     catProducts(c).reduce((sum, p) => sum + p.variants.length, 0)
   )];
-  if (hasMaxi) RANGE_COUNTS[MAXI_TAB] = maxiProducts.reduce((s, p) => s + p.variants.length, 0);
 
   // picking a chip applies the filter — pills are always visible, no panel to close
   tabsEl.querySelectorAll(".tab").forEach(t =>
@@ -119,8 +97,8 @@ function renderRange() {
   selectCategory(0);
 }
 
-/* pick a tab (Tous = 0, category = 1..4): swap panels, update the
-   product count line, and mark the active pill */
+/* pick a tab (Tous = 0, category = 1..n in data order): swap panels, update
+   the product count line, and mark the active pill */
 function selectCategory(i) {
   showTab(i);
   const count = document.getElementById("rangeCount");
@@ -130,9 +108,6 @@ function selectCategory(i) {
     ar: `${n} منتج`
   });
 }
-
-/* jump straight to the Maxiplus tab (used by the Maxiplus banner CTA) */
-function gotoMaxiplus() { if (MAXI_TAB) gotoCat(MAXI_TAB); }
 
 /* jump to a category from the quick-nav strip: select it, then scroll to the grid */
 function gotoCat(i) {
@@ -179,7 +154,7 @@ function variantSubHTML(product, variant) {
 
 function showTab(i) {
   // match by data-tab / panel id (not DOM position) so a reordered tab row
-  // (e.g. the Maxiplus logo tab moved first) still maps to the right panel
+  // still maps to the right panel
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", +t.dataset.tab === i));
   document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", p.id === `panel-${i}`));
 }
@@ -276,12 +251,10 @@ function buildMobileMenu() {
   if (!menu || !data || menu.querySelector(".nav-m")) return;
 
   const cats = data.categories || [];
-  let catLinks = cats.map(c =>
+  // all 6 categories, Maxi Plus included — it's a real category in the data
+  const catLinks = cats.map(c =>
     `<a class="nav-m-cat" href="categorie.html?cat=${c.slug}">${bi(c.name)}</a>`
   ).join("");
-  // include the virtual "Maxi Plus" tab (the paper sub-brand) if it has products
-  if (cats.some(c => catProducts(c).some(p => p.brand === "maxiplus")))
-    catLinks += `<a class="nav-m-cat" href="categorie.html?cat=maxiplus">${bi({ fr: "Maxi Plus", ar: "ماكسي بلس" })}</a>`;
 
   const icPhone = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>';
   const icMail = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';

@@ -5,12 +5,14 @@
    card per variant) renders from this file at runtime by app.js.
    Nothing about the range is hardcoded in index.html.
 
-   The whole site is standardised on 5 categories:
+   The whole site is standardised on 6 categories:
      1. Sols, Surfaces & Vitres
      2. Entretien du Linge      (Lessive)
      3. Eau de Javel
      4. Vaisselle & Cuisine
-     5. Hygiène & Soin Personnel (Savon mains + Papiers/Maxiplus)
+     5. Hygiène & Soin Personnel (Savon mains)
+     6. Maxi Plus                (papiers — the sibling brand, a REAL
+                                  category now, no longer a virtual tab)
 
    MODEL
    -----
@@ -19,8 +21,6 @@
      ├ accent?     "blue"|"gold"|"green"|"lavender"  -> same colour as its
      │                                  card in "L'Excellence" (services
      │                                  section); styles the filter chip
-     ├ brandLogo?  "file.webp"        -> shown next to the tab label
-     │                                  (e.g. Maxiplus, on category 4)
      ├ products[]  OR  groups[]      -> a category is EITHER a flat
      │                                  product list, OR sub-groups
      │                                  (groups are a data grouping only —
@@ -239,8 +239,8 @@ window.OMI_DATA = {
     {
       slug: "hygiene-soin-personnel",
       name: { fr: "Hygiène & Soin Personnel", ar: "النظافة والعناية الشخصية" },
-      desc: { fr: "Savons et papiers doux pour toute la famille, au quotidien.",
-              ar: "صابون وورق ناعم لكل أفراد العائلة، كل يوم." },
+      desc: { fr: "Savons doux pour toute la famille, au quotidien.",
+              ar: "صابون ناعم لكل أفراد العائلة، كل يوم." },
       benefits: [
         { fr: "Douceur au quotidien", ar: "نعومة يومية" },
         { fr: "Hydratation et fraîcheur", ar: "ترطيب وانتعاش" },
@@ -248,9 +248,6 @@ window.OMI_DATA = {
         { fr: "Pour toute la famille", ar: "لكل أفراد العائلة" }
       ],
       accent: "lavender",
-      /* this category carries the Maxiplus paper range — shown as a small
-         logo on the category tab itself, not repeated on every card */
-      brandLogo: "maxiplus-logo.webp",
       products: [
         {
           slug: "savon-liquide-mains",
@@ -282,7 +279,25 @@ window.OMI_DATA = {
             { scent: "camomille", size: "500", image: "savon-camomille-500.webp", alt: "OMI Savon Liquide Mains Camomille 500 ml" },
             { scent: "camomille", size: "300", image: "savon-camomille-300.webp", alt: "OMI Savon Liquide Mains Camomille 300 ml" }
           ]
-        },
+        }
+      ]
+    },
+
+    /* ========== 6 · MAXI PLUS (papiers — sibling brand) ======== */
+    /* A real category since the restructure. The `brand:"maxiplus"` flags on
+       its products are informational only — no code reads them anymore. */
+    {
+      slug: "maxiplus",
+      name: { fr: "Maxi Plus", ar: "ماكسي بلس" },
+      desc: { fr: "Papiers et mouchoirs doux, pensés pour toute la famille.",
+              ar: "ورق ومناديل ناعمة، مصمّمة لكل أفراد العائلة." },
+      benefits: [
+        { fr: "Ultra absorbant", ar: "امتصاص فائق" },
+        { fr: "Résistant et solide", ar: "متين وقوي" },
+        { fr: "Doux au toucher", ar: "ناعم الملمس" },
+        { fr: "Pour toute la famille", ar: "لكل أفراد العائلة" }
+      ],
+      products: [
         {
           slug: "essuie-tout",
           name: { fr: "Essuie-Tout", ar: "فوط مطبخ" },

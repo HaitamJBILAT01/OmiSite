@@ -17,7 +17,7 @@ cleaning-products brand. Plain HTML/CSS/vanilla JS, **no build step**.
 - `contact.html` — contact page (methods + mailto form)
 - `marque.html` — brand ("La marque") page
 - `styles.css` — all styles (design tokens in `:root`; `--font-display`=General Sans FR, `--font`=Cairo AR; `--sec`=section vertical rhythm)
-- `data.js` — product catalog = **single source of truth** (5 categories; products have `variants`; Maxiplus products flagged `brand:"maxiplus"`)
+- `data.js` — product catalog = **single source of truth** (**6 categories** — Maxi Plus is a REAL category since the 2026-07-23 restructure; products have `variants`; the `brand:"maxiplus"` flags are informational only, no code reads them)
 - `app.js` — homepage range render, language switch, mobile menu (`buildMobileMenu()`), trust carousel, live product-count stat. Guarded so it's safe on all pages.
 - `category.js` — renders `categorie.html` (hero/switcher/grid) from `data.js`
 - `.htaccess` — MIME for webp/woff2, CORS for fonts, caching; blocks `.git`/`.claude`/`.md` from web
@@ -46,19 +46,19 @@ cleaning-products brand. Plain HTML/CSS/vanilla JS, **no build step**.
 Lightened site-wide per user preference: **Latin (General Sans) headings max weight 500; big section titles 400**; body 400. Arabic (Cairo) headings brought to 500. No bold headings anywhere.
 
 ## Homepage (index.html) — top → bottom
-1. Navbar (fixed, hide-on-scroll). **Mobile = full-width Dettol-style drawer** (`buildMobileMenu()`): airy left-aligned primary links (no dividers), **"Produits" is a tap-to-expand accordion** (rotating caret; submenu = the 5 categories **+ Maxi Plus**; `display` toggle, caret set inline via JS) + contact/social footer. Language switcher stays in the top bar. `.nav-m`, `.nav-m-sub`, `.nav-m-caret` are mobile-only.
+1. Navbar (fixed, hide-on-scroll). **Mobile = full-width Dettol-style drawer** (`buildMobileMenu()`): airy left-aligned primary links (no dividers), **"Produits" is a tap-to-expand accordion** (rotating caret; submenu = the **6 categories** straight from data.js (Maxi Plus last); `display` toggle, caret set inline via JS) + contact/social footer. Language switcher stays in the top bar. `.nav-m`, `.nav-m-sub`, `.nav-m-caret` are mobile-only.
 2. Hero — royal-blue gradient copy panel + `hero-products.webp`. On mobile the image shows **in full** (contain, all products visible), no separate mobile crop.
 3. Trust strip (4 items; desktop row, mobile peek-carousel).
 4. Services "L'Excellence" — 4 pastel category cards (hardcoded; NOT the Javel category). Each "Découvrir" → `categorie.html?cat=<slug>`.
-5. Product range (`#cats`) — filter pills = **Tous + "Maxi Plus" (text) + 5 categories** (monochrome). `showTab` matches by `data-tab`/panel id.
+5. Product range (`#cats`) — filter pills = **Tous + the 6 categories in data order** (Maxi Plus last, monochrome text). No virtual tab anymore. `showTab` matches by `data-tab`/panel id. NOTE: index.html's footer uses hardcoded `gotoCat(1..6)` — if the category order in data.js changes, update those indices.
 6. Maxiplus banner (`.mx`) — `Maxi-plus-banner*.webp`. CTA "Découvrir plus" → `categorie.html?cat=maxiplus`.
 7. Showcase "Née en Mauritanie" (`glove-peace.webp`) + **brand-stats**: product count is **dynamic** (`#statCount`, set by app.js from the catalogue = 34), then "100% Fabriqué en Mauritanie", "N°1".
 8. Footer — 4 cols: brand+social, Liens rapides, Nos produits, Contact. Social = FB, IG, **TikTok** (`@omirim1`).
 
 ## Category page (categorie.html)
-Loads `data.js`, `app.js`, `category.js`. Order: navbar → **cat-hero** (shared `bannerCAT.webp`) → **cat-switch** (underline tabs: **Maxi Plus (text)** + 5 categories, NO "Tous") → **cat-range** (products) → footer.
+Loads `data.js`, `app.js`, `category.js`. Order: navbar → **cat-hero** (shared `bannerCAT.webp`) → **cat-switch** (underline tabs: **the 6 categories in data order**, Maxi Plus last, NO "Tous") → **cat-range** (products) → footer. No `?cat=` falls back to the FIRST category (sols) — it used to be the virtual Maxi Plus tab.
 - The old **cat-intro line and the "Les atouts de la gamme" benefits band were removed.**
-- `category.js`: `entries` = Maxiplus (virtual) + categories. Tab click = crossfade hero text.
+- `category.js`: `entries` = a straight map of data.js categories (virtual-tab logic removed). Tab click = crossfade hero text.
 
 ## Product page (produit.html) — Dettol-style PDP
 `produit.html?p=<product-slug>` renders ONE product. Loads `data.js`, `app.js`, `product.js`.
@@ -68,13 +68,13 @@ Layout mirrors Dettol: 2-col grid — **left** = breadcrumb, H1, short desc, pil
 - **Photo = the selected variant's own `image`**, so it swaps as you pick. A product may set `photo: "file.webp"` to pin ONE image for all its variants instead. `.pdp-photo` has a fixed `aspect-ratio` and the img uses `max-*` + auto sizing (same pattern as `.pcard .ph img`), so photos of differing intrinsic sizes are never distorted and cause **no layout shift** — that's why the `<img>` needs no width/height here.
 - Product cards everywhere are now `<a class="pcard">` → `produit.html?p=…` with the clicked variant's axis values in the query string, so the card you tapped arrives pre-selected (`productHref()` in app.js).
 
-## data.js catalog (current: **34 variants**, 5 categories)
+## data.js catalog (current: **34 variants**, 6 categories)
 1. sols-surfaces-vitres (accent blue, **8**)
 2. entretien-du-linge (gold, **2** — Lessive only; flat `products`, no more `groups`)
 3. **javel** (cyan, **5** — Eau de Javel, split out of entretien)
 4. vaisselle-cuisine (green, **7**)
-5. hygiene-soin-personnel (lavender, **12**)
-- **Maxi Plus** = virtual tab = all `brand:"maxiplus"` products (7 variants; live in Hygiène). Rendered as **text**, not a logo.
+5. hygiene-soin-personnel (lavender, **5** — Savon Mains only; papers moved to maxiplus)
+6. **maxiplus** (no accent, **7** — Essuie-Tout ×3, Mouchoirs ×2, Serviettes, Papier Hygiénique; moved out of Hygiène in the restructure). Rendered as **text**, not a logo; `brandLogo` field removed from the model.
 - Savon Mains split by size: Original 500/300, Camomille 500/300 (+ Lavande). Liquide Vaisselle Multi-usages 3×1 Citron split 750/300. Size-separated photos: `savon-original-500/300.webp`, `savon-camomille-500/300.webp`, `vaisselle-citron-750/300.webp`.
 - `accent` now only drives nothing critical (the mobile menu color dots were removed). Still on each category.
 
@@ -85,7 +85,7 @@ Layout mirrors Dettol: 2-col grid — **left** = breadcrumb, H1, short desc, pil
 FB `…profile.php?id=61557716205802…` · IG `instagram.com/omiibdaemr` · TikTok `tiktok.com/@omirim1`. In both footers, the mobile drawer, and the contact page. Contact email: **info@omi.mr**. Phone: +222 22 51 11 11.
 
 ## Known / pending
-- "L'Excellence" homepage section is still 4 curated cards (no Javel/Maxi Plus card) — its 2+photo+2 layout would break with a 5th. Javel lives in the filter + category page.
+- "L'Excellence" homepage section stays **4 curated cards** (no Javel/Maxi Plus card) — **user's explicit choice** in the 6-category restructure; its 2+photo+2 layout would break with more. Javel + Maxi Plus live in the filter pills, tabs, footers and mobile menu.
 - Contact form is **mailto-based** (opens the visitor's email app) — no backend. Could move to Formspree etc. if a real inbox submission is wanted. Make sure `info@omi.mr` mailbox exists in Hostinger to receive mail.
 - On the Arabic **footer** (not the drawer), phone/email still use `dir="ltr"` on the whole link (left-aligned) — only the mobile drawer was fixed to right-align.
 

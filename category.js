@@ -4,10 +4,9 @@
    Renders the hero, the category switcher and the product grid
    for ONE category, read from ?cat=<slug> in the URL.
 
-   "maxiplus" is a virtual category: every product flagged
-   brand:"maxiplus" in data.js, wherever it lives in the catalogue.
-   Everything else comes straight from window.OMI_DATA, so adding a
-   category to data.js adds it here automatically.
+   Every tab comes straight from window.OMI_DATA (Maxi Plus is a real
+   category there since the restructure), so adding a category to
+   data.js adds it here automatically.
 
    Reuses bi() / catProducts() / cardHTML() from app.js — load order
    in the page is: data.js, app.js, category.js.
@@ -17,8 +16,6 @@
   if (!grid || !window.OMI_DATA) return;   // not on the category page
 
   const cats = window.OMI_DATA.categories;
-  const maxiLogo = (cats.find(c => c.brandLogo) || {}).brandLogo;
-  const maxiProducts = cats.flatMap(c => catProducts(c).filter(p => p.brand === "maxiplus"));
 
   /* one shared hero banner for every category — loaded once, never swapped,
      so switching category is instant (no image reload) */
@@ -32,26 +29,8 @@
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c0 8-4.4 14-11 14a6 6 0 0 1-5-9.2C7 4 14 4 20 4z"/><path d="M5 19c3.4-4 7-7 12-9"/></svg>'
   ];
 
-  /* selectable entries: the real categories, then Maxiplus as a virtual one */
-  /* tab order: Maxi Plus · then the real categories */
-  const entries = [];
-  if (maxiLogo && maxiProducts.length) {
-    entries.push({
-      slug: "maxiplus",
-      name: { fr: "Maxi Plus", ar: "ماكسي بلس" },
-      desc: { fr: "Papiers et mouchoirs doux, pensés pour toute la famille.",
-              ar: "ورق ومناديل ناعمة، مصمّمة لكل أفراد العائلة." },
-      logo: maxiLogo,
-      benefits: [
-        { fr: "Ultra absorbant", ar: "امتصاص فائق" },
-        { fr: "Résistant et solide", ar: "متين وقوي" },
-        { fr: "Doux au toucher", ar: "ناعم الملمس" },
-        { fr: "Pour toute la famille", ar: "لكل أفراد العائلة" }
-      ],
-      products: maxiProducts
-    });
-  }
-  cats.forEach(c => entries.push({
+  /* one tab per category, in data.js order (Maxi Plus last) */
+  const entries = cats.map(c => ({
     slug: c.slug, name: c.name, desc: c.desc, benefits: c.benefits,
     products: catProducts(c)
   }));
