@@ -49,7 +49,7 @@ Lightened site-wide per user preference: **Latin (General Sans) headings max wei
 1. Navbar (fixed, hide-on-scroll). **Mobile = full-width Dettol-style drawer** (`buildMobileMenu()`): airy left-aligned primary links (no dividers), **"Produits" is a tap-to-expand accordion** (rotating caret; submenu = the **6 categories** straight from data.js (Maxi Plus last); `display` toggle, caret set inline via JS) + contact/social footer. Language switcher stays in the top bar. `.nav-m`, `.nav-m-sub`, `.nav-m-caret` are mobile-only.
 2. Hero — royal-blue gradient copy panel + `hero-products.webp`. On mobile the image shows **in full** (contain, all products visible), no separate mobile crop.
 3. Trust strip (4 items; desktop row, mobile peek-carousel).
-4. Services "L'Excellence" — 4 pastel category cards (hardcoded; NOT the Javel category). Each "Découvrir" → `categorie.html?cat=<slug>`.
+4. Services "L'Excellence" — **4 pastel category cards** (hardcoded): Sols (c-blue), **Eau de Javel (c-cyan, `ic-javel`)**, Vaisselle (c-green), **Maxi Plus (c-rose, `ic-maxi`)**. Linge + Hygiène are NOT in the section (user's pick of 4) — they stay reachable via pills/tabs/menu/footers. Each "Découvrir" → `categorie.html?cat=<slug>`.
 5. Product range (`#cats`) — filter pills = **Tous + the 6 categories in data order** (Maxi Plus last, monochrome text). No virtual tab anymore. `showTab` matches by `data-tab`/panel id. NOTE: index.html's footer uses hardcoded `gotoCat(1..6)` — if the category order in data.js changes, update those indices.
 6. Maxiplus banner (`.mx`) — `Maxi-plus-banner*.webp`. CTA "Découvrir plus" → `categorie.html?cat=maxiplus`.
 7. Showcase "Née en Mauritanie" (`glove-peace.webp`) + **brand-stats**: product count is **dynamic** (`#statCount`, set by app.js from the catalogue = 34), then "100% Fabriqué en Mauritanie", "N°1".
@@ -85,7 +85,7 @@ Layout mirrors Dettol: 2-col grid — **left** = breadcrumb, H1, short desc, pil
 FB `…profile.php?id=61557716205802…` · IG `instagram.com/omiibdaemr` · TikTok `tiktok.com/@omirim1`. In both footers, the mobile drawer, and the contact page. Contact email: **info@omi.mr**. Phone: +222 22 51 11 11.
 
 ## Known / pending
-- "L'Excellence" homepage section stays **4 curated cards** (no Javel/Maxi Plus card) — **user's explicit choice** in the 6-category restructure; its 2+photo+2 layout would break with more. Javel + Maxi Plus live in the filter pills, tabs, footers and mobile menu.
+- "L'Excellence" section = exactly 4 cards by user's choice; the featured four are Sols, Javel, Vaisselle, Maxi Plus (swapped IN 2026-07-23, replacing Linge + Hygiène in the section only).
 - Contact form is **mailto-based** (opens the visitor's email app) — no backend. Could move to Formspree etc. if a real inbox submission is wanted. Make sure `info@omi.mr` mailbox exists in Hostinger to receive mail.
 - On the Arabic **footer** (not the drawer), phone/email still use `dir="ltr"` on the whole link (left-aligned) — only the mobile drawer was fixed to right-align.
 
