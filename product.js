@@ -2,16 +2,16 @@
    OMI — product page (produit.html)
    ------------------------------------------------------------
    Renders ONE product read from ?p=<product-slug>, with its
-   scent / size / type axes as selectable pills & swatches
-   (Dettol-style). Everything comes from window.OMI_DATA.
+   scent / size / type axes as selectable text pills (Dettol-style).
+   Everything comes from window.OMI_DATA.
 
    PHOTO
    -----
-   One photo per PRODUCT (shared by all its variants), set as
-   `photo: "file.webp"` on the product in data.js. While that is
-   empty a CSS/SVG placeholder is shown — no network request, and
-   the .pdp-photo box holds a fixed aspect-ratio so filling the
-   photo in later causes no layout shift.
+   The selected variant's own photo, on a white panel. A product can
+   override this with `photo: "file.webp"` in data.js to force ONE
+   shared image across all its variants. The .pdp-photo box holds a
+   fixed aspect-ratio, so photos of differing intrinsic sizes never
+   shift the layout (that's also why the <img> needs no width/height).
 
    AXES
    ----
@@ -38,11 +38,9 @@
     if (hit) { product = hit; category = c; break; }
   }
 
-  const elCat     = document.getElementById("pdpCat");
   const elTitle   = document.getElementById("pdpTitle");
   const elDesc    = document.getElementById("pdpDesc");
   const elAxes    = document.getElementById("pdpAxes");
-  const elCurrent = document.getElementById("pdpCurrent");
   const elPhoto   = document.getElementById("pdpPhoto");
   const elCrumbC  = document.getElementById("crumbCat");
   const elCrumbP  = document.getElementById("crumbProd");
@@ -54,7 +52,7 @@
       fr: "Ce produit n’existe pas ou n’est plus disponible.",
       ar: "هذا المنتج غير موجود أو لم يعد متوفرًا."
     });
-    elCurrent.innerHTML = `<a class="pdp-back" href="index.html#cats">${bi({ fr: "Voir toute la gamme", ar: "تصفح كل المنتجات" })}</a>`;
+    elAxes.innerHTML = `<a class="pdp-back" href="index.html#cats">${bi({ fr: "Voir toute la gamme", ar: "تصفح كل المنتجات" })}</a>`;
     return;
   }
 
@@ -121,25 +119,14 @@
     render(true);
   }
 
-  /* ---------- photo: shared per product; placeholder until it's set ------- */
-  const PLACEHOLDER = `
-    <div class="pdp-ph" role="img" aria-label="Photo du produit à venir">
-      <svg viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="3"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M50 8h20v14H50z"/>
-        <path d="M44 22h32c8 0 14 7 14 15v96c0 5-4 9-9 9H39c-5 0-9-4-9-9V37c0-8 6-15 14-15z"/>
-        <rect x="42" y="62" width="36" height="40" rx="4"/>
-      </svg>
-      <span class="pdp-ph-t">${bi({ fr: "Photo à venir", ar: "الصورة قريبًا" })}</span>
-    </div>`;
-
+  /* ---------- photo: the selected variant's, unless the product pins one --- */
   function photoHTML(variant) {
-    if (!product.photo) return PLACEHOLDER;
+    const file = product.photo || (variant && variant.image);
+    if (!file) return "";
     const alt = (variant && variant.alt) || product.name.fr;
-    // no width/height attrs: the photo is supplied later and its intrinsic size
-    // isn't known here. .pdp-photo holds a fixed aspect-ratio in CSS, so there
-    // is no layout shift either way.
-    return `<img src="assets/${product.photo}" alt="${alt}" fetchpriority="high" decoding="async">`;
+    // no width/height attrs: variant photos have differing intrinsic sizes.
+    // .pdp-photo holds a fixed aspect-ratio in CSS, so there is no shift.
+    return `<img src="assets/${file}" alt="${alt}" fetchpriority="high" decoding="async">`;
   }
 
   /* ---------- render ---------- */
@@ -147,7 +134,6 @@
     const v = currentVariant() || product.variants[0];
 
     elTitle.innerHTML = bi(product.name);
-    elCat.innerHTML   = bi(category.name);
     elDesc.innerHTML  = category.desc ? bi(category.desc) : "";
 
     elCrumbC.innerHTML = bi(category.name);
@@ -156,24 +142,20 @@
 
     elPhoto.innerHTML = photoHTML(v);
 
+    /* every axis renders as plain text pills — no colour dots */
     elAxes.innerHTML = AX.map(a => `
       <div class="pdp-axis">
         <span class="pdp-axis-lbl">${bi(a.label)}</span>
-        <div class="pdp-opts ${a.style === "swatch" ? "is-swatch" : "is-pill"}" role="group">
+        <div class="pdp-opts" role="group">
           ${a.values.map(val => {
             const on  = state[a.key] === val.key;
             const off = !isAvailable(a.key, val.key);
-            const dot = val.swatch
-              ? `<span class="pdp-dot" style="background:${val.swatch}"></span>` : "";
             return `<button type="button" class="pdp-opt${on ? " on" : ""}${off ? " off" : ""}"
                       data-ax="${a.key}" data-val="${val.key}"
-                      aria-pressed="${on}">${dot}<span>${bi(val.label)}</span></button>`;
+                      aria-pressed="${on}">${bi(val.label)}</button>`;
           }).join("")}
         </div>
       </div>`).join("");
-
-    // the line under the selectors = what you've actually chosen
-    elCurrent.innerHTML = v ? variantSubHTML(product, v) : "";
 
     elAxes.querySelectorAll(".pdp-opt").forEach(b =>
       b.addEventListener("click", () => pick(b.dataset.ax, b.dataset.val)));

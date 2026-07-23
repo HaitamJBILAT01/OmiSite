@@ -29,13 +29,16 @@
      │   groups[] : { name:{fr,ar}, products:[...] }
      └ (product)
          ├ slug                      -> its page: produit.html?p=<slug>
-         ├ photo?  "file.webp"       -> ONE photo shared by all variants, shown
-         │                              on the product page. While empty, a CSS
-         │                              placeholder is drawn instead (no request).
+         ├ photo?  "file.webp"       -> OPTIONAL. Pins ONE image for the whole
+         │                              product page. Omit it (the normal case)
+         │                              and the page shows the selected
+         │                              variant's own `image`.
          ├ name    {fr,ar}           -> card title (shared by all its variants)
-         ├ axes?   {scent?,size?,type?}  -> used only to label each variant,
-         │     each axis: { label:{fr,ar}, style:"swatch"|"pill",       there is no in-card picker
-         │                  values:[ {key,label:{fr,ar},swatch?} ] }
+         ├ axes?   {scent?,size?,type?}  -> label each variant AND become the
+         │     pickers on the product page. Each axis:
+         │       { label:{fr,ar}, values:[ {key,label:{fr,ar}} ] }
+         │     (`style` / `swatch` are legacy and unused — every axis renders
+         │      as plain text pills.)
          └ variants[]                -> every real product that exists —
                { <axisKey>:<valueKey> ..., image, alt, sub? }   EACH becomes its own card
 
@@ -66,7 +69,6 @@ window.OMI_DATA = {
         {
           slug: "nettoyant-surfaces",
           name: { fr: "Nettoyant Surfaces", ar: "منظف الأسطح" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           axes: {
             scent: {
               label: { fr: "Parfum", ar: "العطر" },
@@ -102,7 +104,6 @@ window.OMI_DATA = {
         {
           slug: "vitres-surfaces",
           name: { fr: "Vitres & Surfaces", ar: "الزجاج والأسطح" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "vitres-spray.webp", alt: "OMI Nettoyant Vitres & Surfaces 3 en 1 sans traces",
               sub: { fr: "Spray 3 en 1 · sans traces", ar: "بخاخ 3 في 1 · بدون آثار" } }
@@ -128,7 +129,6 @@ window.OMI_DATA = {
         {
           slug: "lessive-gel-matic",
           name: { fr: "Lessive Gel Matic", ar: "جل غسيل ماتيك" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "lessive-gel-matic.webp", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
               sub: { fr: "Power Gel · 2 en 1 · 3 Kg", ar: "جل قوي · 2 في 1 · 3 كغ" } }
@@ -137,7 +137,6 @@ window.OMI_DATA = {
         {
           slug: "detergent-poudre",
           name: { fr: "Détergent en Poudre", ar: "مسحوق الغسيل" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "detergent-poudre.webp", alt: "Maxi Clean Détergent en Poudre 90 g",
               sub: { fr: "Maxi Clean · lavage main", ar: "ماكسي كلين · غسيل يدوي" } }
@@ -163,7 +162,6 @@ window.OMI_DATA = {
         {
           slug: "eau-de-javel",
           name: { fr: "Eau de Javel", ar: "ماء جافيل" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           axes: {
             scent: {
               label: { fr: "Parfum", ar: "العطر" },
@@ -211,7 +209,6 @@ window.OMI_DATA = {
         {
           slug: "liquide-vaisselle",
           name: { fr: "Liquide Vaisselle", ar: "سائل الأواني" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "toadd3.webp", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 800 ml",
               sub: { fr: "Lavande · 800 ml", ar: "الخزامة · 800 مل" } },
@@ -230,7 +227,6 @@ window.OMI_DATA = {
         {
           slug: "pate-lavante",
           name: { fr: "Pâte Lavante", ar: "عجينة الجلي" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "vaisselle-pate-citron.webp", alt: "OMI Pâte Lavante Multi-Usage Citron",
               sub: { fr: "Multi-usage · Citron", ar: "متعدد الاستعمالات · ليمون" } }
@@ -259,7 +255,6 @@ window.OMI_DATA = {
         {
           slug: "savon-liquide-mains",
           name: { fr: "Savon Liquide Mains", ar: "صابون سائل لليدين" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           axes: {
             scent: {
               label: { fr: "Parfum", ar: "العطر" },
@@ -291,7 +286,6 @@ window.OMI_DATA = {
         {
           slug: "essuie-tout",
           name: { fr: "Essuie-Tout", ar: "فوط مطبخ" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           axes: {
             type: {
@@ -313,7 +307,6 @@ window.OMI_DATA = {
         {
           slug: "mouchoirs",
           name: { fr: "Mouchoirs", ar: "مناديل" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           axes: {
             type: {
@@ -333,7 +326,6 @@ window.OMI_DATA = {
         {
           slug: "serviettes-table",
           name: { fr: "Serviettes de Table", ar: "مناديل المائدة" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           variants: [
             { image: "toadd1.webp", alt: "Maxi Plus Serviettes de Table Original 80",
@@ -343,7 +335,6 @@ window.OMI_DATA = {
         {
           slug: "papier-hygienique",
           name: { fr: "Papier Hygiénique", ar: "ورق تواليت" },
-          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           variants: [
             { image: "toadd7.webp", alt: "Maxi Plus Papier Hygiénique Confort 12 Rouleaux",

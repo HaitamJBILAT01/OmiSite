@@ -7,9 +7,9 @@
 <!-- Fonts self-hosted (@font-face in styles.css). Cairo (Arabic) is subset by
      unicode-range and only downloads once AR is selected. No render-blocking
      third-party requests. -->
-<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=122" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=122" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=122">
+<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=123" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=123" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=123">
 </head>
 <body>
 
@@ -42,33 +42,27 @@
 
 <!-- ================= PRODUCT (filled by product.js from ?p=<slug>) ========= -->
 <main class="pdp" id="pdp">
-  <div class="wrap">
+  <div class="pdp-grid">
 
-    <nav class="pdp-crumbs" aria-label="Fil d'Ariane">
-      <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
-      <span class="pdp-crumb-sep" aria-hidden="true">/</span>
-      <a id="crumbCat" href="categorie.html"></a>
-      <span class="pdp-crumb-sep" aria-hidden="true">/</span>
-      <span id="crumbProd" aria-current="page"></span>
-    </nav>
-
-    <div class="pdp-grid">
-
-      <!-- media -->
-      <div class="pdp-media">
-        <div class="pdp-photo" id="pdpPhoto"></div>
-      </div>
-
-      <!-- copy + selectors -->
-      <div class="pdp-copy">
-        <span class="pdp-eyebrow" id="pdpCat"></span>
-        <h1 id="pdpTitle"></h1>
-        <p class="pdp-desc" id="pdpDesc"></p>
-        <div class="pdp-axes" id="pdpAxes"></div>
-        <p class="pdp-current" id="pdpCurrent"></p>
-      </div>
-
+    <!-- copy + selectors -->
+    <div class="pdp-copy">
+      <nav class="pdp-crumbs" aria-label="Fil d'Ariane">
+        <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
+        <span class="pdp-crumb-sep" aria-hidden="true">/</span>
+        <a id="crumbCat" href="categorie.html"></a>
+        <span class="pdp-crumb-sep" aria-hidden="true">/</span>
+        <span id="crumbProd" aria-current="page"></span>
+      </nav>
+      <h1 id="pdpTitle"></h1>
+      <p class="pdp-desc" id="pdpDesc"></p>
+      <div class="pdp-axes" id="pdpAxes"></div>
     </div>
+
+    <!-- product photo, on white -->
+    <div class="pdp-media">
+      <div class="pdp-photo" id="pdpPhoto"></div>
+    </div>
+
   </div>
 </main>
 
@@ -138,8 +132,8 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=122"></script>
-<script src="app.js?v=122"></script>
-<script src="product.js?v=122"></script>
+<script src="data.js?v=123"></script>
+<script src="app.js?v=123"></script>
+<script src="product.js?v=123"></script>
 </body>
 </html>
