@@ -305,11 +305,45 @@ function buildMobileMenu() {
   menu.appendChild(m);
 }
 
+/* ---------- reveal-on-scroll (Framer-style entrance) ----------
+   Blocks fade + rise as they enter the viewport. The hidden state is applied
+   by CSS only when <html> carries `.reveal-on` (set pre-paint by the inline
+   head script, and only when reduced motion is NOT requested). This just adds
+   `.rv-in` as each block scrolls in. Selector list MUST mirror the CSS one. */
+const REVEAL_SEL = [
+  ".trust-card",
+  ".services h2", ".services-eyebrow", ".svc-card", ".svc-center",
+  ".range > .wrap > h2",
+  ".mx-banner",
+  ".showcase-grid > div:not(.showcase-photo)",
+  ".marque-values-head", ".marque-value", ".marque-cta > .wrap > *",
+  ".contact-info", ".contact-form",
+  ".pdp-copy > *"
+].join(",");
+
+function initReveal() {
+  const root = document.documentElement;
+  if (!root.classList.contains("reveal-on")) return;   // reduced motion / disabled
+  root.classList.add("reveal-ready");                  // tell the head fallback we booted
+  const els = document.querySelectorAll(REVEAL_SEL);
+  if (!("IntersectionObserver" in window)) {            // old browser: just show them
+    els.forEach(el => el.classList.add("rv-in"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add("rv-in"); io.unobserve(en.target); }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+  els.forEach(el => io.observe(el));
+}
+
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderRange();
   initTrustCarousel();
   buildMobileMenu();
+  initReveal();
 
   // close language + mobile menu on outside click / Escape
   document.addEventListener("click", (e) => {

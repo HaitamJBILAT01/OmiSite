@@ -42,6 +42,13 @@ cleaning-products brand. Plain HTML/CSS/vanilla JS, **no build step**.
 - Bilingual: every string is `<span class="fr">…</span><span class="ar">…</span>` (or `bi({fr,ar})` in JS). `[dir="rtl"]` handles Arabic. Phone/email keep `dir="ltr"` on the *value span* only (so RTL rows still right-align).
 - Breakpoints: mobile `<768`, tablet `768–1024`, desktop `>1024`. Must hold in Arabic RTL.
 
+## Scroll & motion (Framer-style)
+- **Reveal-on-scroll:** blocks fade + rise as they enter the viewport. Driven by `initReveal()` in app.js (IntersectionObserver adds `.rv-in`). The hidden state lives in styles.css under `.reveal-on` and a tiny **inline `<head>` script** on every page sets `.reveal-on` on `<html>` **before first paint** (no flash), skipping it for `prefers-reduced-motion`. Fallback: if app.js never boots, a 2.6 s timer strips `.reveal-on` so nothing stays invisible (app.js signals boot via `.reveal-ready`).
+- **The CSS selector list and the JS `REVEAL_SEL` list must stay in sync.** No LCP image is ever animated (hero / product photo / marque photo excluded) so Core Web Vitals are untouched; `translateY` keeps the layout box so no CLS.
+- **Smooth anchor scroll:** `html{scroll-behavior:smooth}` under a `no-preference` media query.
+- **NOT done (deliberately):** inertia/"buttery" wheel smoothing (Lenis-style). It needs a scroll-hijack lib that fights the hide-on-scroll header + mobile drawer lock; left as an opt-in.
+- **Navbar** shrunk to `font-size:13px` (AR 14px), `gap:40px`, hover = `--omi-navy` (blue) — was 14.5px with an ink-900 hover.
+
 ## Typography (minimalist pass)
 Lightened site-wide per user preference: **Latin (General Sans) headings max weight 500; big section titles 400**; body 400. Arabic (Cairo) headings brought to 500. No bold headings anywhere.
 
