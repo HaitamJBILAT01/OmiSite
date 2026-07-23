@@ -12,6 +12,8 @@ cleaning-products brand. Plain HTML/CSS/vanilla JS, **no build step**.
 ## Files (all in `C:\Users\Haitam JBILAT\Desktop\OMI`)
 - `index.html` — homepage
 - `categorie.html` — per-category products page, driven by `?cat=<slug>`
+- `produit.html` — **product page**, driven by `?p=<product-slug>` (see below)
+- `product.js` — renders `produit.html` from `data.js`
 - `contact.html` — contact page (methods + mailto form)
 - `marque.html` — brand ("La marque") page
 - `styles.css` — all styles (design tokens in `:root`; `--font-display`=General Sans FR, `--font`=Cairo AR; `--sec`=section vertical rhythm)
@@ -57,6 +59,14 @@ Lightened site-wide per user preference: **Latin (General Sans) headings max wei
 Loads `data.js`, `app.js`, `category.js`. Order: navbar → **cat-hero** (shared `bannerCAT.webp`) → **cat-switch** (underline tabs: **Maxi Plus (text)** + 5 categories, NO "Tous") → **cat-range** (products) → footer.
 - The old **cat-intro line and the "Les atouts de la gamme" benefits band were removed.**
 - `category.js`: `entries` = Maxiplus (virtual) + categories. Tab click = crossfade hero text.
+
+## Product page (produit.html) — Dettol-style PDP
+`produit.html?p=<product-slug>` renders ONE product. Loads `data.js`, `app.js`, `product.js`.
+Layout: navbar → breadcrumb → 2-col grid (**copy+selectors left, photo right**; on mobile <900px the photo goes on top and copy centres) → footer. Deliberately minimal — no retailer/Amazon buttons, no extra sections yet.
+- **Selectors** come straight from the product's `axes` (scent = colour swatches, size/type = pills). A product with several variants but NO axes (e.g. `liquide-vaisselle`) gets one synthetic **"Variante"** row built from each variant's `sub`. Single-variant products get no selector.
+- **Incomplete combinations are normal** (Citron only exists in 1,5 L). Unreachable values are dimmed (`.pdp-opt.off`) but stay clickable — clicking one snaps the *other* axes to the nearest real variant, so you can never dead-end. All 34 variants are reachable; verified.
+- **Photo = one per PRODUCT**, `photo: "file.webp"` in data.js, shared by every variant. While `photo` is `""` a pure-SVG placeholder renders (no network request). `.pdp-photo` has a fixed `aspect-ratio`, so filling the photo in later causes **no layout shift** — that's why the `<img>` needs no width/height here.
+- Product cards everywhere are now `<a class="pcard">` → `produit.html?p=…` with the clicked variant's axis values in the query string, so the card you tapped arrives pre-selected (`productHref()` in app.js).
 
 ## data.js catalog (current: **34 variants**, 5 categories)
 1. sols-surfaces-vitres (accent blue, **8**)

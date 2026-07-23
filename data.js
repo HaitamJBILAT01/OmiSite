@@ -28,6 +28,10 @@
      │                                  no sub-heading in the UI).
      │   groups[] : { name:{fr,ar}, products:[...] }
      └ (product)
+         ├ slug                      -> its page: produit.html?p=<slug>
+         ├ photo?  "file.webp"       -> ONE photo shared by all variants, shown
+         │                              on the product page. While empty, a CSS
+         │                              placeholder is drawn instead (no request).
          ├ name    {fr,ar}           -> card title (shared by all its variants)
          ├ axes?   {scent?,size?,type?}  -> used only to label each variant,
          │     each axis: { label:{fr,ar}, style:"swatch"|"pill",       there is no in-card picker
@@ -62,6 +66,7 @@ window.OMI_DATA = {
         {
           slug: "nettoyant-surfaces",
           name: { fr: "Nettoyant Surfaces", ar: "منظف الأسطح" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           axes: {
             scent: {
               label: { fr: "Parfum", ar: "العطر" },
@@ -97,6 +102,7 @@ window.OMI_DATA = {
         {
           slug: "vitres-surfaces",
           name: { fr: "Vitres & Surfaces", ar: "الزجاج والأسطح" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "vitres-spray.webp", alt: "OMI Nettoyant Vitres & Surfaces 3 en 1 sans traces",
               sub: { fr: "Spray 3 en 1 · sans traces", ar: "بخاخ 3 في 1 · بدون آثار" } }
@@ -122,6 +128,7 @@ window.OMI_DATA = {
         {
           slug: "lessive-gel-matic",
           name: { fr: "Lessive Gel Matic", ar: "جل غسيل ماتيك" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "lessive-gel-matic.webp", alt: "OMI Power Gel Matic 2 en 1 anti-taches 3 Kg",
               sub: { fr: "Power Gel · 2 en 1 · 3 Kg", ar: "جل قوي · 2 في 1 · 3 كغ" } }
@@ -130,6 +137,7 @@ window.OMI_DATA = {
         {
           slug: "detergent-poudre",
           name: { fr: "Détergent en Poudre", ar: "مسحوق الغسيل" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "detergent-poudre.webp", alt: "Maxi Clean Détergent en Poudre 90 g",
               sub: { fr: "Maxi Clean · lavage main", ar: "ماكسي كلين · غسيل يدوي" } }
@@ -155,6 +163,7 @@ window.OMI_DATA = {
         {
           slug: "eau-de-javel",
           name: { fr: "Eau de Javel", ar: "ماء جافيل" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           axes: {
             scent: {
               label: { fr: "Parfum", ar: "العطر" },
@@ -202,6 +211,7 @@ window.OMI_DATA = {
         {
           slug: "liquide-vaisselle",
           name: { fr: "Liquide Vaisselle", ar: "سائل الأواني" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "toadd3.webp", alt: "OMI Liquide Vaisselle Super Dégraissant Lavande 800 ml",
               sub: { fr: "Lavande · 800 ml", ar: "الخزامة · 800 مل" } },
@@ -220,6 +230,7 @@ window.OMI_DATA = {
         {
           slug: "pate-lavante",
           name: { fr: "Pâte Lavante", ar: "عجينة الجلي" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           variants: [
             { image: "vaisselle-pate-citron.webp", alt: "OMI Pâte Lavante Multi-Usage Citron",
               sub: { fr: "Multi-usage · Citron", ar: "متعدد الاستعمالات · ليمون" } }
@@ -248,6 +259,7 @@ window.OMI_DATA = {
         {
           slug: "savon-liquide-mains",
           name: { fr: "Savon Liquide Mains", ar: "صابون سائل لليدين" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           axes: {
             scent: {
               label: { fr: "Parfum", ar: "العطر" },
@@ -257,24 +269,29 @@ window.OMI_DATA = {
                 { key: "lavande",   label: { fr: "Lavande",   ar: "الخزامة" }, swatch: "#a06fd6" },
                 { key: "camomille", label: { fr: "Camomille", ar: "بابونج" }, swatch: "#7cc243" }
               ]
+            },
+            size: {
+              label: { fr: "Format", ar: "الحجم" },
+              style: "pill",
+              values: [
+                { key: "500", label: { fr: "500 ml", ar: "500 مل" } },
+                { key: "300", label: { fr: "300 ml", ar: "300 مل" } }
+              ]
             }
           },
+          /* no `sub` — the card/PDP line is built from the axes above */
           variants: [
-            { scent: "original",  image: "savon-original-500.webp",  alt: "OMI Savon Liquide Mains Original 500 ml",
-              sub: { fr: "Original · 500 ml", ar: "أصلي · 500 مل" } },
-            { scent: "original",  image: "savon-original-300.webp",  alt: "OMI Savon Liquide Mains Original 300 ml",
-              sub: { fr: "Original · 300 ml", ar: "أصلي · 300 مل" } },
-            { scent: "lavande",   image: "savon-lavande.webp",   alt: "OMI Savon Liquide Mains Lavande",
-              sub: { fr: "Parfum lavande · 300 ml", ar: "عطر الخزامة · 300 مل" } },
-            { scent: "camomille", image: "savon-camomille-500.webp", alt: "OMI Savon Liquide Mains Camomille 500 ml",
-              sub: { fr: "Camomille · 500 ml", ar: "بابونج · 500 مل" } },
-            { scent: "camomille", image: "savon-camomille-300.webp", alt: "OMI Savon Liquide Mains Camomille 300 ml",
-              sub: { fr: "Camomille · 300 ml", ar: "بابونج · 300 مل" } }
+            { scent: "original",  size: "500", image: "savon-original-500.webp",  alt: "OMI Savon Liquide Mains Original 500 ml" },
+            { scent: "original",  size: "300", image: "savon-original-300.webp",  alt: "OMI Savon Liquide Mains Original 300 ml" },
+            { scent: "lavande",   size: "300", image: "savon-lavande.webp",       alt: "OMI Savon Liquide Mains Lavande 300 ml" },
+            { scent: "camomille", size: "500", image: "savon-camomille-500.webp", alt: "OMI Savon Liquide Mains Camomille 500 ml" },
+            { scent: "camomille", size: "300", image: "savon-camomille-300.webp", alt: "OMI Savon Liquide Mains Camomille 300 ml" }
           ]
         },
         {
           slug: "essuie-tout",
           name: { fr: "Essuie-Tout", ar: "فوط مطبخ" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           axes: {
             type: {
@@ -296,6 +313,7 @@ window.OMI_DATA = {
         {
           slug: "mouchoirs",
           name: { fr: "Mouchoirs", ar: "مناديل" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           axes: {
             type: {
@@ -315,6 +333,7 @@ window.OMI_DATA = {
         {
           slug: "serviettes-table",
           name: { fr: "Serviettes de Table", ar: "مناديل المائدة" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           variants: [
             { image: "toadd1.webp", alt: "Maxi Plus Serviettes de Table Original 80",
@@ -324,6 +343,7 @@ window.OMI_DATA = {
         {
           slug: "papier-hygienique",
           name: { fr: "Papier Hygiénique", ar: "ورق تواليت" },
+          photo: "",   /* shared photo for every variant — add the filename here */
           brand: "maxiplus",
           variants: [
             { image: "toadd7.webp", alt: "Maxi Plus Papier Hygiénique Confort 12 Rouleaux",
