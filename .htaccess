@@ -19,11 +19,23 @@ RedirectMatch 404 /\.claude
   </FilesMatch>
 </IfModule>
 
+# Assets are all cache-busted with ?v=N, so they can be cached forever — a
+# content change means a new URL. Lighthouse flags anything under ~1 year,
+# which is why css/js at 1 week scored 0 on "efficient cache lifetimes".
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType font/woff2   "access plus 1 year"
   ExpiresByType image/webp   "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
-  ExpiresByType text/css     "access plus 1 week"
-  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType text/css     "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  # HTML must NOT be cached — it's the file that points at the new ?v=N.
+  # Caching it is what makes a deploy look "not applied" (stale logo, etc).
+  ExpiresByType text/html    "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
 </IfModule>
