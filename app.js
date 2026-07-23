@@ -305,55 +305,11 @@ function buildMobileMenu() {
   menu.appendChild(m);
 }
 
-/* ---------- reveal-on-scroll (Framer-style entrance) ----------
-   Blocks fade + rise as they enter the viewport. The hidden state is applied
-   by CSS only when <html> carries `.reveal-on` (set pre-paint by the inline
-   head script, and only when reduced motion is NOT requested). This just adds
-   `.rv-in` as each block scrolls in. Selector list MUST mirror the CSS one. */
-const REVEAL_SEL = [
-  ".trust-card",
-  ".services h2", ".services-eyebrow", ".svc-card", ".svc-center",
-  ".range > .wrap > h2",
-  ".mx-banner",
-  ".showcase-grid > div:not(.showcase-photo)",
-  ".marque-values-head", ".marque-value", ".marque-cta > .wrap > *",
-  ".contact-info", ".contact-form",
-  ".pdp-copy > *",
-  // product-page extra sections (rendered by product.js after load)
-  ".psec-head", ".pfeat", ".phow-step", ".pcallout-media", ".pcallout-body",
-  ".psafe-item", ".psafe-media", ".pdyk-inner", ".prelated .pcard"
-].join(",");
-
-let _revealIO = null;
-/* Observe any not-yet-tracked reveal targets. Idempotent, so JS-rendered
-   sections (product.js, category.js) can call window.revealScan() after they
-   inject content and their blocks will animate in too. */
-function revealScan() {
-  const root = document.documentElement;
-  if (!root.classList.contains("reveal-on")) return;   // reduced motion / disabled
-  root.classList.add("reveal-ready");                  // tell the head fallback we booted
-  const els = document.querySelectorAll(REVEAL_SEL);
-  if (!("IntersectionObserver" in window)) {            // old browser: just show them
-    els.forEach(el => el.classList.add("rv-in"));
-    return;
-  }
-  if (!_revealIO) {
-    _revealIO = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        if (en.isIntersecting) { en.target.classList.add("rv-in"); _revealIO.unobserve(en.target); }
-      });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
-  }
-  els.forEach(el => { if (!el.dataset.rvObs) { el.dataset.rvObs = "1"; _revealIO.observe(el); } });
-}
-window.revealScan = revealScan;
-
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderRange();
   initTrustCarousel();
   buildMobileMenu();
-  revealScan();
 
   // close language + mobile menu on outside click / Escape
   document.addEventListener("click", (e) => {

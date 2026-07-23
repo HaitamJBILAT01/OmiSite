@@ -42,11 +42,9 @@ cleaning-products brand. Plain HTML/CSS/vanilla JS, **no build step**.
 - Bilingual: every string is `<span class="fr">…</span><span class="ar">…</span>` (or `bi({fr,ar})` in JS). `[dir="rtl"]` handles Arabic. Phone/email keep `dir="ltr"` on the *value span* only (so RTL rows still right-align).
 - Breakpoints: mobile `<768`, tablet `768–1024`, desktop `>1024`. Must hold in Arabic RTL.
 
-## Scroll & motion (Framer-style)
-- **Reveal-on-scroll:** blocks fade + rise as they enter the viewport. Driven by `initReveal()` in app.js (IntersectionObserver adds `.rv-in`). The hidden state lives in styles.css under `.reveal-on` and a tiny **inline `<head>` script** on every page sets `.reveal-on` on `<html>` **before first paint** (no flash), skipping it for `prefers-reduced-motion`. Fallback: if app.js never boots, a 2.6 s timer strips `.reveal-on` so nothing stays invisible (app.js signals boot via `.reveal-ready`).
-- **The CSS selector list and the JS `REVEAL_SEL` list must stay in sync.** No LCP image is ever animated (hero / product photo / marque photo excluded) so Core Web Vitals are untouched; `translateY` keeps the layout box so no CLS.
-- **Smooth anchor scroll:** `html{scroll-behavior:smooth}` under a `no-preference` media query.
-- **NOT done (deliberately):** inertia/"buttery" wheel smoothing (Lenis-style). It needs a scroll-hijack lib that fights the hide-on-scroll header + mobile drawer lock; left as an opt-in.
+## Scroll & motion
+- **Reveal-on-scroll was REMOVED** (2026-07-23) — the fade/rise-on-scroll made mobile feel sluggish. All of it is gone: the `.reveal-on`/`.rv-in` CSS, the `revealScan()` observer in app.js, the inline `<head>` flag script on every page, and product.js's `revealScan()` call. **Don't reintroduce it** without a lighter approach.
+- **Smooth anchor scroll:** `html{scroll-behavior:smooth}` (pre-existing, kept) smooths nav/footer anchor jumps.
 - **Navbar** shrunk to `font-size:13px` (AR 14px), `gap:40px`, hover = `--omi-navy` (blue) — was 14.5px with an ink-900 hover.
 
 ## Typography (minimalist pass)
@@ -78,7 +76,6 @@ Layout mirrors Dettol: 2-col grid — **left** = breadcrumb, H1, short desc, pil
   - **features / howto / callout are PER CATEGORY** in `window.OMI_DATA.categoryContent[<slug>]` (appended at the bottom of data.js). **safety / didYouKnow are GLOBAL** (`OMI_DATA.safety`, `OMI_DATA.didYouKnow`).
   - **Icons are placeholders:** `icon:"keyword"` renders a dashed circle showing the flaticon search term (`.psec-ic::after{content:attr(data-icon)}`). To use real icons, drop the SVG and swap that span. **Photos are placeholders too:** any `photo:""` → a dashed placeholder box; set a filename in `./assets/` to use a real image.
   - **Related** = other products in the same category, topped up from other categories (max 4), reusing `cardHTML`.
-  - These render after load, so product.js calls `window.revealScan()` (exposed by app.js) to animate them in.
 
 ## data.js catalog (current: **34 variants**, 6 categories)
 1. sols-surfaces-vitres (accent blue, **8**)

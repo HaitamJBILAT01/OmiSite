@@ -258,8 +258,6 @@
         <h2 class="psec-head">${bi({ fr: "Produits similaires", ar: "منتجات مشابهة" })}</h2>
         <div class="prelated-grid">${rel.slice(0, 4).map(p => cardHTML(p, p.variants[0])).join("")}</div></div>`);
     }
-
-    if (window.revealScan) window.revealScan();   // animate the new sections in
   }
 
   render(false);
