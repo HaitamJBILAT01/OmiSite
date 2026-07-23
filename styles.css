@@ -1,16 +1,16 @@
 /* General Sans — self-hosted from our own domain (Fontshare CDN is unreliable
    on some networks). ?v query busts any stale/failed font cache. */
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=138') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=138') format('woff2');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=138') format('woff2');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=138') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=139') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=139') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=139') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=139') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
 /* Cairo (Arabic) — self-hosted variable font, was a render-blocking Google Fonts
    request on every page (including FR, which never uses it). 3 subset files;
    font-weight range 400 700 = the weights we actually use. */
-@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-arabic.woff2?v=138') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
-@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin.woff2?v=138') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin-ext.woff2?v=138') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-arabic.woff2?v=139') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
+@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin.woff2?v=139') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin-ext.woff2?v=139') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 
 :root{
   --ink-900:#0B1B33; --ink-700:#2F415A; --ink-600:#3d4d63; --ink-500:#56677E;
@@ -878,23 +878,16 @@ a.contact-method:hover{border-color:var(--ink-200);box-shadow:var(--shadow-sm)}
   .marque-values-grid{grid-template-columns:1fr}
 }
 
-/* ================= PRODUCT PAGE (produit.html) — Dettol-style hero =========
-   Left: breadcrumb + title + desc + pill selectors, aligned to the site content
-   margin with space under the navbar. Right: a full-bleed panel running to the
-   top (flush under the fixed navbar) and the right viewport edge, with a big
-   curved bottom-left corner — a blurred kitchen bg (placeholder until set) and
-   the product bottle large on top. */
+/* ================= PRODUCT PAGE (produit.html) =================
+   Product floats on white (no kitchen bg). Left: breadcrumb + title + desc +
+   pill selectors; right: the product photo, smaller, centred on white. Top gap
+   under the navbar, then a consistent --sec rhythm down the sections. */
 .pdp{padding-bottom:var(--sec)}
+.pdp-top{padding-block:clamp(40px,5vw,72px) var(--sec)}   /* navbar gap top; white gap before 1st band */
 
-.pdp-hero{position:relative;display:grid;grid-template-columns:1.02fr 1fr;
-  align-items:stretch;min-height:clamp(500px,64vh,720px);direction:ltr}
+.pdp-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,4vw,64px);align-items:center}
 [dir="rtl"] .pdp-hero{direction:rtl}
-
-/* left copy — vertically centred; left pad = viewport gutter to 1520px + .wrap pad */
-.pdp-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;
-  padding-block:clamp(40px,5vw,72px);
-  padding-inline-start:calc(max(0px,(100vw - 1520px)/2) + clamp(24px,11.38vw,173px));
-  padding-inline-end:clamp(28px,4vw,64px)}
+.pdp-copy{min-width:0}
 
 .pdp-crumbs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
   font-family:var(--font-display);font-weight:400;font-size:12.5px;letter-spacing:-.005em;
@@ -940,30 +933,18 @@ a.contact-method:hover{border-color:var(--ink-200);box-shadow:var(--shadow-sm)}
   font-weight:500;text-decoration:none}
 .pdp-back:hover{text-decoration:underline}
 
-/* ---- right image panel: bleeds top + right, curved bottom-left corner ---- */
-.pdp-media{position:relative;min-width:0;align-self:stretch}
-.pdp-kitchen{position:absolute;inset:0;z-index:0;overflow:hidden;
-  border-end-start-radius:clamp(90px,13vw,190px);   /* big curve; flips in RTL */
-  background:var(--ink-100) center/cover no-repeat}
-/* placeholder shown until a real kitchen photo is set on the category */
-.pdp-kitchen.is-empty{display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#EAF0FA,#DCE6F5)}
-.pdp-kitchen-t{font-family:var(--font-display);font-size:13px;color:var(--ink-500);letter-spacing:.01em;
-  padding:10px 16px;border:1px dashed var(--ink-300);border-radius:10px;background:rgba(255,255,255,.6)}
-[dir="rtl"] .pdp-kitchen-t{font-family:var(--font)}
-.pdp-photo{position:relative;z-index:1;height:100%;display:flex;align-items:center;justify-content:center;
-  padding:clamp(16px,2.4vw,40px)}
-.pdp-photo img{max-height:90%;max-width:74%;width:auto;height:auto;object-fit:contain;display:block;
-  filter:drop-shadow(0 24px 40px rgba(11,27,51,.28))}
+/* ---- product photo: smaller, floating on white ---- */
+.pdp-media{min-width:0;display:flex;align-items:center;justify-content:center}
+.pdp-photo{width:100%;height:clamp(210px,25vw,320px);display:flex;align-items:center;justify-content:center}
+.pdp-photo img{max-height:100%;max-width:62%;width:auto;height:auto;object-fit:contain;display:block}
 
 @media(max-width:900px){
-  /* stack: kitchen panel + bottle on top, copy below */
-  .pdp-hero{grid-template-columns:1fr;min-height:0}
-  .pdp-media{order:-1;height:clamp(300px,64vw,420px)}
-  .pdp-kitchen{border-end-start-radius:0;border-end-end-radius:clamp(30px,7vw,48px)}
-  .pdp-photo img{max-height:94%;max-width:56%}
-  .pdp-copy{justify-content:flex-start;text-align:center;
-    padding-block:clamp(22px,5vw,32px) 0;padding-inline:clamp(24px,6vw,40px)}
+  /* photo on top, copy below */
+  .pdp-hero{grid-template-columns:1fr;gap:clamp(14px,3vw,24px)}
+  .pdp-media{order:-1}
+  .pdp-photo{height:clamp(200px,44vw,280px)}
+  .pdp-photo img{max-width:50%}
+  .pdp-copy{text-align:center}
   .pdp-copy h1{max-width:none;font-size:clamp(27px,7vw,38px);line-height:1.1}
   .pdp-desc{margin-inline:auto}
   .pdp-crumbs,.pdp-axes,.pdp-opts{justify-content:center}
@@ -974,7 +955,7 @@ a.contact-method:hover{border-color:var(--ink-200);box-shadow:var(--shadow-sm)}
   .pdp-opt{padding:9px 18px;font-size:13px}
 }
 
-/* navbar over the hero image: solid-ish white + shadow, like Dettol */
+/* navbar on the product page: solid-ish white + subtle shadow */
 .page-pdp .site-header{background:rgba(255,255,255,.92);
   border-bottom-color:var(--ink-100);box-shadow:0 2px 16px rgba(11,27,51,.08)}
 
@@ -983,7 +964,7 @@ a.contact-method:hover{border-color:var(--ink-200);box-shadow:var(--shadow-sm)}
    Features / How-to / Callout / Safety / Did-you-know / Related. All white or
    a whisper of --ink-50 for rhythm; no heavy colour bands. Filled by
    product.js; each <section class="psec"> starts [hidden] until it has data. */
-.psec{padding:clamp(46px,6vw,84px) 0}
+.psec{padding:var(--sec) 0}   /* consistent --sec rhythm between sections, like the homepage */
 .psec[hidden]{display:none}
 .phow, .psafety{background:var(--ink-50)}
 .prelated{border-top:1px solid var(--ink-100)}
@@ -1085,7 +1066,8 @@ a.contact-method:hover{border-color:var(--ink-200);box-shadow:var(--shadow-sm)}
    brand. Real SVG icons (assets/<keyword>.svg) are recoloured white via mask;
    categories without SVGs yet fall back to the white-dashed keyword slot. */
 .pfeatures{background:linear-gradient(150deg,#0F3FE6 0%,#173DBF 100%);
-  min-height:390px;display:flex;align-items:center;padding-block:24px}
+  min-height:390px;display:flex;align-items:center;
+  padding-block:0;margin-block:var(--sec)}   /* white --sec gap around the blue band */
 .pfeatures > .wrap{width:100%}
 .pfeatures .psec-head{color:#fff;margin-bottom:90px}   /* title → icons */
 .pfeatures .pfeat-lbl{color:rgba(255,255,255,.92)}
