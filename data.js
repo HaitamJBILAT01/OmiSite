@@ -512,3 +512,8 @@ window.OMI_DATA.didYouKnow = {
   text:  { fr: "Nettoyer réduit la propagation des germes, mais certaines bactéries persistent. Désinfecter régulièrement garde la maison plus saine.",
            ar: "التنظيف يقلّل انتشار الجراثيم، لكن بعض البكتيريا تبقى. التطهير المنتظم يحافظ على منزل أكثر صحة." }
 };
+
+/* Feature icons that now have a real SVG at assets/<keyword>.svg — rendered
+   white via CSS mask on the blue Features band. Add keywords here as you add
+   more SVGs (filename must equal the `icon` keyword). */
+window.OMI_DATA.iconsReady = ["sparkle-clean", "fast-dry", "air-freshener", "surfaces"];

@@ -178,6 +178,13 @@
     // placeholder showing the flaticon search keyword until a real SVG is added
     return `<span class="psec-ic" data-icon="${icon}" aria-hidden="true"></span>`;
   }
+  // feature icon: real SVG (recoloured white via CSS mask) once listed in
+  // OMI_DATA.iconsReady, otherwise the keyword placeholder
+  function featIcon(icon) {
+    const ready = (window.OMI_DATA.iconsReady || []).indexOf(icon) !== -1;
+    if (!ready) return iconSlot(icon);
+    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg')" aria-hidden="true"></span>`;
+  }
   function photoBox(file, hint) {
     if (file) return `<img src="assets/${file}" alt="" loading="lazy" decoding="async">`;
     return `<div class="psec-ph" role="img" aria-label="Photo à ajouter">
@@ -196,7 +203,7 @@
       fill("pFeatures", `<div class="wrap">
         <h2 class="psec-head">${bi({ fr: "Caractéristiques", ar: "المميزات" })}</h2>
         <div class="pfeat-grid">${CONTENT.features.map(f =>
-          `<div class="pfeat">${iconSlot(f.icon)}<span class="pfeat-lbl">${bi(f.label)}</span></div>`
+          `<div class="pfeat">${featIcon(f.icon)}<span class="pfeat-lbl">${bi(f.label)}</span></div>`
         ).join("")}</div></div>`);
     }
 
