@@ -1,16 +1,16 @@
 /* General Sans — self-hosted from our own domain (Fontshare CDN is unreliable
    on some networks). ?v query busts any stale/failed font cache. */
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=124') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=124') format('woff2');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=124') format('woff2');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=124') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-400.woff2?v=125') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-500.woff2?v=125') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-600.woff2?v=125') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'General Sans';src:url('assets/fonts/general-sans-700.woff2?v=125') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
 /* Cairo (Arabic) — self-hosted variable font, was a render-blocking Google Fonts
    request on every page (including FR, which never uses it). 3 subset files;
    font-weight range 400 700 = the weights we actually use. */
-@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-arabic.woff2?v=124') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
-@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin.woff2?v=124') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin-ext.woff2?v=124') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-arabic.woff2?v=125') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
+@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin.woff2?v=125') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Cairo';src:url('assets/fonts/cairo-latin-ext.woff2?v=125') format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 
 :root{
   --ink-900:#0B1B33; --ink-700:#2F415A; --ink-600:#3d4d63; --ink-500:#56677E;
@@ -879,35 +879,27 @@ a.contact-method:hover{border-color:var(--ink-200);box-shadow:var(--shadow-sm)}
 }
 
 /* ================= PRODUCT PAGE (produit.html) =================
-   Dettol-style: big title + pills on the left, the product photo filling
-   a full-bleed panel on the right with the signature curved inner corner.
-   The panel tint is a near-white (--ink-50) purely so that curve reads —
-   set it to #fff for a pure-white panel. */
-.pdp{padding-bottom:var(--sec)}
-.pdp-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);
-  align-items:stretch;min-height:clamp(490px,56vw,720px)}
-[dir="rtl"] .pdp-grid{direction:rtl}
-
-/* left edge lines up with .wrap (max-width 1520 + its clamped padding) while
-   the right column still bleeds to the viewport edge */
-.pdp-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;
-  padding-block:clamp(30px,3.8vw,56px);
-  padding-inline-start:calc(max(0px, 100vw - 1520px) / 2 + clamp(24px,11.38vw,173px));
-  padding-inline-end:clamp(24px,3.6vw,60px)}
+   Everything on white. Breadcrumb spans the top, then a 2-col grid that is
+   TOP-aligned, so the product photo starts on the same line as the title. */
+.pdp{padding-top:clamp(18px,2.6vw,38px);padding-bottom:var(--sec)}
 
 .pdp-crumbs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
   font-family:var(--font-display);font-weight:400;font-size:12.5px;letter-spacing:-.005em;
-  color:var(--ink-400);margin-bottom:clamp(14px,1.8vw,22px)}
+  color:var(--ink-400);margin-bottom:clamp(16px,2.2vw,28px)}
 [dir="rtl"] .pdp-crumbs{font-family:var(--font);font-size:13.5px}
 .pdp-crumbs a{color:var(--ink-400);text-decoration:none;transition:color var(--dur-fast)}
 .pdp-crumbs a:hover{color:var(--omi-navy)}
 .pdp-crumb-sep{color:var(--ink-300)}
 .pdp-crumbs [aria-current]{color:var(--ink-700)}
 
-/* big enough to carry the page, still weight 500 — the site never uses bold
-   headings (see HANDOFF typography) */
+.pdp-grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);
+  gap:clamp(28px,4vw,68px);align-items:start}
+[dir="rtl"] .pdp-grid{direction:rtl}
+.pdp-copy{min-width:0}
+
+/* large, but weight 500 — the site has no bold headings by design */
 .pdp-copy h1{font-family:var(--font-display);font-weight:500;
-  font-size:clamp(31px,4.5vw,60px);line-height:1.02;letter-spacing:-.035em;
+  font-size:clamp(30px,4.2vw,56px);line-height:1.04;letter-spacing:-.035em;
   color:var(--ink-900);margin:0;max-width:13ch}
 [dir="rtl"] .pdp-copy h1{font-family:var(--font);font-weight:500;letter-spacing:-.01em;line-height:1.28}
 
@@ -943,26 +935,23 @@ a.contact-method:hover{border-color:var(--ink-200);box-shadow:var(--shadow-sm)}
   font-weight:500;text-decoration:none}
 .pdp-back:hover{text-decoration:underline}
 
-/* ---- photo panel: full height, bleeds right, curved inner corner ---- */
-.pdp-media{align-self:stretch;display:flex;align-items:center;justify-content:center;
-  min-width:0;background:var(--ink-50);
-  border-end-start-radius:clamp(64px,9vw,150px);   /* flips in RTL */
-  padding:clamp(18px,2.4vw,40px)}
-/* the grid's min-height reserves the space, so the photo can fill it without
-   any layout shift — that's why the <img> needs no width/height */
-.pdp-photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.pdp-photo img{max-width:100%;max-height:100%;width:auto;height:auto;
-  object-fit:contain;display:block}
+/* ---- photo: white, top-aligned with the title, deliberately restrained ----
+   the fixed height reserves the space, so photos of differing intrinsic
+   sizes neither distort nor shift the layout (hence no width/height attrs) */
+.pdp-media{min-width:0;background:#fff}
+.pdp-photo{width:100%;height:clamp(280px,33vw,430px);
+  display:flex;align-items:flex-start;justify-content:center}
+.pdp-photo img{max-width:86%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;object-position:top center;display:block}
 
 @media(max-width:900px){
   /* photo on top, copy below — same rhythm as the homepage hero */
-  .pdp-grid{grid-template-columns:1fr;min-height:0;gap:clamp(16px,3.5vw,26px)}
-  .pdp-media{order:-1;border-end-start-radius:0;border-end-end-radius:clamp(28px,7vw,44px);
-    padding:clamp(16px,4vw,26px);height:clamp(270px,58vw,380px)}
-  .pdp-copy{text-align:center;justify-content:flex-start;
-    padding-block:0 clamp(8px,2.6vw,16px);
-    padding-inline:clamp(24px,6vw,40px)}
-  .pdp-copy h1{max-width:none;font-size:clamp(27px,7.2vw,38px);line-height:1.1}
+  .pdp-grid{grid-template-columns:1fr;gap:clamp(16px,3.5vw,26px)}
+  .pdp-media{order:-1}
+  .pdp-photo{height:clamp(230px,48vw,320px);align-items:center}
+  .pdp-photo img{max-width:66%}
+  .pdp-copy{text-align:center}
+  .pdp-copy h1{max-width:none;font-size:clamp(27px,7vw,38px);line-height:1.1}
   .pdp-desc{margin-inline:auto}
   .pdp-crumbs,.pdp-axes,.pdp-opts{justify-content:center}
   .pdp-axes{gap:clamp(16px,4.5vw,26px)}
