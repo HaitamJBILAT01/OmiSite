@@ -149,7 +149,7 @@ function gotoCat(i) {
 function cardHTML(product, variant) {
   return `
     <div class="pcard">
-      <div class="ph"><img src="assets/${variant.image}" alt="${variant.alt || ""}" loading="lazy"></div>
+      <div class="ph"><img src="assets/${variant.image}" alt="${variant.alt || ""}" loading="lazy" decoding="async"></div>
       <h3>${bi(product.name)}</h3>
       <p class="sub">${variantSubHTML(product, variant)}</p>
     </div>`;

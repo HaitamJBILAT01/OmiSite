@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OMI — Accueil</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=118" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=118" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=118">
+<!-- Fonts self-hosted (@font-face in styles.css). Cairo (Arabic) is subset by
+     unicode-range and only downloads once AR is selected — FR visitors, who are
+     the default, never fetch it. Removes the old render-blocking Google Fonts. -->
+<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=119" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=119" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/hero-products.webp?v=119" as="image" fetchpriority="high">
+<link rel="stylesheet" href="styles.css?v=119">
 </head>
 <body>
 
 <!-- ================= NAVBAR ================= -->
 <header class="site-header"><div class="wrap">
   <nav class="nav">
-    <a href="#" class="nav-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.webp" alt="OMI" style="height:40px;display:block"></a>
+    <a href="#" class="nav-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.webp" alt="OMI" width="1077" height="910" style="height:40px;display:block"></a>
     <div class="nav-links" id="nav-links">
       <a href="#"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
       <a href="#cats"><span class="fr">Produits</span><span class="ar">المنتجات</span></a>
@@ -60,7 +61,8 @@
   </div>
   <div class="hero-visual">
     <picture>
-      <img class="hero-photo" src="assets/hero-products.webp?v=118" alt="Gamme de produits OMI">
+      <img class="hero-photo" src="assets/hero-products.webp?v=119" alt="Gamme de produits OMI"
+           width="1537" height="1023" fetchpriority="high" decoding="async">
     </picture>
   </div>
 </section>
@@ -126,7 +128,7 @@
     </div>
 
     <div class="svc-center">
-      <img src="assets/woman-bucket.webp" alt="Femme mauritanienne tenant un seau de produits OMI">
+      <img src="assets/woman-bucket.webp" alt="Femme mauritanienne tenant un seau de produits OMI" width="861" height="1024" decoding="async">
     </div>
 
     <div class="svc-col">
@@ -180,7 +182,7 @@
         </div>
       </div>
       <div class="showcase-photo">
-        <img src="assets/glove-peace.webp" alt="Gant de ménage jaune à motif traditionnel, utilisé pour l’entretien de la maison">
+        <img src="assets/glove-peace.webp" alt="Gant de ménage jaune à motif traditionnel, utilisé pour l’entretien de la maison" width="1254" height="1254" decoding="async">
       </div>
     </div>
   </div>
@@ -190,7 +192,7 @@
 <section class="mx"><div class="wrap">
   <div class="mx-banner">
     <div class="mx-copy">
-      <img class="mx-logo" src="assets/maxiplus-logo.webp" alt="Maxiplus">
+      <img class="mx-logo" src="assets/maxiplus-logo.webp" alt="Maxiplus" width="862" height="698" decoding="async">
       <h2><span class="fr">La douceur au quotidien.</span><span class="ar">نعومة كل يوم.</span></h2>
       <p><span class="fr">Papiers et mouchoirs pensés pour toute la famille, disponibles chez vos commerçants habituels.</span><span class="ar">ورق ومناديل مصمّمة لكل العائلة، متوفّرة لدى تجاركم المعتادين.</span></p>
       <a href="categorie.html?cat=maxiplus" class="btn mx-btn"><span class="fr">Découvrir plus</span><span class="ar">اكتشف المزيد</span></a>
@@ -204,7 +206,7 @@
   <div class="foot-main">
 
     <div class="foot-brand">
-      <a href="#" class="foot-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.webp" alt="OMI"></a>
+      <a href="#" class="foot-logo" aria-label="OMI"><img src="assets/omi-logo-transparent.webp" alt="OMI" width="1077" height="910"></a>
       <p class="foot-tag"><span class="fr">La propreté de confiance, au cœur des foyers mauritaniens.</span><span class="ar">نظافة موثوقة، في قلب البيوت الموريتانية.</span></p>
       <div class="foot-social">
         <a href="https://web.facebook.com/profile.php?id=61557716205802&amp;mibextid=LQQJ4d&amp;_rdc=1&amp;_rdr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg></a>
@@ -265,7 +267,7 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=118"></script>
-<script src="app.js?v=118"></script>
+<script src="data.js?v=119"></script>
+<script src="app.js?v=119"></script>
 </body>
 </html>
