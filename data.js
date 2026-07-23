@@ -375,6 +375,7 @@ window.OMI_DATA = {
 window.OMI_DATA.categoryContent = {
 
   "sols-surfaces-vitres": {
+    heroPhoto: "",   /* kitchen bg for the product hero; "" = placeholder */
     features: [
       { icon: "sparkle-clean", label: { fr: "Sans traces",         ar: "بدون آثار" } },
       { icon: "fast-dry",      label: { fr: "Séchage rapide",       ar: "جفاف سريع" } },
@@ -395,6 +396,7 @@ window.OMI_DATA.categoryContent = {
   },
 
   "entretien-du-linge": {
+    heroPhoto: "",   /* kitchen bg for the product hero; "" = placeholder */
     features: [
       { icon: "stain-removal", label: { fr: "Anti-taches",       ar: "مزيل للبقع" } },
       { icon: "freshness",     label: { fr: "Fraîcheur durable", ar: "نضارة تدوم" } },
@@ -415,6 +417,7 @@ window.OMI_DATA.categoryContent = {
   },
 
   "javel": {
+    heroPhoto: "",   /* kitchen bg for the product hero; "" = placeholder */
     features: [
       { icon: "disinfect", label: { fr: "Désinfecte",   ar: "تُطهّر" } },
       { icon: "whitening", label: { fr: "Blancheur",    ar: "بياض ناصع" } },
@@ -435,6 +438,7 @@ window.OMI_DATA.categoryContent = {
   },
 
   "vaisselle-cuisine": {
+    heroPhoto: "",   /* kitchen bg for the product hero; "" = placeholder */
     features: [
       { icon: "grease-cut", label: { fr: "Dégraissant",    ar: "مزيل للدهون" } },
       { icon: "shine",      label: { fr: "Brillance",      ar: "لمعان" } },
@@ -455,6 +459,7 @@ window.OMI_DATA.categoryContent = {
   },
 
   "hygiene-soin-personnel": {
+    heroPhoto: "",   /* kitchen bg for the product hero; "" = placeholder */
     features: [
       { icon: "soft-drop",  label: { fr: "Douceur",       ar: "نعومة" } },
       { icon: "moisture",   label: { fr: "Hydratation",   ar: "ترطيب" } },
@@ -475,6 +480,7 @@ window.OMI_DATA.categoryContent = {
   },
 
   "maxiplus": {
+    heroPhoto: "",   /* kitchen bg for the product hero; "" = placeholder */
     features: [
       { icon: "absorbent",  label: { fr: "Ultra absorbant", ar: "امتصاص فائق" } },
       { icon: "strong",     label: { fr: "Résistant",       ar: "متين" } },

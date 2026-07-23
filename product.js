@@ -185,7 +185,7 @@
     if (!ready) return iconSlot(icon);
     // ?v busts the 1-year SVG cache when an icon file is replaced (bumped with
     // the site version — product.js is part of the ?v=N bump set now)
-    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=137')" aria-hidden="true"></span>`;
+    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=138')" aria-hidden="true"></span>`;
   }
   function photoBox(file, hint) {
     if (file) return `<img src="assets/${file}" alt="" loading="lazy" decoding="async">`;
@@ -196,6 +196,20 @@
   function fill(id, inner) {
     const el = document.getElementById(id);
     if (el) { el.innerHTML = inner; el.hidden = false; }
+  }
+
+  // hero kitchen panel: real bg once CONTENT.heroPhoto is set, else placeholder
+  function renderKitchen() {
+    const el = document.getElementById("pdpKitchen");
+    if (!el) return;
+    if (CONTENT.heroPhoto) {
+      el.classList.remove("is-empty");
+      el.style.backgroundImage = `url('assets/${CONTENT.heroPhoto}')`;
+      el.innerHTML = "";
+    } else {
+      el.classList.add("is-empty");
+      el.innerHTML = `<span class="pdp-kitchen-t">${bi({ fr: "Photo cuisine — à ajouter", ar: "صورة المطبخ — تُضاف لاحقًا" })}</span>`;
+    }
   }
 
   function renderExtraSections() {
@@ -270,5 +284,6 @@
   }
 
   render(false);
+  renderKitchen();
   renderExtraSections();
 })();
