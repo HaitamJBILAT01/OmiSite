@@ -46,6 +46,7 @@
   const countEl  = document.getElementById("catCount");
   const crumbEl  = document.getElementById("crumbCat");
   const featWrap  = document.getElementById("catFeats");
+  const featLead  = document.getElementById("catFeatsLead");
   const featTrack = document.getElementById("catFeatTrack");
   const featDots  = document.getElementById("catFeatDots");
 
@@ -58,12 +59,12 @@
      the 1-year SVG cache — category.js is in the version-bump set. */
   function featIcon(f, i) {
     return READY.indexOf(f.icon) !== -1
-      ? `<span class="trust-icon" style="--ti:url('assets/${f.icon}.svg?v=151')" aria-hidden="true"></span>`
+      ? `<span class="trust-icon" style="--ti:url('assets/${f.icon}.svg?v=152')" aria-hidden="true"></span>`
       : `<span class="trust-icon is-svg" aria-hidden="true">${ICONS[i % ICONS.length]}</span>`;
   }
 
   // one banner, set a single time — category switches never touch it
-  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=151")`;
+  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=152")`;
 
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {
@@ -94,8 +95,13 @@
        (hidden if it has none). Same component as the homepage, so it also
        needs the carousel re-armed after each re-render. */
     if (featWrap && featTrack && featDots) {
-      const feats = (CONTENT[e.slug] || {}).features || [];
+      const cc = CONTENT[e.slug] || {};
+      const feats = cc.features || [];
       featWrap.hidden = feats.length === 0;
+      if (featLead) {
+        featLead.innerHTML = cc.featsLead ? bi(cc.featsLead) : "";
+        featLead.hidden = !cc.featsLead;
+      }
       featTrack.innerHTML = feats.map((f, i) => `
         <div class="trust-card">
           ${featIcon(f, i)}

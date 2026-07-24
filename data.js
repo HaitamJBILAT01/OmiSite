@@ -380,6 +380,10 @@ window.OMI_DATA.categoryContent = {
 
   "sols-surfaces-vitres": {
     heroKitchen: "kitchen.webp",   /* Dettol-style kitchen bg behind the product (this category only) */
+    featsLead: {
+      fr: "Des sols qui brillent ? Des vitres sans une seule trace ? Avec la gamme Sols, Surfaces & Vitres, il y a aussi…",
+      ar: "أرضيات تلمع؟ زجاج بدون أي أثر؟ مع تشكيلة الأرضيات والأسطح والزجاج، هناك أيضاً…"
+    },
     features: [
       { icon: "sparkle-clean", label: { fr: "Sans traces", ar: "بدون آثار" },
         text: { fr: "Sols, plans de travail et vitres restent nets, sans voile ni auréole au séchage.",
@@ -408,6 +412,10 @@ window.OMI_DATA.categoryContent = {
   },
 
   "entretien-du-linge": {
+    featsLead: {
+      fr: "Un blanc qui reste blanc ? Une odeur qui tient toute la semaine ? Avec la gamme Entretien du Linge, il y a aussi…",
+      ar: "أبيض يبقى أبيض؟ عطر يدوم الأسبوع كله؟ مع تشكيلة العناية بالملابس، هناك أيضاً…"
+    },
     features: [
       { icon: "stain-removal", label: { fr: "Anti-taches", ar: "مزيل للبقع" },
         text: { fr: "Vient à bout des taches du quotidien — huile, terre, transpiration — dès le premier lavage.",
@@ -436,6 +444,10 @@ window.OMI_DATA.categoryContent = {
   },
 
   "javel": {
+    featsLead: {
+      fr: "Une maison vraiment désinfectée ? Un blanc éclatant ? Avec la gamme Eau de Javel, il y a aussi…",
+      ar: "منزل مُطهَّر فعلاً؟ بياض ناصع؟ مع تشكيلة ماء جافيل، هناك أيضاً…"
+    },
     features: [
       { icon: "disinfect", label: { fr: "Désinfecte", ar: "تُطهّر" },
         text: { fr: "Assainit en profondeur les sols, les sanitaires et les surfaces lavables de la maison.",
@@ -464,6 +476,10 @@ window.OMI_DATA.categoryContent = {
   },
 
   "vaisselle-cuisine": {
+    featsLead: {
+      fr: "La graisse qui part du premier coup ? Des verres sans traces ? Avec la gamme Vaisselle & Cuisine, il y a aussi…",
+      ar: "دهون تزول من المرة الأولى؟ أكواب بدون آثار؟ مع تشكيلة الأواني والمطبخ، هناك أيضاً…"
+    },
     features: [
       { icon: "grease-cut", label: { fr: "Dégraissant", ar: "مزيل للدهون" },
         text: { fr: "Dissout la graisse cuite et les résidus tenaces, sans frotter longtemps.",
@@ -492,6 +508,10 @@ window.OMI_DATA.categoryContent = {
   },
 
   "hygiene-soin-personnel": {
+    featsLead: {
+      fr: "Des mains propres et douces ? Une formule que toute la famille peut utiliser ? Avec la gamme Hygiène & Soin Personnel, il y a aussi…",
+      ar: "أيدٍ نظيفة وناعمة؟ تركيبة تناسب كل العائلة؟ مع تشكيلة النظافة والعناية الشخصية، هناك أيضاً…"
+    },
     features: [
       { icon: "soft-drop", label: { fr: "Douceur", ar: "نعومة" },
         text: { fr: "Une mousse onctueuse qui nettoie les mains sans les dessécher.",
@@ -520,6 +540,10 @@ window.OMI_DATA.categoryContent = {
   },
 
   "maxiplus": {
+    featsLead: {
+      fr: "Une feuille qui absorbe vraiment ? Qui ne se déchire pas ? Avec la gamme Maxi Plus, il y a aussi…",
+      ar: "ورقة تمتص فعلاً؟ ولا تتمزّق؟ مع تشكيلة ماكسي بلس، هناك أيضاً…"
+    },
     features: [
       { icon: "absorbent", label: { fr: "Ultra absorbant", ar: "امتصاص فائق" },
         text: { fr: "Une ouate épaisse qui boit vite les liquides — moins de feuilles pour le même geste.",
