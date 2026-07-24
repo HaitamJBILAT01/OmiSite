@@ -2,6 +2,8 @@
 # (Git deploy can leave a .git folder in public_html — never expose it.)
 RedirectMatch 404 /\.git
 RedirectMatch 404 /\.claude
+# Shelved product page (see _archive/README.md) — deployed but not reachable.
+RedirectMatch 404 /_archive
 <FilesMatch "\.(md|py|gitignore)$">
   Require all denied
 </FilesMatch>

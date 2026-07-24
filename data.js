@@ -28,7 +28,9 @@
      │                                  no sub-heading in the UI).
      │   groups[] : { name:{fr,ar}, products:[...] }
      └ (product)
-         ├ slug                      -> its page: produit.html?p=<slug>
+         ├ slug                      -> was produit.html?p=<slug>; that page is
+         │                              shelved in _archive/, so slugs are
+         │                              currently identifiers only, not links
          ├ photo?  "file.webp"       -> OPTIONAL. Pins ONE image for the whole
          │                              product page. Omit it (the normal case)
          │                              and the page shows the selected
@@ -363,13 +365,15 @@ window.OMI_DATA = {
 };
 
 /* ============================================================
-   PRODUCT-PAGE content (produit.html) — the Dettol-style sections.
-   - features / howto / callout  = PER CATEGORY (every product in a
-     category shares them), keyed by category slug below.
-   - safety / didYouKnow          = GLOBAL (same across the whole site).
-   `icon:"keyword"` is a PLACEHOLDER — the term to search on flaticon.
-   Until a real SVG is added it renders as a small labelled placeholder.
-   Any `*photo:""` renders a labelled placeholder box; set a filename in
+   PER-CATEGORY content, keyed by category slug.
+   - features  = LIVE. Feeds the "Caractéristiques" row on categorie.html.
+   - howto / callout / heroKitchen = only read by the shelved product page
+     (_archive/product.js). Kept for when it comes back.
+   - safety / didYouKnow (below) = GLOBAL, also product-page only.
+   `icon:"keyword"` names `assets/<keyword>.svg`. A feature shows its own icon
+   only once that file exists AND the keyword is added to OMI_DATA.iconsReady
+   at the bottom of this file; otherwise categorie.html falls back to a generic
+   line-art icon. Any `*photo:""` renders a placeholder box; set a filename in
    ./assets/ to use a real image.  TO EDIT: change this block.
    ============================================================ */
 window.OMI_DATA.categoryContent = {

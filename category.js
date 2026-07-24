@@ -21,7 +21,11 @@
      so switching category is instant (no image reload) */
   const BANNER = "bannerCAT.webp";
 
-  /* line-art feature icons (Dettol-style), cycled across the benefits */
+  /* Fallback line-art icons for the Caractéristiques row, cycled by position.
+     A feature only gets its OWN icon once `assets/<icon>.svg` exists AND the
+     keyword is listed in OMI_DATA.iconsReady — only 4 are (the sols set), so
+     without a fallback five of the six categories would render placeholder
+     boxes on a live page. These keep it looking finished meanwhile. */
   const ICONS = [
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><path d="M18.6 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>',
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s6 6.3 6 10.5a6 6 0 0 1-12 0c0-4.2 6-10.5 6-10.5z"/></svg>',
@@ -41,11 +45,24 @@
   const switchEl = document.getElementById("catSwitch");
   const countEl  = document.getElementById("catCount");
   const crumbEl  = document.getElementById("crumbCat");
-  const beneWrap = document.querySelector(".cat-benefits");
-  const beneEl   = document.getElementById("catBenefits");
+  const featWrap = document.getElementById("catFeats");
+  const featEl   = document.getElementById("catFeatGrid");
+
+  const CONTENT = window.OMI_DATA.categoryContent || {};
+  const READY   = window.OMI_DATA.iconsReady || [];
+
+  /* real SVG (recoloured to the brand blue via CSS mask, same trick as the
+     homepage trust icons) once the keyword is in iconsReady; else a generic
+     line-art icon so the row never shows a placeholder box. ?v busts the
+     1-year SVG cache — category.js is in the version-bump set. */
+  function featIcon(icon, i) {
+    return READY.indexOf(icon) !== -1
+      ? `<span class="cat-feat-ic is-mask" style="--ic:url('assets/${icon}.svg?v=149')" aria-hidden="true"></span>`
+      : `<span class="cat-feat-ic" aria-hidden="true">${ICONS[i % ICONS.length]}</span>`;
+  }
 
   // one banner, set a single time — category switches never touch it
-  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=148")`;
+  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=149")`;
 
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {
@@ -72,12 +89,12 @@
     // breadcrumb: last crumb = current category
     if (crumbEl) crumbEl.innerHTML = bi(e.name);
 
-    // per-category benefits strip (hidden if a category has none)
-    if (beneWrap && beneEl) {
-      const list = e.benefits || [];
-      beneWrap.hidden = list.length === 0;
-      beneEl.innerHTML = list.map((b, i) =>
-        `<div class="cat-benefit"><span class="cat-benefit-ic">${ICONS[i % ICONS.length]}</span><span class="cat-benefit-lbl">${bi(b)}</span></div>`
+    // Caractéristiques — this category's own features (hidden if it has none)
+    if (featWrap && featEl) {
+      const feats = (CONTENT[e.slug] || {}).features || [];
+      featWrap.hidden = feats.length === 0;
+      featEl.innerHTML = feats.map((f, i) =>
+        `<div class="cat-feat">${featIcon(f.icon, i)}<span class="cat-feat-lbl">${bi(f.label)}</span></div>`
       ).join("");
     }
 

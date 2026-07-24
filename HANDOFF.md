@@ -12,8 +12,7 @@ cleaning-products brand. Plain HTML/CSS/vanilla JS, **no build step**.
 ## Files (all in `C:\Users\Haitam JBILAT\Desktop\OMI`)
 - `index.html` — homepage
 - `categorie.html` — per-category products page, driven by `?cat=<slug>`
-- `produit.html` — **product page**, driven by `?p=<product-slug>` (see below)
-- `product.js` — renders `produit.html` from `data.js`
+- `_archive/` — **shelved product page** (`produit.html` + `product.js`), 2026-07-24. Deployed but 404'd by `.htaccess`; nothing links to it. **`_archive/README.md` is the restore guide** — read it before bringing the PDP back.
 - `contact.html` — contact page (methods + mailto form)
 - `marque.html` — brand ("La marque") page
 - `styles.css` — all styles (design tokens in `:root`; `--font-display`=General Sans FR, `--font`=Cairo AR; `--sec`=section vertical rhythm)
@@ -30,9 +29,9 @@ cleaning-products brand. Plain HTML/CSS/vanilla JS, **no build step**.
 ## IMPORTANT conventions
 - **Cache-busting:** every CSS/JS `<link>`/`<script>` uses `?v=N`. **After ANY css/js/data/image edit, bump N EVERYWHERE:**
   ```
-  sed -i 's/?v=148/?v=149/g' index.html categorie.html contact.html marque.html produit.html styles.css product.js app.js category.js
+  sed -i 's/?v=149/?v=150/g' index.html categorie.html contact.html marque.html styles.css app.js category.js
   ```
-  (do NOT include `HANDOFF.md` — it rewrites this very line). **Currently at v=148.**
+  (do NOT include `HANDOFF.md` — it rewrites this very line). **Currently at v=149.**
   **Every asset URL the site builds now carries `?v=`, including images.** `.htaccess` caches webp/svg/woff2 for **1 year**, so a same-filename replacement is invisible without a new URL. That covers: the feature-icon SVGs and the kitchen bg (`product.js`), **product photos** (`photoHTML` + `photoBox` + related-shot in `product.js`, `cardHTML` in `app.js`), the category banner (`category.js`), the hero `<img>` + preload, and the `@font-face` URLs. `app.js`/`category.js` joined the sed list on 2026-07-24 for exactly this reason — **miss them and a replaced photo silently stays stale.**
   **So: replacing `assets/<photo>.webp` in place + bumping the version = the new photo goes live on push.** No CDN purge, no hard refresh.
 - Fonts are **self-hosted** (`@font-face` in styles.css → `assets/fonts/general-sans-*.woff2` + `assets/fonts/cairo-*.woff2`). Fontshare/Google CDNs were removed (render-blocking + unreliable on some networks). **Cairo (Arabic)** is a variable woff2 split into 3 `unicode-range` subsets (arabic/latin/latin-ext); because `.ar{display:none}` in FR mode, the Arabic file only downloads once AR is selected — FR visitors (the default) never fetch it. If font URLs ever need cache-busting, they use the same `?v=`.
@@ -67,11 +66,15 @@ Lightened site-wide per user preference: **Latin (General Sans) headings max wei
 8. Footer — 4 cols: brand+social, Liens rapides, Nos produits, Contact. Social = FB, IG, **TikTok** (`@omirim1`).
 
 ## Category page (categorie.html)
-Loads `data.js`, `app.js`, `category.js`. Order: navbar → **cat-hero** (shared `bannerCAT.webp`) → **cat-switch** (underline tabs: **the 6 categories in data order**, Maxi Plus last, NO "Tous") → **cat-range** (products) → footer. No `?cat=` falls back to the FIRST category (sols) — it used to be the virtual Maxi Plus tab.
+Loads `data.js`, `app.js`, `category.js`. Order: navbar → **cat-hero** (shared `bannerCAT.webp`) → **cat-switch** (underline tabs: **the 6 categories in data order**, Maxi Plus last, NO "Tous") → **cat-range** (products) → **cat-feats (Caractéristiques)** → footer. No `?cat=` falls back to the FIRST category (sols) — it used to be the virtual Maxi Plus tab.
 - The old **cat-intro line and the "Les atouts de la gamme" benefits band were removed.**
 - `category.js`: `entries` = a straight map of data.js categories (virtual-tab logic removed). Tab click = crossfade hero text.
+- **Caractéristiques** (added 2026-07-24, moved off the shelved PDP): `#catFeats` / `#catFeatGrid`, re-rendered on every tab switch from `OMI_DATA.categoryContent[<slug>].features`. `[hidden]` if a category has none. **Styled like the homepage trust strip** — white section, centred 4-up row, icons recoloured to `#3D63FF` via CSS mask — deliberately NOT the product page's blue `.pfeatures` band.
+  - `featIcon()` in category.js: a feature shows its **own** `assets/<icon>.svg` only if the keyword is in `OMI_DATA.iconsReady`; otherwise it falls back to one of 4 generic line-art SVGs (the `ICONS` array, cycled by position). **Only the 4 sols icons are ready** — the other 5 categories are all on the fallback, so they repeat the same 4 line-art icons. Adding real SVGs is a drop-in: file in `assets/` + keyword in `iconsReady` + version bump. Needed: `stain-removal freshness fabric-care scent disinfect whitening germs grease-cut shine hand-care multi-use soft-drop moisture gentle family absorbent strong soft-touch`.
 
-## Product page (produit.html) — Dettol-style PDP
+## Product page — SHELVED (`_archive/`), Dettol-style PDP
+> **Not live since 2026-07-24.** `produit.html` + `product.js` moved to `_archive/`, 404'd by `.htaccess`. Product cards are plain `<div class="pcard">` now, not links, and carry no hover affordance. Its CSS is still in `styles.css` under an ARCHIVED banner. **`_archive/README.md` is the restore checklist.** Its `features` content lives on as the category-page Caractéristiques row. Everything below describes the page as it was, for when it returns.
+
 `produit.html?p=<product-slug>` renders ONE product. Loads `data.js`, `app.js`, `product.js`.
 Hero is a `.pdp-hero` grid split into **head** (breadcrumb + H1), **media** (photo), **body** (desc + pill selectors) via `grid-template-areas`, so **desktop** is 2-col (`"head media" / "body media"`) but **mobile (<900px)** stacks in Dettol order: **title → photo → selectors** (`"head" "media" "body"`, left-aligned text). Minimal: no eyebrow, no summary line, no retailer/Amazon buttons.
 - **Photo: floats on white by default** (contained inside `.wrap.pdp-top`, `.pdp-photo img` max-width ~62%). No kitchen bg for most categories.

@@ -119,28 +119,16 @@ function gotoCat(i) {
   }
 }
 
-/* link to the product page, pre-selecting the variant that was clicked so the
-   card you tapped is the one already chosen on arrival */
-function productHref(product, variant) {
-  const qs = new URLSearchParams({ p: product.slug });
-  const keys = axisKeys(product);
-  if (keys.length) {
-    keys.forEach(k => { if (variant[k] != null) qs.set(k, variant[k]); });
-  } else if (product.variants.length > 1) {
-    qs.set("__v", String(product.variants.indexOf(variant)));   // synthetic axis
-  }
-  return `produit.html?${qs}`;
-}
-
 /* one static card per variant: image, product name, one short sub-line.
-   No pickers here — the pickers live on the product page it links to. */
+   NOT a link — the product page is shelved in _archive/ (see its README for
+   the <a> + productHref() this used to render, and how to put them back). */
 function cardHTML(product, variant) {
   return `
-    <a class="pcard" href="${productHref(product, variant)}">
-      <div class="ph"><img src="assets/${variant.image}?v=148" alt="${variant.alt || ""}" loading="lazy" decoding="async"></div>
+    <div class="pcard">
+      <div class="ph"><img src="assets/${variant.image}?v=149" alt="${variant.alt || ""}" loading="lazy" decoding="async"></div>
       <h3>${bi(product.name)}</h3>
       <p class="sub">${variantSubHTML(product, variant)}</p>
-    </a>`;
+    </div>`;
 }
 
 /* short sub-line for a variant: its own `sub`, else built from axis labels */
