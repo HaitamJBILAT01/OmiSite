@@ -7,9 +7,9 @@
 <!-- Fonts self-hosted (@font-face in styles.css). Cairo (Arabic) is subset by
      unicode-range and only downloads once AR is selected. Removed the old
      render-blocking Google Fonts request. -->
-<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=155" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=155" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=155">
+<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=156" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=156" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=156">
 </head>
 <body>
 
@@ -65,25 +65,6 @@
   <p class="range-count" id="catCount"></p>
   <div class="grid" id="catGrid"></div>
 </div></section>
-
-<!-- ================= SPOTLIGHT / "Le bon geste" (per category) =================
-     Dettol-style split band: photo on one half, royal-blue panel on the other
-     carrying ONE icon + a title + a short usage tip. Deliberately no product
-     shot (the product page is shelved) and no title chip — the site has no
-     chip-style elements. Content = OMI_DATA.categoryContent[<slug>].spotlight,
-     filled by category.js; [hidden] until a category has one. -->
-<section class="cat-spot" id="catSpot" hidden>
-  <div class="cat-spot-grid">
-    <div class="cat-spot-media" id="catSpotMedia" role="img" aria-label=""></div>
-    <div class="cat-spot-panel">
-      <div class="cat-spot-inner">
-        <span class="cat-spot-ic-slot" id="catSpotIcon"></span>
-        <h2 id="catSpotTitle"></h2>
-        <p id="catSpotText"></p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ================= CARACTÉRISTIQUES (per category, filled by category.js) ==
      Content comes from OMI_DATA.categoryContent[<slug>].features. This reuses
@@ -169,8 +150,8 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=155"></script>
-<script src="app.js?v=155"></script>
-<script src="category.js?v=155"></script>
+<script src="data.js?v=156"></script>
+<script src="app.js?v=156"></script>
+<script src="category.js?v=156"></script>
 </body>
 </html>

@@ -49,30 +49,22 @@
   const featLead  = document.getElementById("catFeatsLead");
   const featTrack = document.getElementById("catFeatTrack");
   const featDots  = document.getElementById("catFeatDots");
-  const spotWrap  = document.getElementById("catSpot");
-  const spotMedia = document.getElementById("catSpotMedia");
-  const spotIcon  = document.getElementById("catSpotIcon");
-  const spotTitle = document.getElementById("catSpotTitle");
-  const spotText  = document.getElementById("catSpotText");
 
   const CONTENT = window.OMI_DATA.categoryContent || {};
   const READY   = window.OMI_DATA.iconsReady || [];
 
-  /* Shared icon renderer. A keyword listed in iconsReady gets its real SVG,
-     recoloured via CSS mask (`--ti` + a solid background, the homepage trick);
-     anything else falls back to `.is-svg` + an inline line-art SVG so nothing
-     ever renders as an empty box. `cls` picks the skin: `trust-icon` (blue, on
-     white) or `cat-spot-ic` (white, on the blue panel). ?v busts the 1-year
-     SVG cache — category.js is in the version-bump set. */
-  function iconMarkup(icon, i, cls) {
-    return READY.indexOf(icon) !== -1
-      ? `<span class="${cls}" style="--ti:url('assets/${icon}.svg?v=155')" aria-hidden="true"></span>`
-      : `<span class="${cls} is-svg" aria-hidden="true">${ICONS[i % ICONS.length]}</span>`;
+  /* .trust-icon = the homepage's masked icon (--ti + a solid background), used
+     once the keyword is in iconsReady. Otherwise `.is-svg` swaps the mask for
+     an inline line-art SVG so the row never shows a placeholder box. ?v busts
+     the 1-year SVG cache — category.js is in the version-bump set. */
+  function featIcon(f, i) {
+    return READY.indexOf(f.icon) !== -1
+      ? `<span class="trust-icon" style="--ti:url('assets/${f.icon}.svg?v=156')" aria-hidden="true"></span>`
+      : `<span class="trust-icon is-svg" aria-hidden="true">${ICONS[i % ICONS.length]}</span>`;
   }
-  const featIcon = (f, i) => iconMarkup(f.icon, i, "trust-icon");
 
   // one banner, set a single time — category switches never touch it
-  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=155")`;
+  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=156")`;
 
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {
@@ -98,24 +90,6 @@
 
     // breadcrumb: last crumb = current category
     if (crumbEl) crumbEl.innerHTML = bi(e.name);
-
-    /* Spotlight — photo + blue panel with one icon, a title and a usage tip.
-       The photo is a CSS background, so a missing/renamed file degrades to a
-       plain panel instead of a broken <img>. */
-    if (spotWrap) {
-      const sp = (CONTENT[e.slug] || {}).spotlight;
-      spotWrap.hidden = !sp;
-      if (sp) {
-        if (spotMedia) {
-          spotMedia.style.backgroundImage =
-            sp.photo ? `url("${encodeURI("assets/" + sp.photo)}?v=155")` : "";
-          spotMedia.setAttribute("aria-label", e.name.fr);
-        }
-        if (spotIcon)  spotIcon.innerHTML  = iconMarkup(sp.icon, 0, "cat-spot-ic");
-        if (spotTitle) spotTitle.innerHTML = bi(sp.title);
-        if (spotText)  spotText.innerHTML  = bi(sp.text);
-      }
-    }
 
     /* Caractéristiques — this category's own features, as trust-strip cards
        (hidden if it has none). Same component as the homepage, so it also
