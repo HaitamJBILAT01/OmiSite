@@ -7,9 +7,9 @@
 <!-- Fonts self-hosted (@font-face in styles.css). Cairo (Arabic) is subset by
      unicode-range and only downloads once AR is selected. No render-blocking
      third-party requests. -->
-<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=141" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=141" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=141">
+<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=142" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=142" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=142">
 </head>
 <body class="page-pdp">
 
@@ -44,8 +44,10 @@
 <main class="pdp" id="pdp">
   <!-- Hero: copy left, product photo floating on white (smaller) right. -->
   <div class="wrap pdp-top">
+    <!-- head / media / body split so desktop is 2-col but mobile stacks in
+         Dettol order: breadcrumb + title, then photo, then desc + selectors -->
     <div class="pdp-hero">
-      <div class="pdp-copy">
+      <div class="pdp-head">
         <nav class="pdp-crumbs" aria-label="Fil d'Ariane">
           <a href="index.html"><span class="fr">Accueil</span><span class="ar">الرئيسية</span></a>
           <span class="pdp-crumb-sep" aria-hidden="true">/</span>
@@ -54,12 +56,15 @@
           <span id="crumbProd" aria-current="page"></span>
         </nav>
         <h1 id="pdpTitle"></h1>
-        <p class="pdp-desc" id="pdpDesc"></p>
-        <div class="pdp-axes" id="pdpAxes"></div>
       </div>
 
       <div class="pdp-media">
         <div class="pdp-photo" id="pdpPhoto"></div>
+      </div>
+
+      <div class="pdp-body">
+        <p class="pdp-desc" id="pdpDesc"></p>
+        <div class="pdp-axes" id="pdpAxes"></div>
       </div>
     </div>
   </div>
@@ -138,8 +143,8 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=141"></script>
-<script src="app.js?v=141"></script>
-<script src="product.js?v=141"></script>
+<script src="data.js?v=142"></script>
+<script src="app.js?v=142"></script>
+<script src="product.js?v=142"></script>
 </body>
 </html>
