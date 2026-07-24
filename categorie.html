@@ -7,9 +7,9 @@
 <!-- Fonts self-hosted (@font-face in styles.css). Cairo (Arabic) is subset by
      unicode-range and only downloads once AR is selected. Removed the old
      render-blocking Google Fonts request. -->
-<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=149" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=149" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=149">
+<link rel="preload" href="assets/fonts/general-sans-500.woff2?v=150" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-600.woff2?v=150" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=150">
 </head>
 <body>
 
@@ -67,13 +67,20 @@
 </div></section>
 
 <!-- ================= CARACTÉRISTIQUES (per category, filled by category.js) ==
-     Content comes from OMI_DATA.categoryContent[<slug>].features. Styled like
-     the homepage trust strip, not the blue band the product page used.
+     Content comes from OMI_DATA.categoryContent[<slug>].features. This reuses
+     the homepage trust strip's EXACT markup and classes (.trust-inner /
+     .trust-track / .trust-card / .trust-dots) so it's the same component:
+     4-up row on desktop, peek carousel + dots on mobile.
      [hidden] until a category actually has features. -->
-<section class="cat-feats" id="catFeats" hidden><div class="wrap">
-  <h2><span class="fr">Caractéristiques</span><span class="ar">المميزات</span></h2>
-  <div class="cat-feat-grid" id="catFeatGrid"></div>
-</div></section>
+<section class="cat-feats" id="catFeats" hidden>
+  <div class="wrap">
+    <h2><span class="fr">Caractéristiques</span><span class="ar">المميزات</span></h2>
+  </div>
+  <div class="trust-inner">
+    <div class="trust-track" id="catFeatTrack"></div>
+    <div class="trust-dots" id="catFeatDots" role="tablist" aria-label="Carousel"></div>
+  </div>
+</section>
 
 <!-- ================= FOOTER ================= -->
 <footer class="footer"><div class="wrap">
@@ -142,8 +149,8 @@
   </div>
 </div></footer>
 
-<script src="data.js?v=149"></script>
-<script src="app.js?v=149"></script>
-<script src="category.js?v=149"></script>
+<script src="data.js?v=150"></script>
+<script src="app.js?v=150"></script>
+<script src="category.js?v=150"></script>
 </body>
 </html>

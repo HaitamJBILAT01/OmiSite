@@ -381,10 +381,18 @@ window.OMI_DATA.categoryContent = {
   "sols-surfaces-vitres": {
     heroKitchen: "kitchen.webp",   /* Dettol-style kitchen bg behind the product (this category only) */
     features: [
-      { icon: "sparkle-clean", label: { fr: "Sans traces",         ar: "بدون آثار" } },
-      { icon: "fast-dry",      label: { fr: "Séchage rapide",       ar: "جفاف سريع" } },
-      { icon: "air-freshener", label: { fr: "Parfum longue durée",  ar: "عطر يدوم طويلاً" } },
-      { icon: "surfaces",      label: { fr: "Toutes surfaces",      ar: "لكل الأسطح" } }
+      { icon: "sparkle-clean", label: { fr: "Sans traces", ar: "بدون آثار" },
+        text: { fr: "Sols, plans de travail et vitres restent nets, sans voile ni auréole au séchage.",
+                ar: "تبقى الأرضيات وأسطح العمل والزجاج صافية، دون غشاوة أو بقع عند الجفاف." } },
+      { icon: "fast-dry", label: { fr: "Séchage rapide", ar: "جفاف سريع" },
+        text: { fr: "La surface sèche vite et sans rinçage — la pièce est de nouveau praticable en quelques minutes.",
+                ar: "يجف السطح بسرعة ودون شطف — تعود الغرفة صالحة للاستعمال خلال دقائق." } },
+      { icon: "air-freshener", label: { fr: "Parfum longue durée", ar: "عطر يدوم طويلاً" },
+        text: { fr: "Roses, lavande, citron ou fraîcheur : le parfum reste dans la pièce bien après le nettoyage.",
+                ar: "ورد أو خزامى أو ليمون أو منعش: يبقى العطر في الغرفة بعد التنظيف بوقت طويل." } },
+      { icon: "surfaces", label: { fr: "Toutes surfaces", ar: "لكل الأسطح" },
+        text: { fr: "Carrelage, marbre, faïence, bois verni, vitres — un seul produit pour toute la maison.",
+                ar: "بلاط ورخام وخزف وخشب مصقول وزجاج — منتج واحد لكل المنزل." } }
     ],
     howto: [
       { fr: "Diluer un bouchon dans l'eau, ou vaporiser directement.", ar: "خفّف غطاءً في الماء، أو رشّ مباشرة." },
@@ -401,10 +409,18 @@ window.OMI_DATA.categoryContent = {
 
   "entretien-du-linge": {
     features: [
-      { icon: "stain-removal", label: { fr: "Anti-taches",       ar: "مزيل للبقع" } },
-      { icon: "freshness",     label: { fr: "Fraîcheur durable", ar: "نضارة تدوم" } },
-      { icon: "fabric-care",   label: { fr: "Doux pour les fibres", ar: "لطيف على الأنسجة" } },
-      { icon: "scent",         label: { fr: "Parfums variés",    ar: "عطور متنوعة" } }
+      { icon: "stain-removal", label: { fr: "Anti-taches", ar: "مزيل للبقع" },
+        text: { fr: "Vient à bout des taches du quotidien — huile, terre, transpiration — dès le premier lavage.",
+                ar: "يتغلّب على بقع اليوم — الزيت والتراب والعرق — من الغسلة الأولى." } },
+      { icon: "freshness", label: { fr: "Fraîcheur durable", ar: "نضارة تدوم" },
+        text: { fr: "Le linge sort propre et frais, et le reste jusqu'au moment de le porter.",
+                ar: "يخرج الغسيل نظيفًا ومنتعشًا، ويبقى كذلك حتى وقت ارتدائه." } },
+      { icon: "fabric-care", label: { fr: "Doux pour les fibres", ar: "لطيف على الأنسجة" },
+        text: { fr: "Lave en profondeur sans agresser les fibres ni ternir les couleurs, lavage après lavage.",
+                ar: "ينظّف بعمق دون إتلاف الألياف أو إبهات الألوان، غسلة بعد غسلة." } },
+      { icon: "scent", label: { fr: "Parfums variés", ar: "عطور متنوعة" },
+        text: { fr: "Plusieurs parfums au choix, pour retrouver le vôtre à chaque machine.",
+                ar: "عدة عطور للاختيار، لتجد عطرك المفضّل في كل غسلة." } }
     ],
     howto: [
       { fr: "Doser selon la charge de linge.", ar: "حدّد الكمية حسب حجم الغسيل." },
@@ -421,10 +437,18 @@ window.OMI_DATA.categoryContent = {
 
   "javel": {
     features: [
-      { icon: "disinfect", label: { fr: "Désinfecte",   ar: "تُطهّر" } },
-      { icon: "whitening", label: { fr: "Blancheur",    ar: "بياض ناصع" } },
-      { icon: "germs",     label: { fr: "Anti-germes",  ar: "مضاد للجراثيم" } },
-      { icon: "scent",     label: { fr: "Parfums variés", ar: "عطور متنوعة" } }
+      { icon: "disinfect", label: { fr: "Désinfecte", ar: "تُطهّر" },
+        text: { fr: "Assainit en profondeur les sols, les sanitaires et les surfaces lavables de la maison.",
+                ar: "تطهّر بعمق الأرضيات ودورات المياه والأسطح القابلة للغسل في المنزل." } },
+      { icon: "whitening", label: { fr: "Blancheur", ar: "بياض ناصع" },
+        text: { fr: "Ravive le linge blanc et redonne leur éclat aux carrelages ternis.",
+                ar: "تعيد النصاعة للملابس البيضاء وتُرجع البريق للبلاط الباهت." } },
+      { icon: "germs", label: { fr: "Anti-germes", ar: "مضاد للجراثيم" },
+        text: { fr: "Élimine germes et bactéries là où ils s'installent, pour une maison plus saine.",
+                ar: "تقضي على الجراثيم والبكتيريا حيث تتراكم، لمنزل أكثر صحة." } },
+      { icon: "scent", label: { fr: "Parfums variés", ar: "عطور متنوعة" },
+        text: { fr: "Disponible en plusieurs parfums, qui adoucissent l'odeur caractéristique de l'eau de Javel.",
+                ar: "متوفّرة بعدة عطور تلطّف الرائحة المميزة لماء جافيل." } }
     ],
     howto: [
       { fr: "Diluer un bouchon dans un litre d'eau.", ar: "خفّف غطاءً في لتر من الماء." },
@@ -441,10 +465,18 @@ window.OMI_DATA.categoryContent = {
 
   "vaisselle-cuisine": {
     features: [
-      { icon: "grease-cut", label: { fr: "Dégraissant",    ar: "مزيل للدهون" } },
-      { icon: "shine",      label: { fr: "Brillance",      ar: "لمعان" } },
-      { icon: "hand-care",  label: { fr: "Doux pour les mains", ar: "لطيف على اليدين" } },
-      { icon: "multi-use",  label: { fr: "Multi-usages",   ar: "متعدد الاستعمالات" } }
+      { icon: "grease-cut", label: { fr: "Dégraissant", ar: "مزيل للدهون" },
+        text: { fr: "Dissout la graisse cuite et les résidus tenaces, sans frotter longtemps.",
+                ar: "يذيب الدهون المحترقة والبقايا العنيدة، دون فرك طويل." } },
+      { icon: "shine", label: { fr: "Brillance", ar: "لمعان" },
+        text: { fr: "Verres, couverts et assiettes ressortent brillants, sans traces d'eau.",
+                ar: "تخرج الأكواب والملاعق والصحون لامعة، دون آثار ماء." } },
+      { icon: "hand-care", label: { fr: "Doux pour les mains", ar: "لطيف على اليدين" },
+        text: { fr: "Une formule pensée pour la vaisselle quotidienne, qui ne dessèche pas les mains.",
+                ar: "تركيبة مصمّمة للغسل اليومي، لا تجفّف اليدين." } },
+      { icon: "multi-use", label: { fr: "Multi-usages", ar: "متعدد الاستعمالات" },
+        text: { fr: "Vaisselle, plan de travail, plaque de cuisson — il nettoie toute la cuisine.",
+                ar: "الأواني وأسطح العمل والموقد — ينظّف المطبخ كله." } }
     ],
     howto: [
       { fr: "Verser quelques gouttes sur l'éponge humide.", ar: "ضع بضع قطرات على الإسفنجة المبللة." },
@@ -461,10 +493,18 @@ window.OMI_DATA.categoryContent = {
 
   "hygiene-soin-personnel": {
     features: [
-      { icon: "soft-drop",  label: { fr: "Douceur",       ar: "نعومة" } },
-      { icon: "moisture",   label: { fr: "Hydratation",   ar: "ترطيب" } },
-      { icon: "gentle",     label: { fr: "Formule délicate", ar: "تركيبة لطيفة" } },
-      { icon: "family",     label: { fr: "Toute la famille", ar: "لكل العائلة" } }
+      { icon: "soft-drop", label: { fr: "Douceur", ar: "نعومة" },
+        text: { fr: "Une mousse onctueuse qui nettoie les mains sans les dessécher.",
+                ar: "رغوة كريمية تنظّف اليدين دون أن تجفّفهما." } },
+      { icon: "moisture", label: { fr: "Hydratation", ar: "ترطيب" },
+        text: { fr: "Enrichi en agents hydratants, pour des mains souples après chaque lavage.",
+                ar: "غني بعناصر مرطّبة، لتبقى اليدان ناعمتين بعد كل غسلة." } },
+      { icon: "gentle", label: { fr: "Formule délicate", ar: "تركيبة لطيفة" },
+        text: { fr: "Respectueuse de la peau, elle convient aux lavages répétés de la journée.",
+                ar: "لطيفة على البشرة، تناسب الغسل المتكرّر طوال اليوم." } },
+      { icon: "family", label: { fr: "Toute la famille", ar: "لكل العائلة" },
+        text: { fr: "Assez douce pour les mains des enfants comme pour celles des adultes.",
+                ar: "لطيفة بما يكفي لأيدي الأطفال والكبار على حد سواء." } }
     ],
     howto: [
       { fr: "Appliquer une noisette sur mains humides.", ar: "ضع قليلاً على اليدين المبللتين." },
@@ -481,10 +521,18 @@ window.OMI_DATA.categoryContent = {
 
   "maxiplus": {
     features: [
-      { icon: "absorbent",  label: { fr: "Ultra absorbant", ar: "امتصاص فائق" } },
-      { icon: "strong",     label: { fr: "Résistant",       ar: "متين" } },
-      { icon: "soft-touch", label: { fr: "Doux au toucher", ar: "ناعم الملمس" } },
-      { icon: "family",     label: { fr: "Toute la famille", ar: "لكل العائلة" } }
+      { icon: "absorbent", label: { fr: "Ultra absorbant", ar: "امتصاص فائق" },
+        text: { fr: "Une ouate épaisse qui boit vite les liquides — moins de feuilles pour le même geste.",
+                ar: "ورق سميك يمتص السوائل بسرعة — أوراق أقل لنفس العمل." } },
+      { icon: "strong", label: { fr: "Résistant", ar: "متين" },
+        text: { fr: "La feuille tient même humide, sans se déchirer ni laisser de peluches.",
+                ar: "تتماسك الورقة حتى وهي مبللة، دون أن تتمزّق أو تترك وبرًا." } },
+      { icon: "soft-touch", label: { fr: "Doux au toucher", ar: "ناعم الملمس" },
+        text: { fr: "Une texture douce, agréable sur le visage comme sur la peau des enfants.",
+                ar: "ملمس ناعم، لطيف على الوجه وعلى بشرة الأطفال." } },
+      { icon: "family", label: { fr: "Toute la famille", ar: "لكل العائلة" },
+        text: { fr: "Essuie-tout, mouchoirs, serviettes et papier hygiénique pour toute la maison.",
+                ar: "مناديل مطبخ ومحارم ومناديل سفرة وورق صحي لكل المنزل." } }
     ],
     howto: [
       { fr: "Détacher une feuille selon le besoin.", ar: "افصل ورقة حسب الحاجة." },

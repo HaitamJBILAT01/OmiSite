@@ -125,7 +125,7 @@ function gotoCat(i) {
 function cardHTML(product, variant) {
   return `
     <div class="pcard">
-      <div class="ph"><img src="assets/${variant.image}?v=149" alt="${variant.alt || ""}" loading="lazy" decoding="async"></div>
+      <div class="ph"><img src="assets/${variant.image}?v=150" alt="${variant.alt || ""}" loading="lazy" decoding="async"></div>
       <h3>${bi(product.name)}</h3>
       <p class="sub">${variantSubHTML(product, variant)}</p>
     </div>`;
@@ -150,19 +150,26 @@ function showTab(i) {
 /* ---------- trust strip: peek carousel (mobile) ----------
    Dots reflect whichever card sits nearest the track's centre, computed
    from actual rendered positions (getBoundingClientRect) rather than
-   scrollLeft math, so it works the same in LTR and RTL. */
-function initTrustCarousel() {
-  const track = document.getElementById("trustTrack");
-  const dotsWrap = document.getElementById("trustDots");
+   scrollLeft math, so it works the same in LTR and RTL.
+
+   Shared: the homepage trust strip calls it with no args (static markup), the
+   category page passes its own Caractéristiques track, which re-renders on
+   every tab switch. So cards/dots are queried LIVE rather than captured, and
+   the listeners bind once per element (dataset flag) — otherwise every tab
+   switch would stack another scroll handler on the same track. */
+function initTrustCarousel(track, dotsWrap) {
+  track = track || document.getElementById("trustTrack");
+  dotsWrap = dotsWrap || document.getElementById("trustDots");
   if (!track || !dotsWrap) return;
-  const cards = [...track.querySelectorAll(".trust-card")];
-  const dots = [...dotsWrap.querySelectorAll(".trust-dot")];
+
+  const cards = () => [...track.querySelectorAll(".trust-card")];
+  const dots = () => [...dotsWrap.querySelectorAll(".trust-dot")];
 
   function nearestIndex() {
     const trackRect = track.getBoundingClientRect();
     const trackCenter = trackRect.left + trackRect.width / 2;
     let best = 0, bestDist = Infinity;
-    cards.forEach((c, i) => {
+    cards().forEach((c, i) => {
       const r = c.getBoundingClientRect();
       const d = Math.abs((r.left + r.width / 2) - trackCenter);
       if (d < bestDist) { bestDist = d; best = i; }
@@ -171,23 +178,37 @@ function initTrustCarousel() {
   }
 
   function setActiveDot(i) {
-    dots.forEach((d, n) => {
+    dots().forEach((d, n) => {
       d.classList.toggle("on", n === i);
       d.setAttribute("aria-selected", n === i);
     });
   }
 
-  let ticking = false;
-  track.addEventListener("scroll", () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => { setActiveDot(nearestIndex()); ticking = false; });
-  }, { passive: true });
+  if (!track.dataset.carousel) {
+    track.dataset.carousel = "1";
+    let ticking = false;
+    track.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { setActiveDot(nearestIndex()); ticking = false; });
+    }, { passive: true });
+  }
 
-  dots.forEach((d, i) => d.addEventListener("click", () => {
-    setActiveDot(i);
-    cards[i].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
-  }));
+  /* delegated so dots re-rendered on a tab switch keep working */
+  if (!dotsWrap.dataset.carousel) {
+    dotsWrap.dataset.carousel = "1";
+    dotsWrap.addEventListener("click", e => {
+      const dot = e.target.closest(".trust-dot");
+      if (!dot) return;
+      const i = dots().indexOf(dot);
+      const card = cards()[i];
+      if (!card) return;
+      setActiveDot(i);
+      card.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    });
+  }
+
+  setActiveDot(0);   // a re-render resets scrollLeft, so the first card is active
 }
 
 /* ---------- language ---------- */

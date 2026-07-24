@@ -45,24 +45,25 @@
   const switchEl = document.getElementById("catSwitch");
   const countEl  = document.getElementById("catCount");
   const crumbEl  = document.getElementById("crumbCat");
-  const featWrap = document.getElementById("catFeats");
-  const featEl   = document.getElementById("catFeatGrid");
+  const featWrap  = document.getElementById("catFeats");
+  const featTrack = document.getElementById("catFeatTrack");
+  const featDots  = document.getElementById("catFeatDots");
 
   const CONTENT = window.OMI_DATA.categoryContent || {};
   const READY   = window.OMI_DATA.iconsReady || [];
 
-  /* real SVG (recoloured to the brand blue via CSS mask, same trick as the
-     homepage trust icons) once the keyword is in iconsReady; else a generic
-     line-art icon so the row never shows a placeholder box. ?v busts the
-     1-year SVG cache — category.js is in the version-bump set. */
-  function featIcon(icon, i) {
-    return READY.indexOf(icon) !== -1
-      ? `<span class="cat-feat-ic is-mask" style="--ic:url('assets/${icon}.svg?v=149')" aria-hidden="true"></span>`
-      : `<span class="cat-feat-ic" aria-hidden="true">${ICONS[i % ICONS.length]}</span>`;
+  /* .trust-icon = the homepage's masked icon (--ti + a solid background), used
+     once the keyword is in iconsReady. Otherwise `.is-svg` swaps the mask for
+     an inline line-art SVG so the row never shows a placeholder box. ?v busts
+     the 1-year SVG cache — category.js is in the version-bump set. */
+  function featIcon(f, i) {
+    return READY.indexOf(f.icon) !== -1
+      ? `<span class="trust-icon" style="--ti:url('assets/${f.icon}.svg?v=150')" aria-hidden="true"></span>`
+      : `<span class="trust-icon is-svg" aria-hidden="true">${ICONS[i % ICONS.length]}</span>`;
   }
 
   // one banner, set a single time — category switches never touch it
-  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=149")`;
+  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=150")`;
 
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {
@@ -89,13 +90,22 @@
     // breadcrumb: last crumb = current category
     if (crumbEl) crumbEl.innerHTML = bi(e.name);
 
-    // Caractéristiques — this category's own features (hidden if it has none)
-    if (featWrap && featEl) {
+    /* Caractéristiques — this category's own features, as trust-strip cards
+       (hidden if it has none). Same component as the homepage, so it also
+       needs the carousel re-armed after each re-render. */
+    if (featWrap && featTrack && featDots) {
       const feats = (CONTENT[e.slug] || {}).features || [];
       featWrap.hidden = feats.length === 0;
-      featEl.innerHTML = feats.map((f, i) =>
-        `<div class="cat-feat">${featIcon(f.icon, i)}<span class="cat-feat-lbl">${bi(f.label)}</span></div>`
-      ).join("");
+      featTrack.innerHTML = feats.map((f, i) => `
+        <div class="trust-card">
+          ${featIcon(f, i)}
+          <h3>${bi(f.label)}</h3>
+          ${f.text ? `<p>${bi(f.text)}</p>` : ""}
+        </div>`).join("");
+      featDots.innerHTML = feats.map((f, i) =>
+        `<button class="trust-dot${i === 0 ? " on" : ""}" data-i="${i}" role="tab"
+           aria-label="${i + 1}" aria-selected="${i === 0}"></button>`).join("");
+      initTrustCarousel(featTrack, featDots);
     }
 
     document.title = `OMI — ${e.name.fr}`;
