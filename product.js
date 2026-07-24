@@ -179,7 +179,7 @@
   if (CONTENT.heroKitchen) {
     root.classList.add("pdp-has-kitchen");
     const k = document.getElementById("pdpKitchen");
-    if (k) k.style.backgroundImage = `url('assets/${CONTENT.heroKitchen}?v=145')`;
+    if (k) k.style.backgroundImage = `url('assets/${CONTENT.heroKitchen}?v=146')`;
   }
 
   function iconSlot(icon) {
@@ -193,7 +193,7 @@
     if (!ready) return iconSlot(icon);
     // ?v busts the 1-year SVG cache when an icon file is replaced (bumped with
     // the site version — product.js is part of the ?v=N bump set now)
-    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=145')" aria-hidden="true"></span>`;
+    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=146')" aria-hidden="true"></span>`;
   }
   function photoBox(file, hint) {
     if (file) return `<img src="assets/${file}" alt="" loading="lazy" decoding="async">`;
