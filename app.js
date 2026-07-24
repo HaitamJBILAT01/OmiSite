@@ -137,7 +137,7 @@ function productHref(product, variant) {
 function cardHTML(product, variant) {
   return `
     <a class="pcard" href="${productHref(product, variant)}">
-      <div class="ph"><img src="assets/${variant.image}" alt="${variant.alt || ""}" loading="lazy" decoding="async"></div>
+      <div class="ph"><img src="assets/${variant.image}?v=148" alt="${variant.alt || ""}" loading="lazy" decoding="async"></div>
       <h3>${bi(product.name)}</h3>
       <p class="sub">${variantSubHTML(product, variant)}</p>
     </a>`;

@@ -45,7 +45,7 @@
   const beneEl   = document.getElementById("catBenefits");
 
   // one banner, set a single time — category switches never touch it
-  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}")`;
+  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=148")`;
 
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {

@@ -126,7 +126,7 @@
     const alt = (variant && variant.alt) || product.name.fr;
     // no width/height attrs: variant photos have differing intrinsic sizes.
     // .pdp-photo holds a fixed aspect-ratio in CSS, so there is no shift.
-    return `<img src="assets/${file}" alt="${alt}" fetchpriority="high" decoding="async">`;
+    return `<img src="assets/${file}?v=148" alt="${alt}" fetchpriority="high" decoding="async">`;
   }
 
   /* ---------- render ---------- */
@@ -179,7 +179,7 @@
   if (CONTENT.heroKitchen) {
     root.classList.add("pdp-has-kitchen");
     const k = document.getElementById("pdpKitchen");
-    if (k) k.style.backgroundImage = `url('assets/${CONTENT.heroKitchen}?v=147')`;
+    if (k) k.style.backgroundImage = `url('assets/${CONTENT.heroKitchen}?v=148')`;
   }
 
   function iconSlot(icon) {
@@ -193,10 +193,10 @@
     if (!ready) return iconSlot(icon);
     // ?v busts the 1-year SVG cache when an icon file is replaced (bumped with
     // the site version — product.js is part of the ?v=N bump set now)
-    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=147')" aria-hidden="true"></span>`;
+    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=148')" aria-hidden="true"></span>`;
   }
   function photoBox(file, hint) {
-    if (file) return `<img src="assets/${file}" alt="" loading="lazy" decoding="async">`;
+    if (file) return `<img src="assets/${file}?v=148" alt="" loading="lazy" decoding="async">`;
     return `<div class="psec-ph" role="img" aria-label="Photo à ajouter">
       <svg viewBox="0 0 48 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="42" height="30" rx="4"/><circle cx="15" cy="16" r="4"/><path d="M7 33l13-12 9 8 5-4 7 7"/></svg>
       <span class="psec-ph-t">${hint}</span></div>`;
@@ -228,7 +228,7 @@
 
     if (CONTENT.callout) {
       const c = CONTENT.callout;
-      const shot = v ? `<img src="assets/${product.photo || v.image}" alt="${(v && v.alt) || product.name.fr}" loading="lazy" decoding="async">` : "";
+      const shot = v ? `<img src="assets/${product.photo || v.image}?v=148" alt="${(v && v.alt) || product.name.fr}" loading="lazy" decoding="async">` : "";
       fill("pCallout", `<div class="wrap"><div class="pcallout-grid">
         <div class="pcallout-media">${photoBox(c.photo, bi({ fr: "Photo d'ambiance", ar: "صورة أجواء" }))}</div>
         <div class="pcallout-body">
@@ -253,7 +253,7 @@
 
     if (G.didYouKnow) {
       const d = G.didYouKnow;
-      const bg = d.photo ? ` style="background-image:url('assets/${d.photo}')"` : "";
+      const bg = d.photo ? ` style="background-image:url('assets/${d.photo}?v=148')"` : "";
       fill("pDyk", `<div class="wrap"><div class="pdyk-inner${d.photo ? " has-photo" : ""}"${bg}>
         ${d.photo ? "" : photoBox("", bi({ fr: "Photo de fond", ar: "صورة الخلفية" }))}
         <div class="pdyk-card">
