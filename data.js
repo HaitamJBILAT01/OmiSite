@@ -384,6 +384,15 @@ window.OMI_DATA.categoryContent = {
       fr: "Des sols qui brillent ? Des vitres sans une trace ? Il y a aussi…",
       ar: "أرضيات تلمع؟ زجاج بدون أثر؟ وهناك أيضاً…"
     },
+    spotlight: {
+      photo: "test.webp",
+      icon: "sparkle-clean",
+      title: { fr: "Un bouchon suffit", ar: "غطاء واحد يكفي" },
+      text: {
+        fr: "Un bouchon dans un seau d'eau. Trop de produit laisse un film qui ternit le sol au lieu de le faire briller.",
+        ar: "غطاء واحد في دلو ماء. الإفراط يترك طبقة تُبهت الأرضية بدل أن تُلمّعها."
+      }
+    },
     features: [
       { icon: "sparkle-clean", label: { fr: "Sans traces", ar: "بدون آثار" },
         text: { fr: "Ni voile ni auréole au séchage.",
@@ -415,6 +424,15 @@ window.OMI_DATA.categoryContent = {
     featsLead: {
       fr: "Un blanc qui reste blanc ? Une odeur qui tient ? Il y a aussi…",
       ar: "أبيض يبقى أبيض؟ عطر يدوم؟ وهناك أيضاً…"
+    },
+    spotlight: {
+      photo: "test.webp",
+      icon: "fabric-care",
+      title: { fr: "Doser selon la charge", ar: "الكمية حسب حجم الغسيل" },
+      text: {
+        fr: "Doubler la dose ne lave pas mieux : le surplus reste dans les fibres et raidit le linge au séchage.",
+        ar: "مضاعفة الكمية لا تنظّف أكثر: الزائد يبقى في الألياف ويُقسّي الملابس عند الجفاف."
+      }
     },
     features: [
       { icon: "stain-removal", label: { fr: "Anti-taches", ar: "مزيل للبقع" },
@@ -448,6 +466,15 @@ window.OMI_DATA.categoryContent = {
       fr: "Une maison vraiment désinfectée ? Un blanc éclatant ? Il y a aussi…",
       ar: "منزل مُطهَّر فعلاً؟ بياض ناصع؟ وهناك أيضاً…"
     },
+    spotlight: {
+      photo: "test.webp",
+      icon: "germs",
+      title: { fr: "Jamais avec un autre produit", ar: "لا تخلطها مع منتج آخر" },
+      text: {
+        fr: "L'eau de Javel se dilue à l'eau claire, et à rien d'autre. Mélangée à un détartrant ou à un autre nettoyant, elle dégage des vapeurs dangereuses.",
+        ar: "تُخفَّف ماء جافيل بالماء النقي وحده. وخلطها بمزيل الكلس أو بمنظّف آخر يُطلق أبخرة خطيرة."
+      }
+    },
     features: [
       { icon: "disinfect", label: { fr: "Désinfecte", ar: "تُطهّر" },
         text: { fr: "Sols, sanitaires et surfaces lavables.",
@@ -479,6 +506,15 @@ window.OMI_DATA.categoryContent = {
     featsLead: {
       fr: "La graisse qui part du premier coup ? Des verres sans traces ? Il y a aussi…",
       ar: "دهون تزول من أول مرة؟ أكواب بدون آثار؟ وهناك أيضاً…"
+    },
+    spotlight: {
+      photo: "test.webp",
+      icon: "grease-cut",
+      title: { fr: "Quelques gouttes, pas plus", ar: "بضع قطرات، لا أكثر" },
+      text: {
+        fr: "Le produit est concentré. Quelques gouttes sur une éponge humide moussent autant qu'un fond de verre — et se rincent bien plus vite.",
+        ar: "المنتج مركّز. بضع قطرات على إسفنجة مبللة ترغي بقدر كمية كبيرة — وتُشطف أسرع بكثير."
+      }
     },
     features: [
       { icon: "grease-cut", label: { fr: "Dégraissant", ar: "مزيل للدهون" },
@@ -512,6 +548,15 @@ window.OMI_DATA.categoryContent = {
       fr: "Des mains propres et douces ? Une formule pour toute la famille ? Il y a aussi…",
       ar: "أيدٍ نظيفة وناعمة؟ تركيبة لكل العائلة؟ وهناك أيضاً…"
     },
+    spotlight: {
+      photo: "test.webp",
+      icon: "soft-drop",
+      title: { fr: "Vingt secondes", ar: "عشرون ثانية" },
+      text: {
+        fr: "C'est le temps qu'il faut au savon pour faire son travail. Rincer tout de suite n'enlève qu'une partie de ce qu'on a sur les mains.",
+        ar: "هذا هو الوقت الذي يحتاجه الصابون ليؤدّي عمله. والشطف الفوري لا يزيل سوى جزء ممّا على اليدين."
+      }
+    },
     features: [
       { icon: "soft-drop", label: { fr: "Douceur", ar: "نعومة" },
         text: { fr: "Une mousse onctueuse, jamais desséchante.",
@@ -543,6 +588,15 @@ window.OMI_DATA.categoryContent = {
     featsLead: {
       fr: "Une feuille qui absorbe vraiment ? Qui ne se déchire pas ? Il y a aussi…",
       ar: "ورقة تمتص فعلاً؟ ولا تتمزّق؟ وهناك أيضاً…"
+    },
+    spotlight: {
+      photo: "test.webp",
+      icon: "absorbent",
+      title: { fr: "Une feuille à la fois", ar: "ورقة واحدة في كل مرة" },
+      text: {
+        fr: "La ouate est épaisse : une seule feuille absorbe ce que trois feuilles ordinaires laissent passer.",
+        ar: "الورق سميك: ورقة واحدة تمتص ما تتركه ثلاث أوراق عادية."
+      }
     },
     features: [
       { icon: "absorbent", label: { fr: "Ultra absorbant", ar: "امتصاص فائق" },
