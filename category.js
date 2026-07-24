@@ -58,12 +58,12 @@
      the 1-year SVG cache — category.js is in the version-bump set. */
   function featIcon(f, i) {
     return READY.indexOf(f.icon) !== -1
-      ? `<span class="trust-icon" style="--ti:url('assets/${f.icon}.svg?v=150')" aria-hidden="true"></span>`
+      ? `<span class="trust-icon" style="--ti:url('assets/${f.icon}.svg?v=151')" aria-hidden="true"></span>`
       : `<span class="trust-icon is-svg" aria-hidden="true">${ICONS[i % ICONS.length]}</span>`;
   }
 
   // one banner, set a single time — category switches never touch it
-  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=150")`;
+  if (mediaEl) mediaEl.style.backgroundImage = `url("${encodeURI("assets/" + BANNER)}?v=151")`;
 
   /* ?cat=<slug>, falling back to the first category */
   function slugFromUrl() {

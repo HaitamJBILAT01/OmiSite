@@ -569,4 +569,13 @@ window.OMI_DATA.didYouKnow = {
 /* Feature icons that now have a real SVG at assets/<keyword>.svg — rendered
    white via CSS mask on the blue Features band. Add keywords here as you add
    more SVGs (filename must equal the `icon` keyword). */
-window.OMI_DATA.iconsReady = ["sparkle-clean", "fast-dry", "air-freshener", "surfaces"];
+/* Feature icons that have a REAL `assets/<keyword>.svg`. Anything not listed
+   here falls back to a generic line-art icon on categorie.html (see featIcon()
+   in category.js). Add the file + the keyword here + bump ?v=N.
+   Still missing: disinfect · grease-cut · shine · hand-care · multi-use ·
+   soft-drop · moisture · gentle · family · absorbent · strong · soft-touch */
+window.OMI_DATA.iconsReady = [
+  "sparkle-clean", "fast-dry", "air-freshener", "surfaces",   /* sols */
+  "stain-removal", "freshness", "fabric-care", "scent",        /* linge */
+  "whitening", "germs"                                         /* javel (disinfect pending) */
+];
