@@ -381,22 +381,22 @@ window.OMI_DATA.categoryContent = {
   "sols-surfaces-vitres": {
     heroKitchen: "kitchen.webp",   /* Dettol-style kitchen bg behind the product (this category only) */
     featsLead: {
-      fr: "Des sols qui brillent ? Des vitres sans une seule trace ? Avec la gamme Sols, Surfaces & Vitres, il y a aussi…",
-      ar: "أرضيات تلمع؟ زجاج بدون أي أثر؟ مع تشكيلة الأرضيات والأسطح والزجاج، هناك أيضاً…"
+      fr: "Des sols qui brillent ? Des vitres sans une trace ? Il y a aussi…",
+      ar: "أرضيات تلمع؟ زجاج بدون أثر؟ وهناك أيضاً…"
     },
     features: [
       { icon: "sparkle-clean", label: { fr: "Sans traces", ar: "بدون آثار" },
-        text: { fr: "Sols, plans de travail et vitres restent nets, sans voile ni auréole au séchage.",
-                ar: "تبقى الأرضيات وأسطح العمل والزجاج صافية، دون غشاوة أو بقع عند الجفاف." } },
+        text: { fr: "Ni voile ni auréole au séchage.",
+                ar: "لا غشاوة ولا بقع بعد الجفاف." } },
       { icon: "fast-dry", label: { fr: "Séchage rapide", ar: "جفاف سريع" },
-        text: { fr: "La surface sèche vite et sans rinçage — la pièce est de nouveau praticable en quelques minutes.",
-                ar: "يجف السطح بسرعة ودون شطف — تعود الغرفة صالحة للاستعمال خلال دقائق." } },
+        text: { fr: "Sèche vite, et sans rinçage.",
+                ar: "يجف بسرعة، ودون شطف." } },
       { icon: "air-freshener", label: { fr: "Parfum longue durée", ar: "عطر يدوم طويلاً" },
-        text: { fr: "Roses, lavande, citron ou fraîcheur : le parfum reste dans la pièce bien après le nettoyage.",
-                ar: "ورد أو خزامى أو ليمون أو منعش: يبقى العطر في الغرفة بعد التنظيف بوقت طويل." } },
+        text: { fr: "Le parfum reste dans la pièce, bien après.",
+                ar: "يبقى العطر في الغرفة وقتاً طويلاً." } },
       { icon: "surfaces", label: { fr: "Toutes surfaces", ar: "لكل الأسطح" },
-        text: { fr: "Carrelage, marbre, faïence, bois verni, vitres — un seul produit pour toute la maison.",
-                ar: "بلاط ورخام وخزف وخشب مصقول وزجاج — منتج واحد لكل المنزل." } }
+        text: { fr: "Carrelage, marbre, bois verni, vitres.",
+                ar: "بلاط ورخام وخشب مصقول وزجاج." } }
     ],
     howto: [
       { fr: "Diluer un bouchon dans l'eau, ou vaporiser directement.", ar: "خفّف غطاءً في الماء، أو رشّ مباشرة." },
@@ -413,22 +413,22 @@ window.OMI_DATA.categoryContent = {
 
   "entretien-du-linge": {
     featsLead: {
-      fr: "Un blanc qui reste blanc ? Une odeur qui tient toute la semaine ? Avec la gamme Entretien du Linge, il y a aussi…",
-      ar: "أبيض يبقى أبيض؟ عطر يدوم الأسبوع كله؟ مع تشكيلة العناية بالملابس، هناك أيضاً…"
+      fr: "Un blanc qui reste blanc ? Une odeur qui tient ? Il y a aussi…",
+      ar: "أبيض يبقى أبيض؟ عطر يدوم؟ وهناك أيضاً…"
     },
     features: [
       { icon: "stain-removal", label: { fr: "Anti-taches", ar: "مزيل للبقع" },
-        text: { fr: "Vient à bout des taches du quotidien — huile, terre, transpiration — dès le premier lavage.",
-                ar: "يتغلّب على بقع اليوم — الزيت والتراب والعرق — من الغسلة الأولى." } },
+        text: { fr: "Huile, terre, transpiration — dès le premier lavage.",
+                ar: "الزيت والتراب والعرق — من الغسلة الأولى." } },
       { icon: "freshness", label: { fr: "Fraîcheur durable", ar: "نضارة تدوم" },
-        text: { fr: "Le linge sort propre et frais, et le reste jusqu'au moment de le porter.",
-                ar: "يخرج الغسيل نظيفًا ومنتعشًا، ويبقى كذلك حتى وقت ارتدائه." } },
+        text: { fr: "Un linge frais jusqu'au moment de le porter.",
+                ar: "غسيل منتعش حتى وقت ارتدائه." } },
       { icon: "fabric-care", label: { fr: "Doux pour les fibres", ar: "لطيف على الأنسجة" },
-        text: { fr: "Lave en profondeur sans agresser les fibres ni ternir les couleurs, lavage après lavage.",
-                ar: "ينظّف بعمق دون إتلاف الألياف أو إبهات الألوان، غسلة بعد غسلة." } },
+        text: { fr: "Lave en profondeur sans ternir les couleurs.",
+                ar: "ينظّف بعمق دون أن تبهت الألوان." } },
       { icon: "scent", label: { fr: "Parfums variés", ar: "عطور متنوعة" },
-        text: { fr: "Plusieurs parfums au choix, pour retrouver le vôtre à chaque machine.",
-                ar: "عدة عطور للاختيار، لتجد عطرك المفضّل في كل غسلة." } }
+        text: { fr: "Plusieurs parfums, pour retrouver le vôtre.",
+                ar: "عدة عطور، لتختار ما يناسبك." } }
     ],
     howto: [
       { fr: "Doser selon la charge de linge.", ar: "حدّد الكمية حسب حجم الغسيل." },
@@ -445,22 +445,22 @@ window.OMI_DATA.categoryContent = {
 
   "javel": {
     featsLead: {
-      fr: "Une maison vraiment désinfectée ? Un blanc éclatant ? Avec la gamme Eau de Javel, il y a aussi…",
-      ar: "منزل مُطهَّر فعلاً؟ بياض ناصع؟ مع تشكيلة ماء جافيل، هناك أيضاً…"
+      fr: "Une maison vraiment désinfectée ? Un blanc éclatant ? Il y a aussi…",
+      ar: "منزل مُطهَّر فعلاً؟ بياض ناصع؟ وهناك أيضاً…"
     },
     features: [
       { icon: "disinfect", label: { fr: "Désinfecte", ar: "تُطهّر" },
-        text: { fr: "Assainit en profondeur les sols, les sanitaires et les surfaces lavables de la maison.",
-                ar: "تطهّر بعمق الأرضيات ودورات المياه والأسطح القابلة للغسل في المنزل." } },
+        text: { fr: "Sols, sanitaires et surfaces lavables.",
+                ar: "الأرضيات ودورات المياه والأسطح القابلة للغسل." } },
       { icon: "whitening", label: { fr: "Blancheur", ar: "بياض ناصع" },
-        text: { fr: "Ravive le linge blanc et redonne leur éclat aux carrelages ternis.",
-                ar: "تعيد النصاعة للملابس البيضاء وتُرجع البريق للبلاط الباهت." } },
+        text: { fr: "Ravive le linge blanc et les carrelages ternis.",
+                ar: "تعيد البياض للملابس والبريق للبلاط." } },
       { icon: "germs", label: { fr: "Anti-germes", ar: "مضاد للجراثيم" },
-        text: { fr: "Élimine germes et bactéries là où ils s'installent, pour une maison plus saine.",
-                ar: "تقضي على الجراثيم والبكتيريا حيث تتراكم، لمنزل أكثر صحة." } },
+        text: { fr: "Élimine germes et bactéries là où ils s'installent.",
+                ar: "تقضي على الجراثيم والبكتيريا حيث تتراكم." } },
       { icon: "scent", label: { fr: "Parfums variés", ar: "عطور متنوعة" },
-        text: { fr: "Disponible en plusieurs parfums, qui adoucissent l'odeur caractéristique de l'eau de Javel.",
-                ar: "متوفّرة بعدة عطور تلطّف الرائحة المميزة لماء جافيل." } }
+        text: { fr: "Plusieurs parfums, pour adoucir l'odeur.",
+                ar: "عدة عطور تلطّف رائحة الجافيل." } }
     ],
     howto: [
       { fr: "Diluer un bouchon dans un litre d'eau.", ar: "خفّف غطاءً في لتر من الماء." },
@@ -477,22 +477,22 @@ window.OMI_DATA.categoryContent = {
 
   "vaisselle-cuisine": {
     featsLead: {
-      fr: "La graisse qui part du premier coup ? Des verres sans traces ? Avec la gamme Vaisselle & Cuisine, il y a aussi…",
-      ar: "دهون تزول من المرة الأولى؟ أكواب بدون آثار؟ مع تشكيلة الأواني والمطبخ، هناك أيضاً…"
+      fr: "La graisse qui part du premier coup ? Des verres sans traces ? Il y a aussi…",
+      ar: "دهون تزول من أول مرة؟ أكواب بدون آثار؟ وهناك أيضاً…"
     },
     features: [
       { icon: "grease-cut", label: { fr: "Dégraissant", ar: "مزيل للدهون" },
-        text: { fr: "Dissout la graisse cuite et les résidus tenaces, sans frotter longtemps.",
-                ar: "يذيب الدهون المحترقة والبقايا العنيدة، دون فرك طويل." } },
+        text: { fr: "Dissout la graisse cuite, sans frotter.",
+                ar: "يذيب الدهون المحترقة، دون فرك." } },
       { icon: "shine", label: { fr: "Brillance", ar: "لمعان" },
-        text: { fr: "Verres, couverts et assiettes ressortent brillants, sans traces d'eau.",
-                ar: "تخرج الأكواب والملاعق والصحون لامعة، دون آثار ماء." } },
+        text: { fr: "Verres et couverts sans traces d'eau.",
+                ar: "أكواب وملاعق بدون آثار ماء." } },
       { icon: "hand-care", label: { fr: "Doux pour les mains", ar: "لطيف على اليدين" },
-        text: { fr: "Une formule pensée pour la vaisselle quotidienne, qui ne dessèche pas les mains.",
-                ar: "تركيبة مصمّمة للغسل اليومي، لا تجفّف اليدين." } },
+        text: { fr: "Pour la vaisselle de tous les jours.",
+                ar: "للغسل اليومي دون تجفيف اليدين." } },
       { icon: "multi-use", label: { fr: "Multi-usages", ar: "متعدد الاستعمالات" },
-        text: { fr: "Vaisselle, plan de travail, plaque de cuisson — il nettoie toute la cuisine.",
-                ar: "الأواني وأسطح العمل والموقد — ينظّف المطبخ كله." } }
+        text: { fr: "Vaisselle, plan de travail, plaque de cuisson.",
+                ar: "الأواني وأسطح العمل والموقد." } }
     ],
     howto: [
       { fr: "Verser quelques gouttes sur l'éponge humide.", ar: "ضع بضع قطرات على الإسفنجة المبللة." },
@@ -509,22 +509,22 @@ window.OMI_DATA.categoryContent = {
 
   "hygiene-soin-personnel": {
     featsLead: {
-      fr: "Des mains propres et douces ? Une formule que toute la famille peut utiliser ? Avec la gamme Hygiène & Soin Personnel, il y a aussi…",
-      ar: "أيدٍ نظيفة وناعمة؟ تركيبة تناسب كل العائلة؟ مع تشكيلة النظافة والعناية الشخصية، هناك أيضاً…"
+      fr: "Des mains propres et douces ? Une formule pour toute la famille ? Il y a aussi…",
+      ar: "أيدٍ نظيفة وناعمة؟ تركيبة لكل العائلة؟ وهناك أيضاً…"
     },
     features: [
       { icon: "soft-drop", label: { fr: "Douceur", ar: "نعومة" },
-        text: { fr: "Une mousse onctueuse qui nettoie les mains sans les dessécher.",
-                ar: "رغوة كريمية تنظّف اليدين دون أن تجفّفهما." } },
+        text: { fr: "Une mousse onctueuse, jamais desséchante.",
+                ar: "رغوة كريمية لا تجفّف اليدين." } },
       { icon: "moisture", label: { fr: "Hydratation", ar: "ترطيب" },
-        text: { fr: "Enrichi en agents hydratants, pour des mains souples après chaque lavage.",
-                ar: "غني بعناصر مرطّبة، لتبقى اليدان ناعمتين بعد كل غسلة." } },
+        text: { fr: "Des mains souples après chaque lavage.",
+                ar: "يدان ناعمتان بعد كل غسلة." } },
       { icon: "gentle", label: { fr: "Formule délicate", ar: "تركيبة لطيفة" },
-        text: { fr: "Respectueuse de la peau, elle convient aux lavages répétés de la journée.",
-                ar: "لطيفة على البشرة، تناسب الغسل المتكرّر طوال اليوم." } },
+        text: { fr: "Pensée pour les lavages répétés.",
+                ar: "مصمّمة للغسل المتكرّر." } },
       { icon: "family", label: { fr: "Toute la famille", ar: "لكل العائلة" },
-        text: { fr: "Assez douce pour les mains des enfants comme pour celles des adultes.",
-                ar: "لطيفة بما يكفي لأيدي الأطفال والكبار على حد سواء." } }
+        text: { fr: "Des mains des enfants à celles des adultes.",
+                ar: "من أيدي الأطفال إلى أيدي الكبار." } }
     ],
     howto: [
       { fr: "Appliquer une noisette sur mains humides.", ar: "ضع قليلاً على اليدين المبللتين." },
@@ -541,22 +541,22 @@ window.OMI_DATA.categoryContent = {
 
   "maxiplus": {
     featsLead: {
-      fr: "Une feuille qui absorbe vraiment ? Qui ne se déchire pas ? Avec la gamme Maxi Plus, il y a aussi…",
-      ar: "ورقة تمتص فعلاً؟ ولا تتمزّق؟ مع تشكيلة ماكسي بلس، هناك أيضاً…"
+      fr: "Une feuille qui absorbe vraiment ? Qui ne se déchire pas ? Il y a aussi…",
+      ar: "ورقة تمتص فعلاً؟ ولا تتمزّق؟ وهناك أيضاً…"
     },
     features: [
       { icon: "absorbent", label: { fr: "Ultra absorbant", ar: "امتصاص فائق" },
-        text: { fr: "Une ouate épaisse qui boit vite les liquides — moins de feuilles pour le même geste.",
-                ar: "ورق سميك يمتص السوائل بسرعة — أوراق أقل لنفس العمل." } },
+        text: { fr: "Boit vite — moins de feuilles à chaque fois.",
+                ar: "يمتص بسرعة — أوراق أقل في كل مرة." } },
       { icon: "strong", label: { fr: "Résistant", ar: "متين" },
-        text: { fr: "La feuille tient même humide, sans se déchirer ni laisser de peluches.",
-                ar: "تتماسك الورقة حتى وهي مبللة، دون أن تتمزّق أو تترك وبرًا." } },
+        text: { fr: "Tient même humide, sans se déchirer.",
+                ar: "يتماسك حتى مبللاً، دون أن يتمزّق." } },
       { icon: "soft-touch", label: { fr: "Doux au toucher", ar: "ناعم الملمس" },
-        text: { fr: "Une texture douce, agréable sur le visage comme sur la peau des enfants.",
-                ar: "ملمس ناعم، لطيف على الوجه وعلى بشرة الأطفال." } },
+        text: { fr: "Agréable sur le visage comme sur la peau.",
+                ar: "لطيف على الوجه وعلى البشرة." } },
       { icon: "family", label: { fr: "Toute la famille", ar: "لكل العائلة" },
-        text: { fr: "Essuie-tout, mouchoirs, serviettes et papier hygiénique pour toute la maison.",
-                ar: "مناديل مطبخ ومحارم ومناديل سفرة وورق صحي لكل المنزل." } }
+        text: { fr: "Essuie-tout, mouchoirs, serviettes, papier hygiénique.",
+                ar: "مناديل مطبخ ومحارم ومناديل سفرة وورق صحي." } }
     ],
     howto: [
       { fr: "Détacher une feuille selon le besoin.", ar: "افصل ورقة حسب الحاجة." },
