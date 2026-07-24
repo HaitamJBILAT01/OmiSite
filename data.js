@@ -375,6 +375,7 @@ window.OMI_DATA = {
 window.OMI_DATA.categoryContent = {
 
   "sols-surfaces-vitres": {
+    heroKitchen: "kitchen.webp",   /* Dettol-style kitchen bg behind the product (this category only) */
     features: [
       { icon: "sparkle-clean", label: { fr: "Sans traces",         ar: "بدون آثار" } },
       { icon: "fast-dry",      label: { fr: "Séchage rapide",       ar: "جفاف سريع" } },

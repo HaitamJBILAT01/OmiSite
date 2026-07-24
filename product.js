@@ -174,6 +174,14 @@
   const CONTENT = (window.OMI_DATA.categoryContent || {})[category.slug] || {};
   const G = window.OMI_DATA;
 
+  // Kitchen hero background — opt-in per category via CONTENT.heroKitchen.
+  // ?v busts the 1-year image cache (product.js is in the version-bump set).
+  if (CONTENT.heroKitchen) {
+    root.classList.add("pdp-has-kitchen");
+    const k = document.getElementById("pdpKitchen");
+    if (k) k.style.backgroundImage = `url('assets/${CONTENT.heroKitchen}?v=143')`;
+  }
+
   function iconSlot(icon) {
     // placeholder showing the flaticon search keyword until a real SVG is added
     return `<span class="psec-ic" data-icon="${icon}" aria-hidden="true"></span>`;
@@ -185,7 +193,7 @@
     if (!ready) return iconSlot(icon);
     // ?v busts the 1-year SVG cache when an icon file is replaced (bumped with
     // the site version — product.js is part of the ?v=N bump set now)
-    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=142')" aria-hidden="true"></span>`;
+    return `<span class="pfeat-ic" style="--ic:url('assets/${icon}.svg?v=143')" aria-hidden="true"></span>`;
   }
   function photoBox(file, hint) {
     if (file) return `<img src="assets/${file}" alt="" loading="lazy" decoding="async">`;
